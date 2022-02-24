@@ -97,8 +97,7 @@ public class Profil extends Fragment {
         EditText PeditTextNumber = view.findViewById(R.id.PeditTextNumber);
         EditText PeditTextDate = view.findViewById(R.id.PeditTextDate);
 
-
-        /**Cursor cursor = dataBaseHelper.fetch();
+        Cursor cursor = dataBaseHelper.fetch();
         cursor.moveToFirst();
 
         PeditTextName.setText(cursor.getString(0));
@@ -112,9 +111,9 @@ public class Profil extends Fragment {
         String mDrawableName = cursor.getString(6);
 
 
-        //int id = getContext().getResources().getIdentifier(mDrawableName, "drawable", getContext().getPackageName());
-        //profileImage.setImageResource(id);
-*/
+        int id = getContext().getResources().getIdentifier(mDrawableName, "drawable", getContext().getPackageName());
+        profileImage.setImageResource(id);
+
 
         Button btnLogout = view.findViewById(R.id.btnLogout);
         btnLogout.setOnClickListener(new View.OnClickListener() {

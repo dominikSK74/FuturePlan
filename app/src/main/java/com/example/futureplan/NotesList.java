@@ -21,6 +21,10 @@ import com.google.gson.reflect.TypeToken;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -86,6 +90,18 @@ public class NotesList extends Fragment {
             }
         });
 
+        if(MyJSON.getData(getContext(), "notes.json") == null){
+            try {
+                File file = new File(getContext().getFilesDir(), "notes.json");
+                FileWriter fileWriter = null;
+                fileWriter = new FileWriter(file);
+                BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+                bufferedWriter.write("[]");
+                bufferedWriter.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         String jsonFileString = MyJSON.getData(getContext(), "notes.json");
         Gson gson = new Gson();
         Type listNotesType = new TypeToken<List<Notes>>() { }.getType();
@@ -114,8 +130,6 @@ public class NotesList extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Navigation.findNavController(view).navigate(R.id.action_notesList_to_viewNote);
-                //PreferenceUtils.saveNote(note.get(i).getNote(),getContext());
-                //PreferenceUtils.saveTitleNote(note.get(i).getTitle(),getContext());
                 PreferenceUtils.saveNoteID(i,getContext());
             }
         });

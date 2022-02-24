@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         DataBaseHelper dataBaseHelper = new DataBaseHelper(this);
         
       
-       /* Cursor cursor = dataBaseHelper.fetch();
+        Cursor cursor = dataBaseHelper.fetch();
 
         cursor.moveToFirst();
 
@@ -72,11 +72,11 @@ public class MainActivity extends AppCompatActivity {
         profileSurname.setText(cursor.getString(1));
         profileEmail.setText(cursor.getString(3));
 
-       // String mDrawableName = cursor.getString(6);
+        String mDrawableName = cursor.getString(6);
 
-       // int resID = getResources().getIdentifier(mDrawableName , "drawable", this.getPackageName());
+        int resID = getResources().getIdentifier(mDrawableName , "drawable", this.getPackageName());
 
-       // imageProfile.setImageResource(resID);*/
+        imageProfile.setImageResource(resID);
 
 
 
