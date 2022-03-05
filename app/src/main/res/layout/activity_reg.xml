@@ -64,7 +64,7 @@
         android:background="@drawable/custom_input"
         android:drawableStart="@drawable/ic_lock"
         android:drawablePadding="12dp"
-        android:hint="@string/haslo"
+        android:hint="@string/password"
         android:inputType="textPassword"
         android:minHeight="48dp"
         android:padding="5dp"

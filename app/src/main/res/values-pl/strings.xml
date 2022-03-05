@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FuturePlan</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="profile">Profil</string>
+    <string name="schedule">Terminarz</string>
+    <string name="pomoce">Pomoce naukowe</string>
+    <string name="timetable">Plan lekcji</string>
+    <string name="flahcards">Fiszki</string>
+    <string name="notes">Notatki</string>
+    <string name="settings">Ustawienia</string>
+    <string name="about_app">O aplikacji</string>
+
+    <string name="name">Julia Podolak</string>
+    <string name="email">julia.podolak123@gmail.com</string>
+
+    <string name="organizacja">Organizacja</string>
+    <string name="nauka">Nauka</string>
+    <string name="others">Inne</string>
+
+    <string name="monday">Poniedziałek</string>
+    <string name="tuesday">Wtorek</string>
+    <string name="wednesday">Środa</string>
+    <string name="thursday">Czwartek</string>
+    <string name="friday">Piątek</string>
+    <string name="saturday">Sobota</string>
+    <string name="sunday">Niedziela</string>
+
+    <string name="log">logowanie</string>
+    <string name="rej">rejestracja</string>
+
+    <string name="first_name">Imie</string>
+    <string name="nazwaUzyt">Nazwa uzytkownika</string>
+    <string name="last_name">Nazwisko</string>
+    <string name="password">Haslo</string>
+    <string name="Email">Email</string>
+    <string name="powHaslo">Powtorz haslo</string>
+    <string name="title">Tytul</string>
+    <string name="save">zapisz</string>
+    <string name="back">powrot</string>
+    <string name="add">dodaj</string>
+    <string name="delete">usun</string>
+    <string name="authors">Autorzy</string>
+    <string name="authors_description">Dominik Skąpski, Julia Podolak, Julia Korzekwa</string>
+    <string name="year_of_creation">Rok powstania : 2021-2022</string>
+    <string name="app_description">Do tworzenia aplikacji użyto Android Studio i języka programowania Java</string>
+    <string name="choose_language">Wybierz język</string>
+
+    <string name="polish">Polski</string>
+    <string name="english">Angielski</string>
+    <string name="german">Niemiecki</string>
+
+    <string name="polish_lang">Język Polski</string>
+    <string name="infromatics">Informatyka</string>
+    <string name="history">Historia</string>
+    <string name="mathematics">Matematyka</string>
+    <string name="databases">Bazy Danych</string>
+
+
+
+
+</resources>

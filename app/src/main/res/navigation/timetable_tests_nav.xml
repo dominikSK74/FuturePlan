@@ -22,5 +22,16 @@
         <action
             android:id="@+id/action_timetableTest_to_editTimetableTest"
             app:destination="@id/editTimetableTest" />
+        <action
+            android:id="@+id/action_timetableTest_to_deleteTimetableTests"
+            app:destination="@id/deleteTimetableTests" />
+    </fragment>
+    <fragment
+        android:id="@+id/deleteTimetableTests"
+        android:name="com.example.futureplan.DeleteTimetableTests"
+        android:label="DeleteTimetableTests" >
+        <action
+            android:id="@+id/action_deleteTimetableTests_to_timetableTest"
+            app:destination="@id/timetableTest" />
     </fragment>
 </navigation>

@@ -39,6 +39,13 @@ public class DataBaseTests extends SQLiteOpenHelper {
 
     }
 
+    public void deleteRow(String title)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM " + TABLE_NAME+ " WHERE "+COLUMN_TITLE+"='"+title+"'");
+        db.close();
+    }
+
     public boolean insertData(HomeworkModel homeworkModel){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();

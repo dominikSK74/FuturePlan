@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="subjectsarray">
-        <item>Język Polski</item>
-        <item>Informatyka</item>
-        <item>Historia</item>
-        <item>Matematyka</item>
-        <item>Bazy Danych</item>
+        <item>@string/polish_lang</item>
+        <item>@string/infromatics</item>
+        <item>@string/history</item>
+        <item>@string/mathematics</item>
+        <item>@string/polish_lang</item>
     </string-array>
 </resources>

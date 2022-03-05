@@ -95,7 +95,6 @@ public class Homework extends Fragment {
         listHomework.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                System.out.println(list.get(i).get("line1"));
                 element =list.get(i).get("line1");
                 Navigation.findNavController(view).navigate(R.id.action_homework_to_deleteHomework);
             }

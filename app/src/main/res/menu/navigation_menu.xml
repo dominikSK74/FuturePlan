@@ -6,12 +6,12 @@
             <item
                 android:id="@+id/menuTerminarz"
                 android:icon="@drawable/terminarz"
-                android:title="@string/terminarz"/>
+                android:title="@string/schedule"/>
 
             <item
                 android:id="@+id/menuPlanLekcji"
                 android:icon="@drawable/plan"
-                android:title="@string/plan"/>
+                android:title="@string/timetable"/>
         </menu>
     </item>
 
@@ -25,16 +25,16 @@
             <item
                 android:id="@+id/menuFiszki"
                 android:icon="@drawable/fiszki"
-                android:title="@string/fiszki"/>
+                android:title="@string/flahcards"/>
 
             <item
                 android:id="@+id/menuNotatki"
                 android:icon="@drawable/notatki"
-                android:title="@string/notatki"/>
+                android:title="@string/notes"/>
         </menu>
     </item>
 
-    <item android:title="@string/inne">
+    <item android:title="@string/others">
         <menu>
             <item
                 android:id="@+id/profileEmail"
@@ -48,7 +48,7 @@
             <item
                 android:id="@+id/menuoAplikacji"
                 android:icon="@drawable/oaplikacji"
-                android:title="@string/oaplikacji"/>
+                android:title="@string/about_app"/>
         </menu>
     </item>
 </menu>

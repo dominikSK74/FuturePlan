@@ -8,6 +8,7 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
@@ -23,6 +24,7 @@ import java.util.HashMap;
  */
 public class TimetableTest extends Fragment {
     private SimpleAdapter sa;
+    public static String element;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -85,6 +87,15 @@ public class TimetableTest extends Fragment {
             @Override
             public void onClick(View view) {
                 Navigation.findNavController(view).navigate(R.id.action_timetableTest_to_editTimetableTest);
+            }
+        });
+
+        ListView listTests = view.findViewById(R.id.listTests);
+        listTests.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                element =list.get(i).get("line1");
+                Navigation.findNavController(view).navigate(R.id.action_timetableTest_to_deleteTimetableTests);
             }
         });
 
