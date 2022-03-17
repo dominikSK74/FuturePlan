@@ -76,7 +76,7 @@ public class Sunday extends Fragment {
         FloatingActionButton edit = view.findViewById(R.id.editPlan);
 
         TextView day = view.findViewById(R.id.dzien);
-        String dayS = day.getText().toString();
+        String dayS = "Niedziela";
 
         PreferenceUtils.saveDay(dayS, getContext());
 

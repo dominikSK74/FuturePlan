@@ -22,6 +22,7 @@ import android.widget.ImageView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 import android.util.Log;
 import android.view.View;
@@ -34,6 +35,7 @@ import java.util.Locale;
 
 
 public class MainActivity extends AppCompatActivity {
+    FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +45,12 @@ public class MainActivity extends AppCompatActivity {
         Configuration config = new Configuration();
         config.locale = locale;
         resources.updateConfiguration(config, null);
-        startActivity(new Intent(MainActivity.this, BasicActivity.class));
+
+        mAuth = FirebaseAuth.getInstance();
+        if(mAuth.getCurrentUser() == null){
+            startActivity(new Intent(MainActivity.this,LogActivity.class));
+        }else {
+            startActivity(new Intent(MainActivity.this, BasicActivity.class));
         }
+    }
 }

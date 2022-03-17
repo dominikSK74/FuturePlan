@@ -25,7 +25,7 @@
             <item
                 android:id="@+id/menuFiszki"
                 android:icon="@drawable/fiszki"
-                android:title="@string/flahcards"/>
+                android:title="@string/flashcards"/>
 
             <item
                 android:id="@+id/menuNotatki"

@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -84,7 +85,7 @@ public class Monday extends Fragment {
         FloatingActionButton edit = view.findViewById(R.id.editPlan);
 
         TextView day = view.findViewById(R.id.dzien);
-        String dayS = day.getText().toString();
+        String dayS = "Poniedziałek";
 
         PreferenceUtils.saveDay(dayS, getContext());
 
@@ -96,6 +97,14 @@ public class Monday extends Fragment {
                 new String[] { "line1","line2","line3" },
                 new int[] {R.id.line_a, R.id.line_b,R.id.line_c});
         ((ListView)view.findViewById(R.id.listTimetable)).setAdapter(sa);
+
+        ListView listTimetable = view.findViewById(R.id.listTimetable);
+        listTimetable.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+            }
+        });
 
         next.setOnClickListener(new View.OnClickListener(){
             @Override

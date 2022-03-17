@@ -37,36 +37,51 @@
 
     <ListView
         android:id="@+id/listViewTests"
-        android:layout_width="wrap_content"
+        android:layout_width="700px"
         android:layout_height="wrap_content"
-        android:layout_marginStart="52dp"
         android:layout_marginTop="20dp"
+        android:background="@drawable/custom_input"
         android:divider="@null"
         android:dividerHeight="0dp"
+        android:paddingStart="20px"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/listViewCalendar" />
 
     <ListView
         android:id="@+id/listViewHomework"
-        android:layout_width="wrap_content"
+        android:layout_width="700px"
         android:layout_height="wrap_content"
-        android:layout_marginStart="52dp"
         android:layout_marginTop="20dp"
+        android:background="@drawable/custom_input"
         android:divider="@null"
         android:dividerHeight="0dp"
+        android:paddingStart="20px"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/listViewTests" />
 
     <ListView
         android:id="@+id/listViewCalendar"
-        android:layout_width="wrap_content"
+        android:layout_width="700px"
         android:layout_height="wrap_content"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/custom_input"
         android:divider="@null"
         android:dividerHeight="0dp"
+        android:paddingStart="20px"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/date" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

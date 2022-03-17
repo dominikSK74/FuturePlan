@@ -7,4 +7,9 @@
         <item>@string/mathematics</item>
         <item>@string/polish_lang</item>
     </string-array>
+    <string-array name="tabs">
+        <item>@string/timetable</item>
+        <item>@string/homework</item>
+        <item>@string/tests</item>
+    </string-array>
 </resources>

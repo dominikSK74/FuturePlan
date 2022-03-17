@@ -7,13 +7,10 @@
     <string name="schedule">Terminkalender</string>
     <string name="pomoce">Lehrmittel</string>
     <string name="timetable">Stundenplan</string>
-    <string name="flahcards">Fiches</string>
+    <string name="flashcards">Fiches</string>
     <string name="notes">Noten</string>
     <string name="settings">Einstellungen</string>
     <string name="about_app">Über die Anwendung</string>
-
-    <string name="name">Julia Podolak</string>
-    <string name="email">julia.podolak123@gmail.com</string>
 
     <string name="organizacja">Organisation</string>
     <string name="nauka">Wissenschaft</string>
@@ -27,11 +24,11 @@
     <string name="saturday">Samstag </string>
     <string name="sunday">Sonntag </string>
 
-    <string name="log">Protokollierung</string>
+    <string name="logging">Protokollierung</string>
     <string name="rej">Anmeldung</string>
 
     <string name="first_name">Vorname</string>
-    <string name="nazwaUzyt">Name des Benutzers</string>
+    <string name="username">Name des Benutzers</string>
     <string name="last_name">Zuname</string>
     <string name="password">Passwort</string>
     <string name="Email">Email</string>
@@ -56,5 +53,26 @@
     <string name="history">Geschichte</string>
     <string name="mathematics">Mathematik</string>
     <string name="databases">Datenbanken</string>
+    <string name="phone_number">Telefonnummer</string>
+    <string name="birth_date">Geburtsdatum</string>
+    <string name="log_out">Ausloggen</string>
+    <string name="new_note">neue Notiz</string>
+    <string name="next">nächste</string>
+    <string name="previous">früher</string>
+    <string name="delete_set">Bausatz entfernen</string>
+    <string name="note">Notiz</string>
+    <string name="front">Front</string>
+    <string name="add_new_flashcard_set">Neuen Satz hinzufügen</string>
+    <string name="choose_subject">ein Thema auswählen</string>
+    <string name="choose_date">Wählen Sie ein Datum</string>
+    <string name="classroom">Klassenzimmer</string>
+    <string name="start_and_end_time">Start- und Endzeit</string>
+    <string name="description">Beschreibung</string>
+    <string name="name_of_the_set">Name des Satzes</string>
+    <string name="study">Studie!</string>
+    <string name="sign_in">Sich einloggen</string>
+    <string name="sign_up">Sich einschreiben</string>
+    <string name="tests">Prüfung</string>
+    <string name="homework">Hausaufgabe</string>
 
 </resources>
