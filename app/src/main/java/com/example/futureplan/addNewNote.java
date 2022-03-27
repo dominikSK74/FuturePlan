@@ -5,14 +5,19 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -22,6 +27,8 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +36,9 @@ import java.io.IOException;
  * create an instance of this fragment.
  */
 public class addNewNote extends Fragment {
+    FirebaseAuth mAuth;
+    FirebaseFirestore fStore;
+    String userID;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -75,6 +85,10 @@ public class addNewNote extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add_new_note, container, false);
 
+        mAuth = FirebaseAuth.getInstance();
+        fStore = FirebaseFirestore.getInstance();
+        userID = mAuth.getCurrentUser().getUid();
+
         TextInputLayout titleInputTxt = view.findViewById(R.id.title_text_input);
         EditText editTextNote = view.findViewById(R.id.editTextNote);
         Button btnAdd = view.findViewById(R.id.btnAdd);
@@ -93,25 +107,17 @@ public class addNewNote extends Fragment {
                 String title = titleInputTxt.getEditText().getText().toString();
                 String note = editTextNote.getText().toString();
 
-                try {
-                    File file2 = new File(getContext().getFilesDir(),"notes.json");
-                    String strFileJson = MyJSON.getStringFromFile(file2.toString());
-                    JSONArray array = new JSONArray(strFileJson);
-
-                    JSONObject newJsonObject = new JSONObject();
-                    newJsonObject.put("Title", title);
-                    newJsonObject.put("Note", note);
-
-                    array.put(newJsonObject);
-
-                    File file = new File(getContext().getFilesDir(),"notes.json");
-                    FileWriter fileWriter = new FileWriter(file);
-                    BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-                    bufferedWriter.write(array.toString());
-                    bufferedWriter.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                userID = mAuth.getCurrentUser().getUid();
+                DocumentReference documentReference = fStore.collection("users").document(userID).collection("notes").document();
+                Map<String,Object> user = new HashMap<>();
+                user.put("title",title);
+                user.put("note",note);
+                documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Log.d("TAG","onSuccess: note saved for user" + userID);
+                    }
+                });
 
                 Navigation.findNavController(view).navigate(R.id.action_addNewNote_to_notesList);
             }

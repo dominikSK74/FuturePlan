@@ -56,7 +56,7 @@ public class Profil extends Fragment {
     FirebaseAuth mAuth;
     String avatar;
 
-    //String mDrawableName;
+    String mDrawableName;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -128,9 +128,12 @@ public class Profil extends Fragment {
                 PeditTextSName.setText(documentSnapshot.getString("sName"));
                 PeditTextNumber.setText(documentSnapshot.getString("phone"));
                 PeditTextDate.setText(documentSnapshot.getString("birthdate"));
-                //mDrawableName = documentSnapshot.getString("avatar");
+                mDrawableName = documentSnapshot.getString("avatar");
+                System.out.println(mDrawableName);
             }
         });
+
+
 
        // Resources resources = getContext().getResources();
         //final int resourceId = resources.getIdentifier(mDrawableName, "drawable", getContext().getPackageName());

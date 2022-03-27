@@ -2,6 +2,7 @@ package com.example.futureplan;
 
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
@@ -13,6 +14,13 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,6 +33,12 @@ import java.util.HashMap;
 public class TimetableTest extends Fragment {
     private SimpleAdapter sa;
     public static String element;
+
+    private FirebaseAuth mAuth;
+    private FirebaseFirestore fStore;
+    private String userID;
+
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -71,15 +85,37 @@ public class TimetableTest extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_timetable_test, container, false);
 
+        mAuth = FirebaseAuth.getInstance();
+        fStore = FirebaseFirestore.getInstance();
+        userID = mAuth.getCurrentUser().getUid();
+
         DataBaseTests dataBaseTests = new DataBaseTests(getContext());
 
-        ArrayList<HashMap<String,String>> list = dataBaseTests.getAdapterList(getContext());
+        ArrayList<HashMap<String,String>> list = new ArrayList<>();
 
-        sa = new SimpleAdapter(getContext(), list,
-                R.layout.list_timetable,
-                new String[] { "line1","line2","line3" },
-                new int[] {R.id.line_a, R.id.line_b,R.id.line_c});
-        ((ListView)view.findViewById(R.id.listTests)).setAdapter(sa);
+        ArrayList<String> testID = new ArrayList<>();
+
+        CollectionReference collectionReference = fStore.collection("users").document(userID).collection("tests");
+        collectionReference.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                for(DocumentSnapshot snapshot : value){
+                    testID.add(snapshot.getId());
+                    HashMap<String,String> item = new HashMap<String,String>();
+                    item.put( "line1", snapshot.getString("title"));
+                    item.put( "line2", snapshot.getString("subject"));
+                    item.put( "line3", snapshot.getString("date"));
+                    list.add( item );
+                }
+                sa = new SimpleAdapter(getContext(), list,
+                        R.layout.list_timetable,
+                        new String[] { "line1","line2","line3" },
+                        new int[] {R.id.line_a, R.id.line_b,R.id.line_c});
+                ((ListView)view.findViewById(R.id.listTests)).setAdapter(sa);
+            }
+        });
+
+
 
         FloatingActionButton editTests = view.findViewById(R.id.editTests);
 
@@ -94,7 +130,9 @@ public class TimetableTest extends Fragment {
         listTests.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                element =list.get(i).get("line1");
+                Bundle bundle = new Bundle();
+                bundle.putString("testID", testID.get(i));
+                element=testID.get(i);
                 Navigation.findNavController(view).navigate(R.id.action_timetableTest_to_deleteTimetableTests);
             }
         });

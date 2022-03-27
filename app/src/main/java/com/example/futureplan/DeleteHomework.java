@@ -2,6 +2,7 @@ package com.example.futureplan;
 
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
@@ -11,6 +12,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -18,6 +25,9 @@ import com.google.android.material.textfield.TextInputLayout;
  * create an instance of this fragment.
  */
 public class DeleteHomework extends Fragment {
+    private FirebaseAuth mAuth;
+    private FirebaseFirestore fStore;
+    private String userID;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -64,15 +74,26 @@ public class DeleteHomework extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_delete_homework, container, false);
 
+        mAuth = FirebaseAuth.getInstance();
+        fStore = FirebaseFirestore.getInstance();
+        userID = mAuth.getCurrentUser().getUid();
+
         TextInputLayout title_text_input = view.findViewById(R.id.title_text_input);
-        title_text_input.getEditText().setText(Homework.element);
+        //String nazwa = getArguments().getString("homeworkID");
+
+        DocumentReference documentReference = fStore.collection("users").document(userID).collection("homework").document(Homework.homework);
+        documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                title_text_input.getEditText().setText(value.getString("title"));
+            }
+        });
 
         Button btnDelete = view.findViewById(R.id.btnDelete);
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DataBaseHomework dataBaseHomework = new DataBaseHomework(getContext());
-                dataBaseHomework.deleteRow(Homework.element);
+                documentReference.delete();
                 Navigation.findNavController(view).navigate(R.id.action_deleteHomework_to_homework);
             }
         });
