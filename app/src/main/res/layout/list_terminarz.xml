@@ -9,7 +9,7 @@
         android:layout_width="200px"
         android:layout_height="wrap_content"
         android:text="Text"
-        android:textColor="@color/black"
+        android:textColor="@color/textColor"
         app:layout_constraintEnd_toStartOf="@+id/line_b"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
         android:text="Text"
-        android:textColor="@color/black"
+        android:textColor="@color/textColor"
         app:layout_constraintStart_toEndOf="@+id/line_a"
         app:layout_constraintTop_toTopOf="parent" />
 

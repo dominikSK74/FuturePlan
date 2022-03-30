@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBackground"
     tools:context=".EditTimetableTest">
 
     <com.google.android.material.textfield.TextInputLayout
@@ -15,6 +16,7 @@
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:textColorHint="@color/textColor"
         app:startIconDrawable="@drawable/przedmioty_ikona">
 
         <AutoCompleteTextView
@@ -39,7 +41,8 @@
         android:gravity="center_vertical"
         android:hint="Wybierz date"
         android:paddingLeft="40px"
-        android:textColorHint="@color/black"
+        android:textColorHint="@color/textColor"
+        android:backgroundTint="@color/colorBackground"
         android:textSize="40px"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,6 +54,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
+        android:textColorHint="@color/textColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dayEdTxtTests">

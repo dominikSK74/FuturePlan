@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBackground"
     tools:context=".Thursday">
 
     <RelativeLayout
@@ -22,7 +23,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="@string/thursday"
-            android:textColor="@color/black"
+            android:textColor="@color/textColor"
             android:textSize="18dp"
             android:textStyle="bold" />
         <ImageView
@@ -30,7 +31,7 @@
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:src="@drawable/ic_baseline_keyboard_arrow_left_24"
-            app:tint="@color/black"
+            app:tint="@color/textColor"
             android:layout_alignLeft="@id/dzien"
             android:clickable="true" />
 
@@ -39,7 +40,7 @@
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
-            app:tint="@color/black"
+            app:tint="@color/textColor"
             android:layout_alignRight="@id/dzien"
             android:clickable="true" />
 

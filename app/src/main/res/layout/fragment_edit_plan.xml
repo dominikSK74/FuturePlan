@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBackground"
     tools:context=".EditPlan">
 
     <com.google.android.material.textfield.TextInputLayout
@@ -15,6 +16,7 @@
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:textColorHint="@color/textColor"
         app:startIconDrawable="@drawable/przedmioty_ikona">
 
         <AutoCompleteTextView
@@ -25,6 +27,7 @@
             android:inputType="none"
             android:paddingTop="16dp"
             android:paddingBottom="16dp"
+            android:textColor="@color/textColor"/>
             android:text="@string/choose_subject" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -36,7 +39,8 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtinput">
+        app:layout_constraintTop_toBottomOf="@+id/txtinput"
+        android:textColorHint="@color/textColor">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/date_edit_text"
@@ -44,6 +48,7 @@
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/time_icon"
             android:drawablePadding="40px"
+            android:textColor="@color/textColor"/>
             android:hint="@string/start_and_end_time"
             app:layout_constraintTop_toBottomOf="@+id/class_text_input" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -55,7 +60,8 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/date_text_input">
+        app:layout_constraintTop_toBottomOf="@+id/date_text_input"
+        android:textColorHint="@color/textColor">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/name_edit_text"
@@ -63,8 +69,10 @@
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/class_icon"
             android:drawablePadding="50px"
+            app:layout_constraintTop_toBottomOf="@+id/classEdText"
+            android:textColor="@color/textColor"
+            />
             android:hint="@string/classroom"
-            app:layout_constraintTop_toBottomOf="@+id/classEdText" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
