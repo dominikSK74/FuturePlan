@@ -3,6 +3,7 @@ package com.example.futureplan;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -12,6 +13,14 @@ import android.widget.CalendarView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -30,6 +39,10 @@ public class Terminarz extends Fragment {
     private String dateString;
     private String dayString;
     private String monthString;
+
+    private FirebaseAuth mAuth;
+    private FirebaseFirestore fStore;
+    private String userID;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -75,6 +88,10 @@ public class Terminarz extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_terminarz, container, false);
 
+        mAuth = FirebaseAuth.getInstance();
+        fStore = FirebaseFirestore.getInstance();
+        userID = mAuth.getCurrentUser().getUid();
+
         CalendarView simpleCalendarView = view.findViewById(R.id.simpleCalendarView);
 
         TextView date = view.findViewById(R.id.date);
@@ -87,25 +104,25 @@ public class Terminarz extends Fragment {
                 int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
                 switch (dayOfWeek) {
                     case Calendar.SUNDAY:
-                        nameOfDay= "Niedziela";
+                        nameOfDay= "Sunday";
                         break;
                     case Calendar.MONDAY:
-                        nameOfDay= "Poniedziałek";
+                        nameOfDay= "Monday";
                         break;
                     case Calendar.TUESDAY:
-                        nameOfDay= "Wtorek";
+                        nameOfDay= "Tuesday";
                         break;
                     case Calendar.THURSDAY:
-                        nameOfDay= "Czwartek";
+                        nameOfDay= "Thursday";
                         break;
                     case Calendar.SATURDAY:
-                        nameOfDay= "Sobota";
+                        nameOfDay= "Saturday";
                         break;
                     case Calendar.WEDNESDAY:
-                        nameOfDay= "Środa";
+                        nameOfDay= "Wednesday";
                         break;
                     case Calendar.FRIDAY:
-                        nameOfDay= "Piątek";
+                        nameOfDay= "Friday";
                         break;
                 }
                 month = month + 1;
@@ -123,43 +140,79 @@ public class Terminarz extends Fragment {
 
                 date.setText(dateString);
                 date.setVisibility(View.VISIBLE);
-
-                DataBaseTimetable dataBaseTimetable = new DataBaseTimetable(getContext());
-
                 ListView listViewCalendar = view.findViewById(R.id.listViewCalendar);
 
-                ArrayList<HashMap<String,String>> list = dataBaseTimetable.getAdapterList(getContext(),nameOfDay);
-                sa = new SimpleAdapter(getContext(), list,
-                        R.layout.list_terminarz,
-                        new String[] { "line1","line2" },
-                        new int[] {R.id.line_b, R.id.line_a});
-                ((ListView)view.findViewById(R.id.listViewCalendar)).setAdapter(sa);
+                ArrayList<HashMap<String,String>> list = new ArrayList<>();
+
+                CollectionReference collectionReference = fStore.collection("users").document(userID).collection("timetable").document("lessons").collection(nameOfDay);
+                collectionReference.addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        for(DocumentSnapshot snapshot : value){
+                            HashMap<String,String> item = new HashMap<String,String>();
+                            item.put( "line1", snapshot.getString("time"));
+                            item.put( "line2", snapshot.getString("subject"));
+                            list.add( item );
+                        }
+                        sa = new SimpleAdapter(getContext(), list,
+                                R.layout.list_terminarz,
+                                new String[] { "line1","line2" },
+                                new int[] {R.id.line_b, R.id.line_a});
+                        ((ListView)view.findViewById(R.id.listViewCalendar)).setAdapter(sa);
+                    }
+                });
 
                 listViewCalendar.setVisibility(View.VISIBLE);
 
                 //---------------------------------------\\
 
-                DataBaseTests dataBaseTests = new DataBaseTests(getContext());
+                ArrayList<HashMap<String,String>> list2 = new ArrayList<>();
 
-                ArrayList<HashMap<String,String>> list2 = dataBaseTests.getListTests(getContext(),dateString);
-
-                sa2 = new SimpleAdapter(getContext(), list2,
-                        R.layout.list_terminarz,
-                        new String[] { "line1","line2" },
-                        new int[] {R.id.line_b, R.id.line_a});
-                ((ListView)view.findViewById(R.id.listViewTests)).setAdapter(sa2);
+                CollectionReference tests = fStore.collection("users").document(userID).collection("tests");
+                tests.addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        for(DocumentSnapshot snapshot : value){
+                            System.out.println(snapshot.getString("date"));
+                            System.out.println(dateString);
+                            if(snapshot.getString("date").equals(dateString)) {
+                                HashMap<String, String> item = new HashMap<String, String>();
+                                item.put("line1", snapshot.getString("subject"));
+                                item.put("line2", snapshot.getString("title"));
+                                list.add(item);
+                            }
+                        }
+                        sa2 = new SimpleAdapter(getContext(), list2,
+                                R.layout.list_terminarz,
+                                new String[] { "line1","line2" },
+                                new int[] {R.id.line_b, R.id.line_a});
+                        ((ListView)view.findViewById(R.id.listViewTests)).setAdapter(sa2);
+                    }
+                });
 
                 //---------------------------------------\\
 
-                DataBaseHomework dataBaseHomework = new DataBaseHomework(getContext());
+                ArrayList<HashMap<String,String>> list3 = new ArrayList<>();
 
-                ArrayList<HashMap<String,String>> list3 = dataBaseHomework.getListHomework(getContext(),dateString);
-
-                sa3 = new SimpleAdapter(getContext(), list3,
-                        R.layout.list_terminarz,
-                        new String[] { "line1","line2" },
-                        new int[] {R.id.line_b, R.id.line_a});
-                ((ListView)view.findViewById(R.id.listViewHomework)).setAdapter(sa3);
+                CollectionReference homework = fStore.collection("users").document(userID).collection("homework");
+                homework.addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        for(DocumentSnapshot snapshot : value){
+                            if(snapshot.getString("date").equals(dateString)) {
+                                HashMap<String, String> item = new HashMap<String, String>();
+                                item.put("line1", snapshot.getString("subject"));
+                                item.put("line2", snapshot.getString("title"));
+                                list.add(item);
+                            }
+                        }
+                        sa2 = new SimpleAdapter(getContext(), list2,
+                                R.layout.list_terminarz,
+                                new String[] { "line1","line2" },
+                                new int[] {R.id.line_b, R.id.line_a});
+                        ((ListView)view.findViewById(R.id.listViewHomework)).setAdapter(sa2);
+                    }
+                });
             }
         });
 

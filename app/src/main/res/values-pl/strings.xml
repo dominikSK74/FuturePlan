@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FuturePlan</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="profile">Profil</string>
+    <string name="schedule">Terminarz</string>
+    <string name="pomoce">Pomoce naukowe</string>
+    <string name="timetable">Plan lekcji</string>
+    <string name="flashcards">Fiszki</string>
+    <string name="notes">Notatki</string>
+    <string name="settings">Ustawienia</string>
+    <string name="about_app">O aplikacji</string>
+
+    <string name="organizacja">Organizacja</string>
+    <string name="nauka">Nauka</string>
+    <string name="others">Inne</string>
+
+    <string name="monday">Poniedziałek</string>
+    <string name="tuesday">Wtorek</string>
+    <string name="wednesday">Środa</string>
+    <string name="thursday">Czwartek</string>
+    <string name="friday">Piątek</string>
+    <string name="saturday">Sobota</string>
+    <string name="sunday">Niedziela</string>
+
+    <string name="logging">logowanie</string>
+    <string name="rej">rejestracja</string>
+
+    <string name="first_name">Imie</string>
+    <string name="username">Nazwa uzytkownika</string>
+    <string name="last_name">Nazwisko</string>
+    <string name="password">Hasło</string>
+    <string name="Email">Email</string>
+    <string name="powHaslo">Powtórz hasło</string>
+    <string name="title">Tytuł</string>
+    <string name="save">zapisz</string>
+    <string name="back">powrót</string>
+    <string name="add">dodaj</string>
+    <string name="delete">usun</string>
+    <string name="authors">Autorzy</string>
+    <string name="authors_description">Dominik Skąpski, Julia Podolak, Julia Korzekwa</string>
+    <string name="year_of_creation">Rok powstania : 2021-2022</string>
+    <string name="app_description">Do tworzenia aplikacji użyto Android Studio i języka programowania Java</string>
+    <string name="choose_language">Wybierz język</string>
+
+    <string name="polish">Polski</string>
+    <string name="english">Angielski</string>
+    <string name="german">Niemiecki</string>
+
+    <string name="polish_lang">Język Polski</string>
+    <string name="infromatics">Informatyka</string>
+    <string name="history">Historia</string>
+    <string name="mathematics">Matematyka</string>
+    <string name="databases">Bazy Danych</string>
+    <string name="phone_number">Numer telefonu</string>
+    <string name="birth_date">Data urodzenia</string>
+    <string name="log_out">Wyloguj</string>
+    <string name="new_note">Nowa notatka</string>
+    <string name="next">Nastepny</string>
+    <string name="previous">Poprzedni</string>
+    <string name="delete_set">Usuń zestaw</string>
+    <string name="note">Notatka</string>
+    <string name="front">Front</string>
+    <string name="add_new_flashcard_set">Dodaj nowy zestaw</string>
+    <string name="choose_subject">Wybierz przedmiot</string>
+    <string name="choose_date">Wybierz datę</string>
+    <string name="classroom">Klasa</string>
+    <string name="start_and_end_time">Czas rozpoczęcia i zakończenia</string>
+    <string name="description">Opis</string>
+    <string name="name_of_the_set">Nazwa zestawu</string>
+    <string name="study">Ucz się!</string>
+    <string name="sign_in">Zaloguj</string>
+    <string name="sign_up">Załóż konto</string>
+    <string name="tests">Sprawdziany</string>
+    <string name="homework">Zad. domowe</string>
+    <string name="share">udostępnij</string>
+    <string name="view_shared">Udostepnione fiszki</string>
+
+
+</resources>

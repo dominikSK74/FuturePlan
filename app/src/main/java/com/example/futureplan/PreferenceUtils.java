@@ -27,6 +27,11 @@ public class PreferenceUtils {
         return true;
     }
 
+    public static String getName(Context ctx){
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
+        return prefs.getString(Constants.KEY_NAME, null);
+    }
+
     public static boolean saveAvatar(String avatar, Context ctx){
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
         SharedPreferences.Editor prefsEditor = prefs.edit();

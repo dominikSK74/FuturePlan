@@ -21,8 +21,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,6 +35,10 @@ import java.util.Calendar;
  * create an instance of this fragment.
  */
 public class EditHomework extends Fragment {
+    private FirebaseAuth mAuth;
+    private FirebaseFirestore fStore;
+    private String userID;
+
     private String subject;
     private  String dayString;
     private  String date;
@@ -82,6 +91,10 @@ public class EditHomework extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_edit_homework, container, false);
 
+        mAuth = FirebaseAuth.getInstance();
+        fStore = FirebaseFirestore.getInstance();
+        userID = mAuth.getCurrentUser().getUid();
+
         TextInputLayout txt = view.findViewById(R.id.txtinput);
         txt.setStartIconTintList(null);
 
@@ -95,13 +108,10 @@ public class EditHomework extends Fragment {
         autoCompleteTxt.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                PreferenceUtils.saveSubject(autoCompleteTxt.getText().toString(),getContext());
                 subject = autoCompleteTxt.getText().toString();
             }
         });
-
-        subject = PreferenceUtils.getSubject(getContext());
-
+        
         TextView dayEdTxt = view.findViewById(R.id.dayEdTxt);
 
         dayEdTxt.setOnClickListener(new View.OnClickListener() {
@@ -126,7 +136,6 @@ public class EditHomework extends Fragment {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month = month + 1;
-                System.out.println("onDateSet: mm/dd/yyy: " + month + "/" + day + "/" + year);
 
                 dayString = day + "";
                 monthString = month + "";
@@ -145,15 +154,18 @@ public class EditHomework extends Fragment {
 
         TextInputLayout titleEdTxt = view.findViewById(R.id.title_text_input);
 
-        DataBaseHomework dataBaseHomework = new DataBaseHomework(getContext());
-
         Button saveBtn = view.findViewById(R.id.saveBtn);
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                HomeworkModel homeworkModel;
-                homeworkModel = new HomeworkModel(-1,subject,date,titleEdTxt.getEditText().getText().toString());
-                dataBaseHomework.insertData(homeworkModel);
+                String title = titleEdTxt.getEditText().getText().toString();
+                DocumentReference documentReference = fStore.collection("users").document(userID).collection("homework").document();
+                Map<String,Object> homework = new HashMap<>();
+                homework.put("subject",subject);
+                homework.put("date",date);
+                homework.put("title",title);
+                documentReference.set(homework);
+
                 Navigation.findNavController(view).navigate(R.id.action_editHomework_to_homework);
             }
         });

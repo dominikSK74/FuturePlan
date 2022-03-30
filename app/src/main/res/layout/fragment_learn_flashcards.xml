@@ -74,7 +74,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
                 android:gravity="center"
-                android:text="Front"
+                android:text="@string/front"
                 android:textSize="30dp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -88,7 +88,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="28dp"
                 android:gravity="center"
-                android:text="Notatka"
+                android:text="@string/note"
                 android:textSize="25dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -101,19 +101,19 @@
 
     <Button
         android:id="@+id/nextFlash"
+        style="?attr/materialButtonOutlinedStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
         android:layout_marginEnd="28dp"
-        android:text="Dalej"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/easyFlipView"
+        android:backgroundTint="@color/blue2"
+        android:text="@string/next"
 
         android:textAllCaps="false"
-        style="?attr/materialButtonOutlinedStyle"
-        app:strokeColor="@color/black"
         android:textColor="@color/black"
-        android:backgroundTint="@color/blue2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/easyFlipView"
+        app:strokeColor="@color/black"
 
 
         />
@@ -125,7 +125,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="184dp"
         android:layout_marginEnd="20dp"
-        android:text="Usuń zestaw"
+        android:text="@string/delete_set"
         app:layout_constraintEnd_toStartOf="@+id/nextFlash"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/prevFlash"
@@ -145,7 +145,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
         android:layout_marginTop="100dp"
-        android:text="Wróć"
+        android:text="@string/back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/easyFlipView"
 
@@ -156,6 +156,16 @@
         android:backgroundTint="@color/blue2"
 
         />
+
+    <Button
+        android:id="@+id/btnShare"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/share"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

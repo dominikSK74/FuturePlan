@@ -15,9 +15,14 @@ import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +30,10 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class addNewFlashcards extends Fragment {
+    private FirebaseAuth mAuth;
+    private FirebaseFirestore fStore;
+    private String userID;
+    private int flashID;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -71,6 +80,10 @@ public class addNewFlashcards extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add_new_flashcards, container, false);
 
+        mAuth = FirebaseAuth.getInstance();
+        fStore = FirebaseFirestore.getInstance();
+        userID = mAuth.getCurrentUser().getUid();
+
         FloatingActionButton addNewFlash = view.findViewById(R.id.addNewFlashcardsButton);
         ExtendedFloatingActionButton saveFlashcard = view.findViewById(R.id.saveFlashcards);
         EditText flashcardsName = view.findViewById(R.id.nazwaZestawu);
@@ -78,9 +91,8 @@ public class addNewFlashcards extends Fragment {
         EditText notatka1 = view.findViewById(R.id.notatka);
         EditText opis2 = view.findViewById(R.id.opis2);
         EditText notatka2 = view.findViewById(R.id.notatka2);
-        FCDBHelper DB = new FCDBHelper(getContext());
 
-
+        flashID = 0;
 
         addNewFlash.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,12 +103,19 @@ public class addNewFlashcards extends Fragment {
                 String op2 = opis2.getText().toString();
                 String n2 = notatka2.getText().toString();
 
-                Boolean checkInsertData = DB.insertFlashcardsData(nazwa, op1, n1, op2, n2);
+                DocumentReference documentReference2 = fStore.collection("users").document(userID).collection("flashcards").document(nazwa);
+                Map<String,Object> name = new HashMap<>();
+                name.put("name",nazwa);
+                documentReference2.set(name);
 
-                if(checkInsertData==true)
-                    Toast.makeText(getContext(),"Dodano nowa fiszke", Toast.LENGTH_SHORT ).show();
-                else
-                    Toast.makeText(getContext(),"Dodanie nie powiodlo sie", Toast.LENGTH_SHORT ).show();
+                DocumentReference documentReference = fStore.collection("users").document(userID).collection("flashcards").document(nazwa).collection("cards").document("" + flashID);
+                Map<String,Object> flashcard = new HashMap<>();
+                flashcard.put("des1",op1);
+                flashcard.put("n1",n1);
+                flashcard.put("des2",op2);
+                flashcard.put("n2",n2);
+                documentReference.set(flashcard);
+                flashID++;
 
                 opis1.setText("");
                 notatka1.setText("");

@@ -25,7 +25,7 @@
             android:inputType="none"
             android:paddingTop="16dp"
             android:paddingBottom="16dp"
-            android:text="Wybierz przedmiot" />
+            android:text="@string/choose_subject" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -38,7 +38,7 @@
         android:drawableStart="@drawable/calendar_icon"
         android:drawablePadding="60px"
         android:gravity="center_vertical"
-        android:hint="Wybierz date"
+        android:hint="@string/choose_date"
         android:paddingLeft="40px"
         android:textColor="@color/black"
         android:textColorHint="@color/black"
@@ -48,7 +48,7 @@
         app:layout_constraintTop_toBottomOf="@+id/txtinput" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/class_text_input"
+        android:id="@+id/title_text_input"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -58,13 +58,13 @@
         app:layout_constraintTop_toBottomOf="@+id/dayEdTxt">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/classEdTxt"
+            android:id="@+id/titleEdTxt"
             android:layout_width="match_parent"
             android:layout_height="150px"
             android:drawableStart="@drawable/ic_note"
             android:drawablePadding="80px"
             android:drawableTint="@color/blue1"
-            android:hint="Tytul"
+            android:hint="@string/title"
             app:layout_constraintTop_toBottomOf="@+id/dayEdTxt" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -74,7 +74,7 @@
         android:id="@+id/saveBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="zapisz"
+        android:text="@string/save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "797201195425",
+    "project_id": "futureplan-3db41",
+    "storage_bucket": "futureplan-3db41.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:797201195425:android:ac342331e189586a532be0",
+        "android_client_info": {
+          "package_name": "com.example.futureplan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "797201195425-d43opsef2s6eurb0bshut2en1ei38rv8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1446dCuUZL3WHcBh9REZ2B5VHa1GSa_c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "797201195425-d43opsef2s6eurb0bshut2en1ei38rv8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

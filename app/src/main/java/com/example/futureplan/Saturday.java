@@ -2,6 +2,7 @@ package com.example.futureplan;
 
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
@@ -14,6 +15,13 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,6 +33,10 @@ import java.util.HashMap;
  */
 public class Saturday extends Fragment {
     private SimpleAdapter sa;
+
+    private FirebaseAuth mAuth;
+    private FirebaseFirestore fStore;
+    private String userID;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -71,23 +83,43 @@ public class Saturday extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_saturday, container, false);
 
+        mAuth = FirebaseAuth.getInstance();
+        fStore = FirebaseFirestore.getInstance();
+        userID = mAuth.getCurrentUser().getUid();
+
         ImageView next = view.findViewById(R.id.next);
         ImageView prev = view.findViewById(R.id.prev);
         FloatingActionButton edit = view.findViewById(R.id.editPlan);
 
-        TextView day = view.findViewById(R.id.dzien);
-        String dayS = day.getText().toString();
+        String dayS = "Saturday";
 
-        PreferenceUtils.saveDay(dayS, getContext());
+        Bundle bundle= new Bundle();
+        bundle.putString("day",dayS);
 
-        DataBaseTimetable dataBaseTimetable = new DataBaseTimetable(getContext());
+        ArrayList<HashMap<String,String>> list = new ArrayList<HashMap<String,String>>();
 
-        ArrayList<HashMap<String,String>> list = dataBaseTimetable.getAdapterList(getContext(),dayS);
-        sa = new SimpleAdapter(getContext(), list,
-                R.layout.list_timetable,
-                new String[] { "line1","line2","line3" },
-                new int[] {R.id.line_a, R.id.line_b,R.id.line_c});
-        ((ListView)view.findViewById(R.id.listTimetable)).setAdapter(sa);
+        ArrayList<String> lessonID = new ArrayList<>();
+
+        CollectionReference collectionReference = fStore.collection("users").document(userID).collection("timetable").document("lessons").collection(dayS);
+        collectionReference.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                for(DocumentSnapshot snapshot : value){
+                    lessonID.add(snapshot.getId());
+                    HashMap<String,String> item = new HashMap<String,String>();
+                    item.put( "line1", snapshot.getString("subject"));
+                    item.put( "line2", snapshot.getString("time"));
+                    item.put( "line3", snapshot.getString("classroom"));
+                    list.add( item );
+                }
+                sa = new SimpleAdapter(getContext(), list,
+                        R.layout.list_timetable,
+                        new String[] { "line1","line2","line3" },
+                        new int[] {R.id.line_a, R.id.line_b,R.id.line_c});
+                ((ListView)view.findViewById(R.id.listTimetable)).setAdapter(sa);
+            }
+        });
+
 
         next.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -106,7 +138,7 @@ public class Saturday extends Fragment {
         edit.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(view).navigate(R.id.action_saturday_to_editPlan2);
+                Navigation.findNavController(view).navigate(R.id.action_saturday_to_editPlan2,bundle);
             }
         });
 
