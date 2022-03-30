@@ -39,9 +39,11 @@ public class PlanLekcji extends Fragment {
         adapter = new FragmentAdapter(fm, getLifecycle());
         pager2.setAdapter(adapter);
 
-        tabLayout.addTab(tabLayout.newTab().setText("Plan lekcji"));
-        tabLayout.addTab(tabLayout.newTab().setText("Zad. domowe"));
-        tabLayout.addTab(tabLayout.newTab().setText("Sprawdziany"));
+        String[] items = getResources().getStringArray(R.array.tabs);
+
+        tabLayout.addTab(tabLayout.newTab().setText(items[0]));
+        tabLayout.addTab(tabLayout.newTab().setText(items[1]));
+        tabLayout.addTab(tabLayout.newTab().setText(items[2]));
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override

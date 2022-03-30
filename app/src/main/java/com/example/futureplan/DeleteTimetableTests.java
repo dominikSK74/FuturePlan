@@ -21,10 +21,10 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link DeleteHomework#newInstance} factory method to
+ * Use the {@link DeleteTimetableTests#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DeleteHomework extends Fragment {
+public class DeleteTimetableTests extends Fragment {
     private FirebaseAuth mAuth;
     private FirebaseFirestore fStore;
     private String userID;
@@ -38,7 +38,7 @@ public class DeleteHomework extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public DeleteHomework() {
+    public DeleteTimetableTests() {
         // Required empty public constructor
     }
 
@@ -48,11 +48,11 @@ public class DeleteHomework extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment DeleteHomework.
+     * @return A new instance of fragment DeleteTimetableTests.
      */
     // TODO: Rename and change types and number of parameters
-    public static DeleteHomework newInstance(String param1, String param2) {
-        DeleteHomework fragment = new DeleteHomework();
+    public static DeleteTimetableTests newInstance(String param1, String param2) {
+        DeleteTimetableTests fragment = new DeleteTimetableTests();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -72,16 +72,15 @@ public class DeleteHomework extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_delete_homework, container, false);
+        View view = inflater.inflate(R.layout.fragment_delete_timetable_tests, container, false);
 
         mAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
         userID = mAuth.getCurrentUser().getUid();
 
         TextInputLayout title_text_input = view.findViewById(R.id.title_text_input);
-        //String nazwa = getArguments().getString("homeworkID");
 
-        DocumentReference documentReference = fStore.collection("users").document(userID).collection("homework").document(Homework.homework);
+        DocumentReference documentReference = fStore.collection("users").document(userID).collection("tests").document(TimetableTest.element);
         documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -94,14 +93,14 @@ public class DeleteHomework extends Fragment {
             @Override
             public void onClick(View view) {
                 documentReference.delete();
-                Navigation.findNavController(view).navigate(R.id.action_deleteHomework_to_homework);
+                Navigation.findNavController(view).navigate(R.id.action_deleteTimetableTests_to_timetableTest);
             }
         });
         Button btnBack = view.findViewById(R.id.btnBack);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.action_deleteHomework_to_homework);
+                Navigation.findNavController(view).navigate(R.id.action_deleteTimetableTests_to_timetableTest);
             }
         });
         return view;

@@ -20,8 +20,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +34,10 @@ import java.util.Calendar;
  * create an instance of this fragment.
  */
 public class EditTimetableTest extends Fragment {
+    private FirebaseAuth mAuth;
+    private FirebaseFirestore fStore;
+    private String userID;
+
     private String subject;
     private  String dayString;
     private  String date;
@@ -80,6 +89,10 @@ public class EditTimetableTest extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_edit_timetable_test, container, false);
 
+        mAuth = FirebaseAuth.getInstance();
+        fStore = FirebaseFirestore.getInstance();
+        userID = mAuth.getCurrentUser().getUid();
+
         TextInputLayout txt = view.findViewById(R.id.txtinput);
         txt.setStartIconTintList(null);
 
@@ -93,7 +106,6 @@ public class EditTimetableTest extends Fragment {
         autoCompleteTxt.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                PreferenceUtils.saveSubject(autoCompleteTxt.getText().toString(),getContext());
                 subject = autoCompleteTxt.getText().toString();
             }
         });
@@ -123,7 +135,6 @@ public class EditTimetableTest extends Fragment {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month = month + 1;
-                System.out.println("onDateSet: mm/dd/yyy: " + month + "/" + day + "/" + year);
 
                 dayString = day + "";
                 monthString = month + "";
@@ -139,17 +150,18 @@ public class EditTimetableTest extends Fragment {
             }
         };
 
-        subject = PreferenceUtils.getSubject(getContext());
-
-        DataBaseTests dataBaseTests = new DataBaseTests(getContext());
 
         Button saveBtnTests = view.findViewById(R.id.saveBtnTests);
         saveBtnTests.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                HomeworkModel homeworkModel;
-                homeworkModel = new HomeworkModel(-1,subject,date,titleEdTxtTests.getEditText().getText().toString());
-                dataBaseTests.insertData(homeworkModel);
+                String title = titleEdTxtTests.getEditText().getText().toString();
+                DocumentReference documentReference = fStore.collection("users").document(userID).collection("tests").document();
+                Map<String,Object> test = new HashMap<>();
+                test.put("subject",subject);
+                test.put("date",date);
+                test.put("title",title);
+                documentReference.set(test);
                 Navigation.findNavController(view).navigate(R.id.action_editTimetableTest_to_timetableTest);
             }
         });

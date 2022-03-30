@@ -1,5 +1,6 @@
 package com.example.futureplan;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -7,8 +8,14 @@ import android.database.Cursor;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatDelegate;
+import android.content.res.Resources;
+import android.database.Cursor;
+import android.os.Bundle;
+
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,12 +31,22 @@ import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.Executor;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -40,6 +57,12 @@ import java.util.List;
 
 
 public class Profil extends Fragment {
+    String userID;
+    FirebaseFirestore fStore;
+    FirebaseAuth mAuth;
+    String avatar;
+
+    String mDrawableName;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -96,8 +119,9 @@ public class Profil extends Fragment {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
 
-
-        DataBaseHelper dataBaseHelper = new DataBaseHelper(getContext());
+        mAuth = FirebaseAuth.getInstance();
+        fStore = FirebaseFirestore.getInstance();
+        userID = mAuth.getCurrentUser().getUid();
 
         int images[]={R.drawable.awatar1,R.drawable.awatar2,R.drawable.awatar3,R.drawable.awatar4,R.drawable.awatar5,R.drawable.awatar6,R.drawable.awatar7, R.drawable.awatar8};
 
@@ -110,59 +134,66 @@ public class Profil extends Fragment {
         EditText PeditTextNumber = view.findViewById(R.id.PeditTextNumber);
         EditText PeditTextDate = view.findViewById(R.id.PeditTextDate);
 
+        DocumentReference documentReference = fStore.collection("users").document(userID);
+        documentReference.addSnapshotListener((Activity) getContext(), new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
+                PeditTextEmail.setText(documentSnapshot.getString("email"));
+                PeditTextN.setText(documentSnapshot.getString("nickname"));
+                PeditTextName.setText(documentSnapshot.getString("fName"));
+                PeditTextSName.setText(documentSnapshot.getString("sName"));
+                PeditTextNumber.setText(documentSnapshot.getString("phone"));
+                PeditTextDate.setText(documentSnapshot.getString("birthdate"));
+                mDrawableName = documentSnapshot.getString("avatar");
+                System.out.println(mDrawableName);
+            }
+        });
 
-        /**Cursor cursor = dataBaseHelper.fetch();
-        cursor.moveToFirst();
+        System.out.println(mDrawableName);
 
-        PeditTextName.setText(cursor.getString(0));
-        PeditTextSName.setText(cursor.getString(1));
-        PeditTextN.setText(cursor.getString(2));
-        PeditTextEmail.setText(cursor.getString(3));
-        PeditTextNumber.setText(cursor.getString(4));
-
-        PeditTextDate.setText(cursor.getString(5));
-
-        String mDrawableName = cursor.getString(6);
-
-
-        //int id = getContext().getResources().getIdentifier(mDrawableName, "drawable", getContext().getPackageName());
-        //profileImage.setImageResource(id);
-*/
+       // Resources resources = getContext().getResources();
+        //final int resourceId = resources.getIdentifier(mDrawableName, "drawable", getContext().getPackageName());
+        //int resID = getResources().getIdentifier(mDrawableName , "drawable", getContext().getPackageName());
+        //profileImage.setImageResource(resID);
 
         Button btnLogout = view.findViewById(R.id.btnLogout);
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                FirebaseAuth.getInstance().signOut();
                 PreferenceUtils.saveEmail("", getContext());
                 startActivity(new Intent(getContext(), LogActivity.class));
             }
         });
 
-
-
         Button btnSave = view.findViewById(R.id.btnSave);
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String Fname = PeditTextName.getText().toString();
-                String Sname = PeditTextSName.getText().toString();
+                String fName = PeditTextName.getText().toString();
+                String sName = PeditTextSName.getText().toString();
                 String email = PeditTextEmail.getText().toString();
                 String name = PeditTextN.getText().toString();
-                String number = PeditTextNumber.getText().toString();
+                String phone = PeditTextNumber.getText().toString();
                 String date = PeditTextDate.getText().toString();
-                String avatar = PreferenceUtils.getAvatar(getContext());
 
-                UserModel userModel;
-                userModel = new UserModel(-1, Fname, Sname, name,  email, "", number, date,avatar);
-
-                PreferenceUtils.saveEmail(email, getContext());
-
-                String em = PreferenceUtils.getEmail(getContext());
-                dataBaseHelper.updateData(userModel, em);
+                DocumentReference documentReference = fStore.collection("users").document(userID);
+                Map<String,Object> user = new HashMap<>();
+                user.put("nickname",name);
+                user.put("email",email);
+                user.put("fName",fName);
+                user.put("sName",sName);
+                user.put("phone",phone);
+                user.put("birthdate",date);
+                user.put("avatar",avatar);
+                documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Log.d("TAG","onSuccess: user profile is saved " + userID);
+                    }
+                });
             }
         });
-
-
 
         FloatingActionButton btnImage = view.findViewById(R.id.btnImage);
         btnImage.setOnClickListener(new View.OnClickListener() {
@@ -180,9 +211,8 @@ public class Profil extends Fragment {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         profileImage.setImageResource(images[position]);
-                        PreferenceUtils.saveAvatar("awatar" + (position+1),getContext());
-                        System.out.println(PreferenceUtils.getAvatar(getContext()));
-
+                        avatar = "awatar" + (position+1);
+                        //PreferenceUtils.saveAvatar("awatar" + (position+1),getContext());
                     }
                 });
 
@@ -192,11 +222,6 @@ public class Profil extends Fragment {
                 builder.show();
             }
         });
-
-
-
-
-
 
         return view;
     }

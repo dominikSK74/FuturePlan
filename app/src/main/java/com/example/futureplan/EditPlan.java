@@ -18,7 +18,13 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.makeramen.roundedimageview.RoundedImageView;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,6 +32,9 @@ import com.makeramen.roundedimageview.RoundedImageView;
  * create an instance of this fragment.
  */
 public class EditPlan extends Fragment {
+    private FirebaseAuth mAuth;
+    private FirebaseFirestore fStore;
+    private String userID;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -72,6 +81,10 @@ public class EditPlan extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        mAuth = FirebaseAuth.getInstance();
+        fStore = FirebaseFirestore.getInstance();
+        userID = mAuth.getCurrentUser().getUid();
+
         View view = inflater.inflate(R.layout.fragment_edit_plan, container, false);
 
         //Ustawienie koloru ikonek
@@ -79,7 +92,6 @@ public class EditPlan extends Fragment {
         txt.setStartIconTintList(null);
 
         //Pole wybierz przedmiot
-        //String[] items = {"Historia", "Informatyka", "Język Polski", "Matematyka"}; // 2 Sposoby
         String[] items = getResources().getStringArray(R.array.subjectsarray);
         AutoCompleteTextView autoCompleteTxt;
         ArrayAdapter<String> adapterItems;
@@ -90,18 +102,15 @@ public class EditPlan extends Fragment {
         autoCompleteTxt.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                PreferenceUtils.saveSubject(autoCompleteTxt.getText().toString(),getContext());
+                //PreferenceUtils.saveSubject(autoCompleteTxt.getText().toString(),getContext());
                 subject = autoCompleteTxt.getText().toString();
             }
         });
 
 
 
-        String day = PreferenceUtils.getDay(getContext());
-
-        subject = PreferenceUtils.getSubject(getContext());
-
-        DataBaseTimetable dataBaseTimetable = new DataBaseTimetable(getContext());
+        //String day = PreferenceUtils.getDay(getContext());
+        String day = getArguments().getString("day");
 
         Button saveButton = view.findViewById(R.id.saveButton);
 
@@ -111,10 +120,13 @@ public class EditPlan extends Fragment {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TimetableModel timetableModel;
-                timetableModel = new TimetableModel(-1, day, subject,dateInputTxt.getEditText().getText().toString(),classInputTxt.getEditText().getText().toString());
-                boolean success = dataBaseTimetable.insertData(timetableModel);
-                Toast.makeText(getContext(), "Success= " + success, Toast.LENGTH_SHORT).show();
+                DocumentReference documentReference = fStore.collection("users").document(userID).collection("timetable").document("lessons").collection(day).document();
+                Map<String,String> lesson = new HashMap<>();
+                lesson.put("subject",subject);
+                lesson.put("time",dateInputTxt.getEditText().getText().toString());
+                lesson.put("classroom",classInputTxt.getEditText().getText().toString());
+                documentReference.set(lesson);
+
                 Navigation.findNavController(view).navigate(R.id.action_editPlan2_to_monday);
             }
         });

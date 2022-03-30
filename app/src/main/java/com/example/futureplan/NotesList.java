@@ -1,7 +1,9 @@
 package com.example.futureplan;
 
+import android.app.Activity;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
@@ -15,12 +17,26 @@ import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.lang.reflect.Array;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,7 +48,10 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class NotesList extends Fragment {
-
+    FirebaseAuth mAuth;
+    FirebaseFirestore fStore;
+    String userID;
+    public static String noteID;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -78,6 +97,42 @@ public class NotesList extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_notes_list, container, false);
 
+        mAuth = FirebaseAuth.getInstance();
+        fStore = FirebaseFirestore.getInstance();
+        userID = mAuth.getCurrentUser().getUid();
+
+        ArrayList<String> arraySnapshotId = new ArrayList<>();
+
+        GridView gridView = view.findViewById(R.id.gridViewNotes);
+        ArrayList<HashMap<String,String>> list = new ArrayList<HashMap<String,String>>();
+
+        CollectionReference collectionReference = fStore.collection("users").document(userID).collection("notes");
+        collectionReference.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                for (DocumentSnapshot snapshot : value){
+                    HashMap<String,String> item = new HashMap<String,String>();
+                    arraySnapshotId.add(snapshot.getId());
+                    item.put( "line1", snapshot.getString("title"));
+                    item.put( "line2", snapshot.getString("note"));
+                    list.add(item);
+                }
+                SimpleAdapter sa = new SimpleAdapter(getContext(), list,
+                        R.layout.grid_view_note,
+                        new String[] { "line1","line2"},
+                        new int[] {R.id.txtTitle, R.id.txtNote});
+                ((GridView)view.findViewById(R.id.gridViewNotes)).setAdapter(sa);
+            }
+        });
+
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Navigation.findNavController(view).navigate(R.id.action_notesList_to_viewNote);
+                noteID = arraySnapshotId.get(i);
+            }
+        });
+
         Button btnNewNote = view.findViewById(R.id.btnNewNote);
         btnNewNote.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,41 +140,6 @@ public class NotesList extends Fragment {
                 Navigation.findNavController(view).navigate(R.id.action_notesList_to_addNewNote);
             }
         });
-
-        String jsonFileString = MyJSON.getData(getContext(), "notes.json");
-        Gson gson = new Gson();
-        Type listNotesType = new TypeToken<List<Notes>>() { }.getType();
-        List<Notes> note = gson.fromJson(jsonFileString, listNotesType);
-
-        GridView gridView = view.findViewById(R.id.gridViewNotes);
-        ArrayList<HashMap<String,String>> list = new ArrayList<HashMap<String,String>>();
-
-        int numberOfNotes = note.size();
-
-        HashMap<String,String> item;
-        for(int i=0;i<numberOfNotes;i++){
-            item = new HashMap<String,String>();
-            item.put( "line1", note.get(i).getTitle());
-            item.put( "line2", note.get(i).getNote());
-            list.add( item );
-        }
-
-        SimpleAdapter sa = new SimpleAdapter(getContext(), list,
-                R.layout.grid_view_note,
-                new String[] { "line1","line2"},
-                new int[] {R.id.txtTitle, R.id.txtNote});
-        ((GridView)view.findViewById(R.id.gridViewNotes)).setAdapter(sa);
-
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Navigation.findNavController(view).navigate(R.id.action_notesList_to_viewNote);
-                //PreferenceUtils.saveNote(note.get(i).getNote(),getContext());
-                //PreferenceUtils.saveTitleNote(note.get(i).getTitle(),getContext());
-                PreferenceUtils.saveNoteID(i,getContext());
-            }
-        });
-
 
         return view;
     }

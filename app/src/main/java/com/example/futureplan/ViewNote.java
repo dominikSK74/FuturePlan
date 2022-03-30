@@ -2,6 +2,7 @@ package com.example.futureplan;
 
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
@@ -10,8 +11,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -23,7 +31,9 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,6 +41,9 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class ViewNote extends Fragment {
+    FirebaseAuth mAuth;
+    FirebaseFirestore fStore;
+    String userID;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -77,21 +90,21 @@ public class ViewNote extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_view_note, container, false);
 
-        String jsonFileString = MyJSON.getData(getContext(), "notes.json");
-        Gson gson = new Gson();
-        Type listNotesType = new TypeToken<List<Notes>>() { }.getType();
-        List<Notes> notes = gson.fromJson(jsonFileString, listNotesType);
-
-        int note_id = PreferenceUtils.getNoteID(getContext());
-
-        String note = notes.get(note_id).getNote();
-        String titleNote = notes.get(note_id).getTitle();
+        mAuth = FirebaseAuth.getInstance();
+        fStore = FirebaseFirestore.getInstance();
+        userID = mAuth.getCurrentUser().getUid();
 
         TextInputLayout titleInputTxt = view.findViewById(R.id.title_text_input);
         EditText editTextNote = view.findViewById(R.id.editTextNote);
 
-        titleInputTxt.getEditText().setText(titleNote);
-        editTextNote.setText(note);
+        DocumentReference documentReference = fStore.collection("users").document(userID).collection("notes").document(NotesList.noteID);
+        documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                titleInputTxt.getEditText().setText(value.getString("title"));
+                editTextNote.setText(value.getString("note"));
+            }
+        });
 
         Button btnBack = view.findViewById(R.id.btnBack);
         btnBack.setOnClickListener(new View.OnClickListener() {
@@ -105,20 +118,7 @@ public class ViewNote extends Fragment {
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                notes.remove(note_id);
-
-                String jsonString = gson.toJson(notes,listNotesType);
-
-                try {
-                    File file = new File(getContext().getFilesDir(),"notes.json");
-                    FileWriter fileWriter = null;
-                    fileWriter = new FileWriter(file);
-                    BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-                    bufferedWriter.write(jsonString);
-                    bufferedWriter.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                documentReference.delete();
                 Navigation.findNavController(view).navigate(R.id.action_viewNote_to_notesList);
             }
         });
@@ -130,21 +130,11 @@ public class ViewNote extends Fragment {
                 String titleNote = titleInputTxt.getEditText().getText().toString();
                 String note = editTextNote.getText().toString();
 
-                notes.get(note_id).setNote(note);
-                notes.get(note_id).setTitle(titleNote);
-
-                String jsonString = gson.toJson(notes,listNotesType);
-
-                try {
-                    File file = new File(getContext().getFilesDir(),"notes.json");
-                    FileWriter fileWriter = null;
-                    fileWriter = new FileWriter(file);
-                    BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-                    bufferedWriter.write(jsonString);
-                    bufferedWriter.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                DocumentReference documentReference = fStore.collection("users").document(userID).collection("notes").document(NotesList.noteID);
+                Map<String,Object> user = new HashMap<>();
+                user.put("title",titleNote);
+                user.put("note",note);
+                documentReference.set(user);
             }
         });
         return view;

@@ -3,6 +3,7 @@ package com.example.futureplan;
 import android.database.Cursor;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
@@ -12,9 +13,20 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.wajahatkarim3.easyflipview.EasyFlipView;
 
 import org.w3c.dom.Text;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,6 +34,14 @@ import org.w3c.dom.Text;
  * create an instance of this fragment.
  */
 public class LearnFlashcards extends Fragment {
+    private FirebaseAuth mAuth;
+    private FirebaseFirestore fStore;
+    private String userID;
+
+
+    private int cardID;
+    private int count;
+    private String username;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -68,69 +88,115 @@ public class LearnFlashcards extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_learn_flashcards, container, false);
 
+        mAuth = FirebaseAuth.getInstance();
+        fStore = FirebaseFirestore.getInstance();
+        userID = mAuth.getCurrentUser().getUid();
+
         TextView frontOpis = view.findViewById(R.id.frontOpis);
         TextView frontNotatka = view.findViewById(R.id.frontNotatka);
         TextView backOpis = view.findViewById(R.id.backOpis);
         TextView backNotatka = view.findViewById(R.id.backNotatka);
         Button nextFlash = view.findViewById(R.id.nextFlash);
-        FCDBHelper DB = new FCDBHelper(getContext());
-        EasyFlipView easyFlipView = view.findViewById(R.id.easyFlipView);
         Button deleteFlash = view.findViewById(R.id.deleteFlash);
         Button prevFlash = view.findViewById(R.id.prevFlash);
 
         String nazwa = getArguments().getString("nazwa");
-        Cursor cursor = DB.getFlashKit(nazwa);
 
-        cursor.move(1);
-        frontOpis.setText(cursor.getString(2));
-        frontNotatka.setText(cursor.getString(3));
-        backOpis.setText(cursor.getString(4));
-        backNotatka.setText(cursor.getString(5));
+        count =0;
+        cardID = 0;
 
+        CollectionReference collectionReference =fStore.collection("users").document(userID).collection("flashcards").document(nazwa).collection("cards");
+        collectionReference.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                for (DocumentSnapshot snapshot : value){
+                    count++;
+                }
+            }
+        });
+
+        DocumentReference documentReference = fStore.collection("users").document(userID).collection("flashcards").document(nazwa).collection("cards").document("" + cardID);
+        documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                frontOpis.setText(value.getString("des1"));
+                frontNotatka.setText(value.getString("n1"));
+                backOpis.setText(value.getString("des2"));
+                backNotatka.setText(value.getString("n2"));
+            }
+        });
 
         nextFlash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if(cursor.getPosition() != cursor.getCount()-1) {
-                    cursor.moveToNext();
-                    if(easyFlipView.isBackSide()){
-                        easyFlipView.flipTheView();
-                    }
+                if(cardID < (count -1) ){
+                    cardID++;
                 }
-                frontOpis.setText(cursor.getString(2));
-                frontNotatka.setText(cursor.getString(3));
-                backOpis.setText(cursor.getString(4));
-                backNotatka.setText(cursor.getString(5));
+                System.out.println(cardID);
+                DocumentReference documentReference = fStore.collection("users").document(userID).collection("flashcards").document(nazwa).collection("cards").document("" + cardID);
+                documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                        frontOpis.setText(value.getString("des1"));
+                        frontNotatka.setText(value.getString("n1"));
+                        backOpis.setText(value.getString("des2"));
+                        backNotatka.setText(value.getString("n2"));
+                    }
+                });
             }
         });
 
         prevFlash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(cursor.getPosition() != 0){
-                    cursor.moveToPrevious();
-                    if(easyFlipView.isBackSide()){
-                        easyFlipView.flipTheView();
-                    }
-                }
 
-                frontOpis.setText(cursor.getString(2));
-                frontNotatka.setText(cursor.getString(3));
-                backOpis.setText(cursor.getString(4));
-                backNotatka.setText(cursor.getString(5));
+                if(!(cardID == 0)){
+                    cardID--;
+                }
+                System.out.println(cardID);
+                DocumentReference documentReference = fStore.collection("users").document(userID).collection("flashcards").document(nazwa).collection("cards").document("" + cardID);
+                documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                        frontOpis.setText(value.getString("des1"));
+                        frontNotatka.setText(value.getString("n1"));
+                        backOpis.setText(value.getString("des2"));
+                        backNotatka.setText(value.getString("n2"));
+                    }
+                });
             }
         });
 
         deleteFlash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Bundle bundle2 = new Bundle();
-                bundle2.putString("checkDelete", "yes");
-                bundle2.putString("nazwa", nazwa);
+                fStore.collection("users").document(userID).collection("flashcards").document(nazwa).delete();
+                Navigation.findNavController(view).navigate(R.id.action_learnFlashcards_to_menuFiszki);
+            }
+        });
+
+        Button btnShare = view.findViewById(R.id.btnShare);
+        btnShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DocumentReference documentReference = fStore.collection("sharedFlashcards").document(nazwa);
+                Map<String,String> flashcard = new HashMap<>();
+
+                DocumentReference user = fStore.collection("users").document(userID);
+                user.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                        username = value.getString("nickname");
+                        PreferenceUtils.saveName(username,getContext());
+                    }
+                });
+                username = PreferenceUtils.getName(getContext());
+
+                flashcard.put("username", username);
+                documentReference.set(flashcard);
 
 
-                Navigation.findNavController(view).navigate(R.id.menuFiszki, bundle2);
             }
         });
 

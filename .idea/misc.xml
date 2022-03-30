@@ -108,16 +108,21 @@
         <entry key="..\:/Users/Julia0n3/Desktop/Nowy folder/FuturePlan/app/src/main/res/drawable/list_timetable.xml" value="0.4453125" />
         <entry key="..\:/Users/Julia0n3/Desktop/Nowy folder/FuturePlan/app/src/main/res/drawable/rounded_textview.xml" value="0.4453125" />
         <entry key="..\:/Users/Julia0n3/Desktop/Nowy folder/FuturePlan/app/src/main/res/layout/activity_log.xml" value="0.42916666666666664" />
+        <entry key="..\:/Users/Julia0n3/Desktop/Nowy folder/FuturePlan/app/src/main/res/layout/activity_main.xml" value="0.30885416666666665" />
+        <entry key="..\:/Users/Julia0n3/Desktop/Nowy folder/FuturePlan/app/src/main/res/layout/activity_reg.xml" value="0.42916666666666664" />
         <entry key="..\:/Users/Julia0n3/Desktop/Nowy folder/FuturePlan/app/src/main/res/layout/card_item.xml" value="0.24010416666666667" />
         <entry key="..\:/Users/Julia0n3/Desktop/Nowy folder/FuturePlan/app/src/main/res/layout/custom_image_layout.xml" value="0.42916666666666664" />
         <entry key="..\:/Users/Julia0n3/Desktop/Nowy folder/FuturePlan/app/src/main/res/layout/drawer_header.xml" value="0.42916666666666664" />
         <entry key="..\:/Users/Julia0n3/Desktop/Nowy folder/FuturePlan/app/src/main/res/layout/fragment_add_new_flashcards.xml" value="0.42916666666666664" />
         <entry key="..\:/Users/Julia0n3/Desktop/Nowy folder/FuturePlan/app/src/main/res/layout/fragment_add_new_note.xml" value="0.42916666666666664" />
         <entry key="..\:/Users/Julia0n3/Desktop/Nowy folder/FuturePlan/app/src/main/res/layout/fragment_delete_homework.xml" value="0.30885416666666665" />
+        <entry key="..\:/Users/Julia0n3/Desktop/Nowy folder/FuturePlan/app/src/main/res/layout/fragment_delete_timetable.xml" value="0.42916666666666664" />
+        <entry key="..\:/Users/Julia0n3/Desktop/Nowy folder/FuturePlan/app/src/main/res/layout/fragment_delete_timetable_tests.xml" value="0.42916666666666664" />
         <entry key="..\:/Users/Julia0n3/Desktop/Nowy folder/FuturePlan/app/src/main/res/layout/fragment_edit_homework.xml" value="0.42916666666666664" />
         <entry key="..\:/Users/Julia0n3/Desktop/Nowy folder/FuturePlan/app/src/main/res/layout/fragment_edit_plan.xml" value="0.3542116630669546" />
         <entry key="..\:/Users/Julia0n3/Desktop/Nowy folder/FuturePlan/app/src/main/res/layout/fragment_edit_timetable_test.xml" value="0.41510416666666666" />
         <entry key="..\:/Users/Julia0n3/Desktop/Nowy folder/FuturePlan/app/src/main/res/layout/fragment_file_chooser.xml" value="0.42916666666666664" />
+        <entry key="..\:/Users/Julia0n3/Desktop/Nowy folder/FuturePlan/app/src/main/res/layout/fragment_first.xml" value="0.30885416666666665" />
         <entry key="..\:/Users/Julia0n3/Desktop/Nowy folder/FuturePlan/app/src/main/res/layout/fragment_fiszki.xml" value="0.42916666666666664" />
         <entry key="..\:/Users/Julia0n3/Desktop/Nowy folder/FuturePlan/app/src/main/res/layout/fragment_friday.xml" value="0.42916666666666664" />
         <entry key="..\:/Users/Julia0n3/Desktop/Nowy folder/FuturePlan/app/src/main/res/layout/fragment_gridview_pomoce.xml" value="0.42916666666666664" />

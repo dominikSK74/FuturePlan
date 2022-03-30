@@ -1,9 +1,12 @@
 package com.example.futureplan;
 
+import android.app.Activity;
 import android.app.UiModeManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatDelegate;
@@ -13,10 +16,19 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
+
+import android.widget.Toast;
+
+import java.util.Locale;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,6 +36,8 @@ import android.widget.TextView;
  * create an instance of this fragment.
  */
 public class Ustawienia extends Fragment {
+    Context context = getContext();
+    Resources resources;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -65,6 +79,21 @@ public class Ustawienia extends Fragment {
         }
     }
 
+    private void RestartActivity(){
+        startActivity(new Intent(getContext(),BasicActivity.class));
+    }
+
+    private void localeHelp(String lang){
+        Locale locale = new Locale(lang);
+        Locale.setDefault(locale);
+        Resources resources = getContext().getResources();
+        Configuration config = new Configuration();
+        config.locale = locale;
+        resources.updateConfiguration(config, null);
+        RestartActivity();
+    }
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -101,6 +130,29 @@ public class Ustawienia extends Fragment {
                 SharedPreferences.Editor editor = settings.edit();
                 editor.putBoolean("switchkey", b);
                 editor.commit();
+
+        String[] items = getResources().getStringArray(R.array.languageArray);
+        AutoCompleteTextView autoCompleteLanguage;
+        ArrayAdapter<String> adapterItems;
+
+        autoCompleteLanguage = view.findViewById(R.id.autoCompleteLanguage);
+        adapterItems = new ArrayAdapter<String>(requireContext(), R.layout.subjects, items);
+        autoCompleteLanguage.setAdapter(adapterItems);
+        autoCompleteLanguage.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                switch(i){
+                    case 0:
+                        localeHelp("pl");
+                        break;
+                    case 1:
+                        localeHelp("en");
+                        break;
+                    case 2:
+                        localeHelp("de");
+                        break;
+                }
+
             }
         });
 

@@ -4,9 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackground"
-    tools:context=".DeleteHomework">
-
+    tools:context=".DeleteTimetable">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/title_text_input"
@@ -15,17 +13,14 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:textColorHint="@color/textColor">
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/titleEdTxt"
             android:layout_width="match_parent"
             android:layout_height="150px"
-            android:drawableStart="@drawable/ic_note"
             android:drawablePadding="80px"
             android:drawableTint="@color/blue1"
-            android:textColor="@color/textColor"/>
             android:hint="@string/title"
             app:layout_constraintTop_toBottomOf="@+id/dayEdTxt" />
     </com.google.android.material.textfield.TextInputLayout>

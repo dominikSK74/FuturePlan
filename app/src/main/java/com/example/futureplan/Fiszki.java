@@ -4,6 +4,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
@@ -21,6 +22,14 @@ import android.widget.GridLayout;
 import android.widget.ScrollView;
 
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,6 +41,9 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class Fiszki extends Fragment {
+    private FirebaseAuth mAuth;
+    private FirebaseFirestore fStore;
+    private String userID;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -76,32 +88,14 @@ public class Fiszki extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        mAuth = FirebaseAuth.getInstance();
+        fStore = FirebaseFirestore.getInstance();
+        userID = mAuth.getCurrentUser().getUid();
 
         View view = inflater.inflate(R.layout.fragment_fiszki, container, false);
         RecyclerView fiszkiRecycler = view.findViewById(R.id.fiszkiRecycler);
         ExtendedFloatingActionButton efab = view.findViewById(R.id.FABfiszki);
-        NestedScrollView sv = view.findViewById(R.id.scrollView2);
-        FCDBHelper DB = new FCDBHelper(getContext());
-        Cursor dbCursor = DB.getFlashcardsData();
-
-        //Usuwanie zestawu
-        try
-        {
-            if(getArguments().getString("checkDelete") == "yes")
-            {
-                //System.out.println("Jest Argument!");
-                String name = getArguments().getString("nazwa");
-                Boolean checkDataDelete = DB.deleteData(name);
-                if (checkDataDelete==true)
-                    System.out.println("Usunieto dane");
-                else
-                    System.out.println("Nie Usunieto danych!");
-            }
-        }catch(final Exception e){
-
-        }
-
-
+        NestedScrollView sv = view.findViewById(R.id.scrollView2);;
 
 
         fiszkiRecycler.setLayoutManager(
@@ -124,24 +118,17 @@ public class Fiszki extends Fragment {
         List<CardItem> cardItems = new ArrayList<>(); // Lista obiektow CardItem.java
         CardAdapter mAdapter = new CardAdapter(cardItems);
 
-        //Załadowanie elementów z bazy danych
-        while(dbCursor.moveToNext()){
-            String nazwa = dbCursor.getString(1);
-            boolean check2 = false;
-
-            for(int i=0;i<cardItems.size();i++){
-
-                if(nazwa.equals(cardItems.get(i).getText())) {
-                    check2 = true;
+        DocumentReference documentReference = fStore.collection("users").document(userID).collection("flashcards").document("df");
+        CollectionReference collectionReference = fStore.collection("users").document(userID).collection("flashcards");
+        collectionReference.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                for (DocumentSnapshot snapshot: value) {
+                    cardItems.add(new CardItem(snapshot.getId()));
                 }
-            }
-
-            if(check2 == false){
-                cardItems.add(new CardItem(nazwa));
                 fiszkiRecycler.setAdapter(mAdapter);
             }
-        }
-
+        });
 
         //Extended Floating Action Button on click to add new flashcards
         efab.setOnClickListener(new View.OnClickListener() {
