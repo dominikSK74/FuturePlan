@@ -25,6 +25,9 @@ import com.wajahatkarim3.easyflipview.EasyFlipView;
 
 import org.w3c.dom.Text;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link LearnFlashcards#newInstance} factory method to
@@ -34,8 +37,11 @@ public class LearnFlashcards extends Fragment {
     private FirebaseAuth mAuth;
     private FirebaseFirestore fStore;
     private String userID;
+
+
     private int cardID;
     private int count;
+    private String username;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -167,6 +173,30 @@ public class LearnFlashcards extends Fragment {
             public void onClick(View view) {
                 fStore.collection("users").document(userID).collection("flashcards").document(nazwa).delete();
                 Navigation.findNavController(view).navigate(R.id.action_learnFlashcards_to_menuFiszki);
+            }
+        });
+
+        Button btnShare = view.findViewById(R.id.btnShare);
+        btnShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DocumentReference documentReference = fStore.collection("sharedFlashcards").document(nazwa);
+                Map<String,String> flashcard = new HashMap<>();
+
+                DocumentReference user = fStore.collection("users").document(userID);
+                user.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                        username = value.getString("nickname");
+                        PreferenceUtils.saveName(username,getContext());
+                    }
+                });
+                username = PreferenceUtils.getName(getContext());
+
+                flashcard.put("username", username);
+                documentReference.set(flashcard);
+
+
             }
         });
 

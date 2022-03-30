@@ -74,6 +74,8 @@
     <string name="sign_up">Załóż konto</string>
     <string name="tests">Sprawdziany</string>
     <string name="homework">Zad. domowe</string>
+    <string name="share">udostępnij</string>
+    <string name="view_shared">Udostepnione fiszki</string>
 
 
 </resources>

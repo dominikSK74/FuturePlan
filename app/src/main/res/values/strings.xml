@@ -73,6 +73,8 @@
     <string name="sign_up">Sign up</string>
     <string name="tests">Tests</string>
     <string name="homework">Homework</string>
+    <string name="share">share</string>
+    <string name="view_shared">shared flashcards</string>
 
 
 </resources>

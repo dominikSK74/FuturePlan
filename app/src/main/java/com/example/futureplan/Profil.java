@@ -133,7 +133,7 @@ public class Profil extends Fragment {
             }
         });
 
-
+        System.out.println(mDrawableName);
 
        // Resources resources = getContext().getResources();
         //final int resourceId = resources.getIdentifier(mDrawableName, "drawable", getContext().getPackageName());

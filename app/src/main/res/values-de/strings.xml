@@ -74,5 +74,7 @@
     <string name="sign_up">Sich einschreiben</string>
     <string name="tests">Prüfung</string>
     <string name="homework">Hausaufgabe</string>
+    <string name="share">aktie</string>
+    <string name="view_shared">bereitgestellte Karten</string>
 
 </resources>

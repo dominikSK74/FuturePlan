@@ -89,7 +89,6 @@ public class TimetableTest extends Fragment {
         fStore = FirebaseFirestore.getInstance();
         userID = mAuth.getCurrentUser().getUid();
 
-        DataBaseTests dataBaseTests = new DataBaseTests(getContext());
 
         ArrayList<HashMap<String,String>> list = new ArrayList<>();
 
