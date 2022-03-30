@@ -12,7 +12,7 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/ikona"
         android:supportsRtl="true"
-        android:theme="@style/Theme.FuturePlan" >
+        android:theme="@style/Theme.Light" >
         <activity
             android:name=".BasicActivity"
             android:exported="true" />

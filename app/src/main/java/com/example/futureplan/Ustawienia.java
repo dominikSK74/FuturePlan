@@ -118,11 +118,10 @@ public class Ustawienia extends Fragment {
         switch1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(b)
-                {
+                if (b) {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
 
-                }else{
+                } else {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                 }
                 //Save status switch in settings
@@ -130,6 +129,9 @@ public class Ustawienia extends Fragment {
                 SharedPreferences.Editor editor = settings.edit();
                 editor.putBoolean("switchkey", b);
                 editor.commit();
+            }
+            });
+
 
         String[] items = getResources().getStringArray(R.array.languageArray);
         AutoCompleteTextView autoCompleteLanguage;

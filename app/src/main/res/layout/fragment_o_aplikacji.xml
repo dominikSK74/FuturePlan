@@ -4,9 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackground"
-    android:layout_marginTop="38dp"
-    tools:context=".oAplikacji">
+    tools:context=".oAplikacji"
     tools:layout_editor_absoluteX="-8dp"
     tools:layout_editor_absoluteY="267dp">
 
@@ -75,8 +73,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:textColor="@color/textColor"/>
         app:layout_constraintTop_toBottomOf="@+id/textView3"
         tools:ignore="MissingConstraints" />
 
@@ -98,11 +94,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:text="@string/authors_description"
-        android:textColor="@color/black"
+        android:textColor="@color/textColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
-        android:textColor="@color/textColor"/>
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <TextView
         android:id="@+id/textView5"
@@ -111,11 +106,10 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         android:text="@string/year_of_creation"
-        android:textColor="@color/black"
+        android:textColor="@color/textColor"
         app:layout_constraintBottom_toTopOf="@+id/view3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:textColor="@color/textColor"/>
         app:layout_constraintTop_toBottomOf="@+id/view2" />
 
     <TextView
@@ -126,11 +120,10 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
         android:text="@string/app_description"
-        android:textColor="@color/black"
+        android:textColor="@color/textColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        android:textColor="@color/textColor"/>
         app:layout_constraintTop_toBottomOf="@+id/view3" />
 
 
