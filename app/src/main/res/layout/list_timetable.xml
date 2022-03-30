@@ -13,6 +13,7 @@
         android:layout_toRightOf="@id/line_c"
         android:text="TextView"
         android:layout_marginTop="20px"
+        android:textColor="@color/textColor"
         android:textSize="16sp"
         android:textStyle="italic" />
 
@@ -22,7 +23,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/line_a"
         android:layout_toRightOf="@id/line_c"
-        android:text="TextView" />
+        android:text="TextView"
+        android:textColor="@color/textColor"/>
 
     <TextView
         android:id="@+id/line_c"
@@ -31,7 +33,8 @@
         android:layout_marginRight="20px"
         android:background="@drawable/rounded_textview"
         android:gravity="center"
-        android:text="Text" />
+        android:text="Text"
+        android:textColor="@color/textColor"/>
 
 
 

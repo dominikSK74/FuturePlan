@@ -10,14 +10,16 @@
     android:layout_gravity="fill"
     android:layout_rowWeight="1"
     android:layout_columnWeight="1"
-    android:layout_margin="8dp" >
+    android:layout_margin="8dp"
+    android:backgroundTint="@color/colorBackground">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center_vertical|center_horizontal"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@color/colorBackground">
 
         <TextView
             android:id="@+id/fiszkiText"
@@ -25,6 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="Fiszki"
+            android:textColor="@color/textColor"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -38,6 +41,7 @@
             android:layout_marginTop="16dp"
             android:background="@drawable/flashcard_layout"
             android:gravity="center"
+            android:textColor="@color/textColor"
             android:text="Ucz się!"
             android:textSize="15sp"
             android:textStyle="bold"

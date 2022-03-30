@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:layout_marginTop="38dp"
     tools:context=".Profil">
 
 
@@ -46,7 +48,9 @@
         app:layout_constraintBottom_toTopOf="@+id/PeditTextSName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/profileImage"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/editTextHint"/>
 
     <EditText
         android:id="@+id/PeditTextSName"
@@ -62,7 +66,9 @@
         app:layout_constraintBottom_toTopOf="@+id/PeditTextN"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/profileImage"
-        app:layout_constraintTop_toBottomOf="@+id/PeditTextName" />
+        app:layout_constraintTop_toBottomOf="@+id/PeditTextName"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/editTextHint"/>
 
     <EditText
         android:id="@+id/PeditTextN"
@@ -78,7 +84,9 @@
         app:layout_constraintBottom_toTopOf="@+id/PeditTextEmail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profileImage" />
+        app:layout_constraintTop_toBottomOf="@+id/profileImage"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/editTextHint"/>
 
     <EditText
         android:id="@+id/PeditTextEmail"
@@ -95,7 +103,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/PeditTextN" />
+        app:layout_constraintTop_toBottomOf="@+id/PeditTextN"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/editTextHint"/>
 
     <EditText
         android:id="@+id/PeditTextNumber"
@@ -112,7 +122,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/PeditTextEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/PeditTextEmail"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/editTextHint"/>
 
     <EditText
         android:id="@+id/PeditTextDate"
@@ -129,7 +141,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/PeditTextNumber" />
+        app:layout_constraintTop_toBottomOf="@+id/PeditTextNumber"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/editTextHint"/>
 
     <Button
         android:id="@+id/btnSave"

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBackground"
     tools:context=".EditHomework">
 
     <com.google.android.material.textfield.TextInputLayout
@@ -15,7 +16,8 @@
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:startIconDrawable="@drawable/przedmioty_ikona">
+        app:startIconDrawable="@drawable/przedmioty_ikona"
+        android:textColorHint="@color/textColor">
 
         <AutoCompleteTextView
             android:id="@+id/autoCompleteTextView"
@@ -25,7 +27,8 @@
             android:inputType="none"
             android:paddingTop="16dp"
             android:paddingBottom="16dp"
-            android:text="Wybierz przedmiot" />
+            android:text="Wybierz przedmiot"
+            android:textColor="@color/textColor"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -40,8 +43,8 @@
         android:gravity="center_vertical"
         android:hint="Wybierz date"
         android:paddingLeft="40px"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/textColor"
         android:textSize="40px"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

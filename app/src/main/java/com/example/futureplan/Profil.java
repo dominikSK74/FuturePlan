@@ -2,9 +2,11 @@ package com.example.futureplan;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -19,6 +21,7 @@ import android.widget.GridView;
 
 import android.widget.ImageView;
 
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -82,6 +85,16 @@ public class Profil extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_profil, container, false);
+
+        //SET THEME FROM SETTINGS
+        SharedPreferences settings = getContext().getSharedPreferences("PREFS_NAME", 0);
+        boolean silent = settings.getBoolean("switchkey", false);
+        if(silent)
+        {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        }else{
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
 
 
         DataBaseHelper dataBaseHelper = new DataBaseHelper(getContext());

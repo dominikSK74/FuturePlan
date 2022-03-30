@@ -7,16 +7,16 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="blue1">#00CCFF</color>
-    <color name="primary">#03A9F4</color>
+    <color name="blue1">#006B84</color>
+    <color name="primary">#006B84</color>
     <color name="primaryDark">#3F51B5</color>
-    <color name="blue2">#97e7fb</color>
+    <color name="blue2">#0585BD</color>
     <color name="red">#91011E</color>
     <color name="gray">#9e9e9e</color>
     <color name="red2">#ff8080</color>
 
-    <!--Light theme colors -->
-    <color name="colorBackground">#FFFFFF</color>
-    <color name="textColor">#FF000000</color>
-    <color name="editTextHint">#99A095</color>
+    <!--Dark theme colors -->
+    <color name="colorBackground">#40403A</color>
+    <color name="textColor">#FFFFFF</color>
+    <color name="editTextHint">#FFFFFF</color>
 </resources>

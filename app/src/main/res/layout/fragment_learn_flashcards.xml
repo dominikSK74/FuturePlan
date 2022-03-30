@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="50dp"
+    android:layout_marginTop="38dp"
+    android:background="@color/colorBackground"
     tools:context=".LearnFlashcards">
 
     <com.wajahatkarim3.easyflipview.EasyFlipView
@@ -36,6 +37,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
                 android:gravity="center"
+                android:textColor="@color/textColor"
                 android:text="Back"
                 android:textSize="30dp"
                 android:textStyle="bold"
@@ -51,6 +53,7 @@
                 android:layout_marginTop="28dp"
                 android:gravity="center"
                 android:text="Notatka"
+                android:textColor="@color/textColor"
                 android:textSize="25dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -75,6 +78,7 @@
                 android:layout_marginTop="40dp"
                 android:gravity="center"
                 android:text="Front"
+                android:textColor="@color/textColor"
                 android:textSize="30dp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -88,6 +92,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="28dp"
                 android:gravity="center"
+                android:textColor="@color/textColor"
                 android:text="Notatka"
                 android:textSize="25dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -112,7 +117,7 @@
         android:textAllCaps="false"
         style="?attr/materialButtonOutlinedStyle"
         app:strokeColor="@color/black"
-        android:textColor="@color/black"
+        android:textColor="@color/textColor"
         android:backgroundTint="@color/blue2"
 
 
@@ -152,7 +157,7 @@
         android:textAllCaps="false"
         style="?attr/materialButtonOutlinedStyle"
         app:strokeColor="@color/black"
-        android:textColor="@color/black"
+        android:textColor="@color/textColor"
         android:backgroundTint="@color/blue2"
 
         />
