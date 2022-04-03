@@ -145,16 +145,10 @@ public class Profil extends Fragment {
                 PeditTextNumber.setText(documentSnapshot.getString("phone"));
                 PeditTextDate.setText(documentSnapshot.getString("birthdate"));
                 mDrawableName = documentSnapshot.getString("avatar");
-                System.out.println(mDrawableName);
+                int resID = getResources().getIdentifier(mDrawableName , "drawable", getContext().getPackageName());
+                profileImage.setImageResource(resID);
             }
         });
-
-        System.out.println(mDrawableName);
-
-       // Resources resources = getContext().getResources();
-        //final int resourceId = resources.getIdentifier(mDrawableName, "drawable", getContext().getPackageName());
-        //int resID = getResources().getIdentifier(mDrawableName , "drawable", getContext().getPackageName());
-        //profileImage.setImageResource(resID);
 
         Button btnLogout = view.findViewById(R.id.btnLogout);
         btnLogout.setOnClickListener(new View.OnClickListener() {

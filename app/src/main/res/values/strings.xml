@@ -43,7 +43,7 @@
     <string name="app_description">Android Studio and the Java programming language were used to develop the application</string>
     <string name="choose_language">Choose language</string>
 
-    <string name="polish">Polnisch</string>
+    <string name="polish">Polisch</string>
     <string name="english">Englisch</string>
     <string name="german">Deutsch</string>
 
@@ -75,6 +75,7 @@
     <string name="homework">Homework</string>
     <string name="share">share</string>
     <string name="view_shared">shared flashcards</string>
+    <string name="shared_by" >Shared by</string>
 
 
 </resources>

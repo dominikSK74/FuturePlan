@@ -1,30 +1,23 @@
 package com.example.futureplan;
 
-import android.database.Cursor;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.GridLayout;
-import android.widget.ScrollView;
+import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -32,15 +25,14 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link Fiszki#newInstance} factory method to
+ * Use the {@link SharedFlashcards#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Fiszki extends Fragment {
+public class SharedFlashcards extends Fragment {
     private FirebaseAuth mAuth;
     private FirebaseFirestore fStore;
     private String userID;
@@ -54,7 +46,7 @@ public class Fiszki extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public Fiszki() {
+    public SharedFlashcards() {
         // Required empty public constructor
     }
 
@@ -64,11 +56,11 @@ public class Fiszki extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment Fiszki.
+     * @return A new instance of fragment SharedFlashcards.
      */
     // TODO: Rename and change types and number of parameters
-    public static Fiszki newInstance(String param1, String param2) {
-        Fiszki fragment = new Fiszki();
+    public static SharedFlashcards newInstance(String param1, String param2) {
+        SharedFlashcards fragment = new SharedFlashcards();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -88,37 +80,23 @@ public class Fiszki extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_shared_flashcards, container, false);
+
         mAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
         userID = mAuth.getCurrentUser().getUid();
 
-        View view = inflater.inflate(R.layout.fragment_fiszki, container, false);
         RecyclerView fiszkiRecycler = view.findViewById(R.id.fiszkiRecycler);
         ExtendedFloatingActionButton efab = view.findViewById(R.id.FABfiszki);
-        NestedScrollView sv = view.findViewById(R.id.scrollView2);;
-
 
         fiszkiRecycler.setLayoutManager(
                 new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         );
 
-        // Floating Action Button Hide and Show
-
-        sv.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
-            @Override
-            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-                if (scrollY > oldScrollY) {
-                    efab.hide();
-                }else {
-                    efab.show();
-                }
-            }
-        });
-
         List<CardItem> cardItems = new ArrayList<>(); // Lista obiektow CardItem.java
         CardAdapter mAdapter = new CardAdapter(cardItems);
 
-        CollectionReference collectionReference = fStore.collection("users").document(userID).collection("flashcards");
+        CollectionReference collectionReference = fStore.collection("sharedFlashcards");
         collectionReference.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -129,36 +107,24 @@ public class Fiszki extends Fragment {
             }
         });
 
-        //Extended Floating Action Button on click to add new flashcards
-        efab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.action_menuFiszki_to_addNewFlashcards);
-            }
-        });
-
         mAdapter.setOnItemClickListener(new CardAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
                 Bundle bundle = new Bundle();
                 String nazwa = cardItems.get(position).getText();
                 bundle.putString("nazwa", nazwa);
-                Navigation.findNavController(view).navigate(R.id.action_menuFiszki_to_learnFlashcards, bundle);
+                Navigation.findNavController(view).navigate(R.id.action_sharedFlashcards_to_learnSharedFlashcards, bundle);
             }
         });
 
-        Button btnViewShared = view.findViewById(R.id.btnViewShared);
-        btnViewShared.setOnClickListener(new View.OnClickListener() {
+        Button btnBack = view.findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.action_menuFiszki_to_sharedFlashcards);
+                Navigation.findNavController(view).navigate(R.id.action_sharedFlashcards_to_menuFiszki);
             }
         });
-
-
 
         return view;
     }
-
-
 }

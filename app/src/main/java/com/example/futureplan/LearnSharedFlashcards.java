@@ -1,6 +1,5 @@
 package com.example.futureplan;
 
-import android.database.Cursor;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -12,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
@@ -22,23 +20,16 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.wajahatkarim3.easyflipview.EasyFlipView;
-
-import org.w3c.dom.Text;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link LearnFlashcards#newInstance} factory method to
+ * Use the {@link LearnSharedFlashcards#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class LearnFlashcards extends Fragment {
+public class LearnSharedFlashcards extends Fragment {
     private FirebaseAuth mAuth;
     private FirebaseFirestore fStore;
     private String userID;
-
 
     private int cardID;
     private int count;
@@ -53,7 +44,7 @@ public class LearnFlashcards extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public LearnFlashcards() {
+    public LearnSharedFlashcards() {
         // Required empty public constructor
     }
 
@@ -63,11 +54,11 @@ public class LearnFlashcards extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment LearnFlashcards.
+     * @return A new instance of fragment LearnSharedFlashcards.
      */
     // TODO: Rename and change types and number of parameters
-    public static LearnFlashcards newInstance(String param1, String param2) {
-        LearnFlashcards fragment = new LearnFlashcards();
+    public static LearnSharedFlashcards newInstance(String param1, String param2) {
+        LearnSharedFlashcards fragment = new LearnSharedFlashcards();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -87,7 +78,7 @@ public class LearnFlashcards extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_learn_flashcards, container, false);
+        View view = inflater.inflate(R.layout.fragment_learn_shared_flashcards, container, false);
 
         mAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
@@ -101,12 +92,14 @@ public class LearnFlashcards extends Fragment {
         Button deleteFlash = view.findViewById(R.id.deleteFlash);
         Button prevFlash = view.findViewById(R.id.prevFlash);
 
+        TextView txtUser = view.findViewById(R.id.textUser);
+
         String nazwa = getArguments().getString("nazwa");
 
         count =0;
         cardID = 0;
 
-        CollectionReference collectionReference =fStore.collection("users").document(userID).collection("flashcards").document(nazwa).collection("cards");
+        CollectionReference collectionReference = fStore.collection("sharedFlashcards").document(nazwa).collection("cards");
         collectionReference.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -116,7 +109,7 @@ public class LearnFlashcards extends Fragment {
             }
         });
 
-        DocumentReference documentReference = fStore.collection("users").document(userID).collection("flashcards").document(nazwa).collection("cards").document("" + cardID);
+        DocumentReference documentReference = fStore.collection("sharedFlashcards").document(nazwa).collection("cards").document("" + cardID);
         documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -134,7 +127,7 @@ public class LearnFlashcards extends Fragment {
                 if(cardID < (count -1) ){
                     cardID++;
                 }
-                DocumentReference documentReference = fStore.collection("users").document(userID).collection("flashcards").document(nazwa).collection("cards").document("" + cardID);
+                DocumentReference documentReference = fStore.collection("sharedFlashcards").document(nazwa).collection("cards").document("" + cardID);
                 documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
                     @Override
                     public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -153,7 +146,7 @@ public class LearnFlashcards extends Fragment {
                 if(!(cardID == 0)){
                     cardID--;
                 }
-                DocumentReference documentReference = fStore.collection("users").document(userID).collection("flashcards").document(nazwa).collection("cards").document("" + cardID);
+                DocumentReference documentReference = fStore.collection("sharedFlashcards").document(nazwa).collection("cards").document("" + cardID);
                 documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
                     @Override
                     public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -169,56 +162,18 @@ public class LearnFlashcards extends Fragment {
         deleteFlash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                fStore.collection("users").document(userID).collection("flashcards").document(nazwa).delete();
+                fStore.collection("sharedFlashcards").document(nazwa).delete();
                 Navigation.findNavController(view).navigate(R.id.action_learnFlashcards_to_menuFiszki);
             }
         });
 
-        Button btnShare = view.findViewById(R.id.btnShare);
-        btnShare.setOnClickListener(new View.OnClickListener() {
+        DocumentReference userName = fStore.collection("sharedFlashcards").document(nazwa);
+        userName.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
-            public void onClick(View view) {
-                DocumentReference documentReference = fStore.collection("sharedFlashcards").document(nazwa);
-                Map<String,String> flashcard = new HashMap<>();
-
-
-                DocumentReference user = fStore.collection("users").document(userID);
-                user.addSnapshotListener(new EventListener<DocumentSnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                        username = value.getString("nickname");
-                        PreferenceUtils.saveName(username,getContext());
-                    }
-                });
-
-                username = PreferenceUtils.getName(getContext());
-
-                flashcard.put("username", username);
-                documentReference.set(flashcard);
-
-                CollectionReference collectionReference =fStore.collection("users").document(userID).collection("flashcards").document(nazwa).collection("cards");
-                collectionReference.addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                        int i=0;
-                        for (DocumentSnapshot snapshot : value){
-                            DocumentReference flashcard = fStore.collection("sharedFlashcards").document(nazwa).collection("cards").document(""+i);
-                            Map<String,String> card = new HashMap<>();
-                            card.put("des1",snapshot.getString("des1"));
-                            card.put("des2",snapshot.getString("des2"));
-                            card.put("n1",snapshot.getString("n1"));
-                            card.put("n2",snapshot.getString("n2"));
-                            flashcard.set(card);
-                            i++;
-                        }
-                    }
-                });
-                Toast.makeText(getContext(), "Udostępniono zestaw", Toast.LENGTH_SHORT).show();
-
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                txtUser.setText(value.getString("username"));
             }
         });
-
-
 
 
         return view;
