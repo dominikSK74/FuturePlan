@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="38dp"
     android:background="@color/colorBackground"
     tools:context=".ViewNote">
 
@@ -31,16 +32,16 @@
         android:id="@+id/editTextNote"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/edit_txt_note"
         android:gravity="top"
         android:inputType="text|textMultiLine"
         android:padding="5dp"
+        android:textColor="@color/textColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title_text_input"
-        android:textColor="@color/textColor"
-        android:backgroundTint="@color/colorBackground"/>
+/>
 
     <Button
         android:id="@+id/btnSave"

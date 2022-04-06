@@ -77,12 +77,13 @@ public class BasicActivity extends AppCompatActivity {
                 profileEmail.setText(documentSnapshot.getString("email"));
                 profileName.setText(documentSnapshot.getString("fName"));
                 profileSurname.setText(documentSnapshot.getString("sName"));
-               // mDrawableName = documentSnapshot.getString("avatar");
+                String mDrawableName = documentSnapshot.getString("avatar");
+                int resID = getResources().getIdentifier(mDrawableName , "drawable", getPackageName());
+                imageProfile.setImageResource(resID);
             }
         });
 
-        //int resID = getResources().getIdentifier(mDrawableName , "drawable", this.getPackageName());
-        //imageProfile.setImageResource(resID);
+
 
         //-----------------------------------\\
     }

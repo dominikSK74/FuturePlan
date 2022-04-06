@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="38dp"
     android:background="@color/colorBackground"
     tools:context=".EditTimetableTest">
 
@@ -39,10 +40,9 @@
         android:drawableStart="@drawable/calendar_icon"
         android:drawablePadding="60px"
         android:gravity="center_vertical"
-        android:hint="Wybierz date"
+        android:hint="@string/choose_date"
         android:paddingLeft="40px"
         android:textColorHint="@color/textColor"
-        android:backgroundTint="@color/colorBackground"
         android:textSize="40px"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

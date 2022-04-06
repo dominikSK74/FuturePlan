@@ -76,5 +76,6 @@
     <string name="homework">Hausaufgabe</string>
     <string name="share">aktie</string>
     <string name="view_shared">bereitgestellte Karten</string>
+    <string name="shared_by">"  Geteilt von"</string>
 
 </resources>

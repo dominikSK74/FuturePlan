@@ -76,6 +76,7 @@
     <string name="homework">Zad. domowe</string>
     <string name="share">udostępnij</string>
     <string name="view_shared">Udostepnione fiszki</string>
+    <string name="shared_by">Udostęnione przez</string>
 
 
 </resources>
