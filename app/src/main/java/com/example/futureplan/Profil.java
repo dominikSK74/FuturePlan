@@ -2,11 +2,17 @@ package com.example.futureplan;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDelegate;
 import android.content.res.Resources;
 import android.database.Cursor;
@@ -30,7 +36,9 @@ import android.widget.ImageView;
 
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.imageview.ShapeableImageView;
@@ -41,12 +49,20 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.makeramen.roundedimageview.RoundedImageView;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Executor;
+
+import javax.xml.transform.Result;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -58,11 +74,19 @@ import java.util.concurrent.Executor;
 
 public class Profil extends Fragment {
     String userID;
-    FirebaseFirestore fStore;
-    FirebaseAuth mAuth;
+    private FirebaseFirestore fStore;
+    private FirebaseAuth mAuth;
     String avatar;
 
     String mDrawableName;
+
+    private RoundedImageView profileImage;
+
+    public Uri imageUri;
+    private FirebaseStorage storage;
+    private StorageReference storageReference;
+
+    AlertDialog.Builder builder;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -122,10 +146,12 @@ public class Profil extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
         userID = mAuth.getCurrentUser().getUid();
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
 
         int images[]={R.drawable.awatar1,R.drawable.awatar2,R.drawable.awatar3,R.drawable.awatar4,R.drawable.awatar5,R.drawable.awatar6,R.drawable.awatar7, R.drawable.awatar8};
 
-        ShapeableImageView profileImage = view.findViewById(R.id.profileImage);
+        profileImage = view.findViewById(R.id.profileImage);
 
         EditText PeditTextEmail = view.findViewById(R.id.PeditTextEmail);
         EditText PeditTextN = view.findViewById(R.id.PeditTextN);
@@ -145,17 +171,17 @@ public class Profil extends Fragment {
                 PeditTextNumber.setText(documentSnapshot.getString("phone"));
                 PeditTextDate.setText(documentSnapshot.getString("birthdate"));
                 mDrawableName = documentSnapshot.getString("avatar");
-                int resID = getResources().getIdentifier(mDrawableName , "drawable", getContext().getPackageName());
-                profileImage.setImageResource(resID);
+
+                downloadFile(mDrawableName);
             }
         });
+        //
 
         Button btnLogout = view.findViewById(R.id.btnLogout);
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 FirebaseAuth.getInstance().signOut();
-                PreferenceUtils.saveEmail("", getContext());
                 startActivity(new Intent(getContext(), LogActivity.class));
             }
         });
@@ -180,12 +206,9 @@ public class Profil extends Fragment {
                 user.put("phone",phone);
                 user.put("birthdate",date);
                 user.put("avatar",avatar);
-                documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        Log.d("TAG","onSuccess: user profile is saved " + userID);
-                    }
-                });
+
+                documentReference.set(user);
+                uploadPicture();
             }
         });
 
@@ -204,13 +227,16 @@ public class Profil extends Fragment {
                 gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        profileImage.setImageResource(images[position]);
-                        avatar = "awatar" + (position+1);
-                        //PreferenceUtils.saveAvatar("awatar" + (position+1),getContext());
+                        if(position == 8){
+                            choosePicture();
+                        }else {
+                            profileImage.setImageResource(images[position]);
+                            avatar = "awatar" + (position + 1);
+                        }
                     }
                 });
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder = new AlertDialog.Builder(getActivity());
                 builder.setView(gridView);
                 builder.setTitle("Wybierz zdjecie profilowe:");
                 builder.show();
@@ -219,5 +245,71 @@ public class Profil extends Fragment {
 
         return view;
     }
+    public static final int PICK_IMAGE = 1;
+    private void choosePicture() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
 
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PICK_IMAGE && data!=null && data.getData()!=null) {
+            imageUri = data.getData();
+            profileImage.setImageURI(imageUri);
+        }
+    }
+
+    private void uploadPicture() {
+        final ProgressDialog pd = new ProgressDialog(getContext());
+        pd.setTitle("Uploading image...");
+        pd.show();
+
+        StorageReference ref = storageReference.child("profileImages").child(userID + ".jpeg");
+        ref.putFile(imageUri)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        pd.dismiss();
+                        Toast.makeText(getContext(), "Image uploaded", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        pd.dismiss();
+                        Toast.makeText(getContext(), "Failed to upload", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+                        double progressPercent = (100.00 * snapshot.getBytesTransferred() / snapshot.getTotalByteCount());
+                        pd.setMessage("Progress: " + progressPercent + "%");
+                    }
+                });
+    }
+
+    private void downloadFile(String mDrawableName){
+        StorageReference imageRef = storageReference.child("profileImages").child(userID + ".jpeg");
+        long MAXBYTES = 1024*1024;
+        imageRef.getBytes(MAXBYTES).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+            @Override
+            public void onSuccess(byte[] bytes) {
+                //convert byte[] to bitmap
+                Bitmap bitmap = BitmapFactory.decodeByteArray(bytes,0, bytes.length);
+                profileImage.setImageBitmap(bitmap);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                int resID = getResources().getIdentifier(mDrawableName , "drawable", getContext().getPackageName());
+                profileImage.setImageResource(resID);
+            }
+        });
+
+    }
 }

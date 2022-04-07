@@ -9,7 +9,7 @@
     tools:context=".Profil">
 
 
-    <com.google.android.material.imageview.ShapeableImageView
+    <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/profileImage"
         android:layout_width="150dp"
         android:layout_height="150dp"
@@ -17,8 +17,9 @@
         android:layout_marginTop="60dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
-        app:srcCompat="@drawable/awatar1" />
+        android:scaleType="centerCrop"
+        android:src="@drawable/awatar1"
+        app:riv_oval="true"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnImage"
