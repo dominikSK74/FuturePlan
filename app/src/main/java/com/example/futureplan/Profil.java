@@ -134,7 +134,7 @@ public class Profil extends Fragment {
         View view = inflater.inflate(R.layout.fragment_profil, container, false);
 
         //SET THEME FROM SETTINGS
-        SharedPreferences settings = getContext().getSharedPreferences("PREFS_NAME", 0);
+        /*SharedPreferences settings = getContext().getSharedPreferences("PREFS_NAME", 0);
         boolean silent = settings.getBoolean("switchkey", false);
         if(silent)
         {
@@ -143,15 +143,21 @@ public class Profil extends Fragment {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
 
+         */
+        avatar = "";
         mAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
         userID = mAuth.getCurrentUser().getUid();
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
 
+
+
         int images[]={R.drawable.awatar1,R.drawable.awatar2,R.drawable.awatar3,R.drawable.awatar4,R.drawable.awatar5,R.drawable.awatar6,R.drawable.awatar7, R.drawable.awatar8};
 
         profileImage = view.findViewById(R.id.profileImage);
+
+        imageUri=Uri.parse("android.resource://my.package.name/"+profileImage);
 
         EditText PeditTextEmail = view.findViewById(R.id.PeditTextEmail);
         EditText PeditTextN = view.findViewById(R.id.PeditTextN);
@@ -175,14 +181,14 @@ public class Profil extends Fragment {
                 downloadFile(mDrawableName);
             }
         });
-        //
+
 
         Button btnLogout = view.findViewById(R.id.btnLogout);
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                startActivity(new Intent(getContext(),LogActivity.class));
                 FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(getContext(), LogActivity.class));
             }
         });
 
@@ -208,6 +214,7 @@ public class Profil extends Fragment {
                 user.put("avatar",avatar);
 
                 documentReference.set(user);
+
                 uploadPicture();
             }
         });
@@ -277,13 +284,6 @@ public class Profil extends Fragment {
                         Toast.makeText(getContext(), "Image uploaded", Toast.LENGTH_SHORT).show();
                     }
                 })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        pd.dismiss();
-                        Toast.makeText(getContext(), "Failed to upload", Toast.LENGTH_SHORT).show();
-                    }
-                })
                 .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
@@ -312,4 +312,6 @@ public class Profil extends Fragment {
         });
 
     }
+
+
 }

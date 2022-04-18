@@ -28,6 +28,7 @@ public class LogActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log);
+
         mAuth = FirebaseAuth.getInstance();
         mLoadingBar = new ProgressDialog(LogActivity.this);
         buttonRejestracja = findViewById(R.id.buttonRejestracja);

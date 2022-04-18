@@ -1,10 +1,15 @@
 package com.example.futureplan;
 
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +18,7 @@ import android.widget.CalendarView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
@@ -23,6 +29,9 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -33,7 +42,7 @@ import java.util.HashMap;
  * Use the {@link Terminarz#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Terminarz extends Fragment {
+public class Terminarz extends Fragment implements CalendarAdapter.onItemListener{
     private SimpleAdapter sa, sa2, sa3;
     private String nameOfDay;
     private String dateString;
@@ -43,6 +52,12 @@ public class Terminarz extends Fragment {
     private FirebaseAuth mAuth;
     private FirebaseFirestore fStore;
     private String userID;
+
+    private TextView monthYearText;
+    private RecyclerView calendarRecyclerView;
+    private LocalDate selectedDate;
+
+    private String monthYear;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -81,14 +96,22 @@ public class Terminarz extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_terminarz, container, false);
 
-        mAuth = FirebaseAuth.getInstance();
+        calendarRecyclerView = view.findViewById(R.id.calendarRecyclerView);
+        monthYearText = view.findViewById(R.id.monthYearTxt);
+        selectedDate = LocalDate.now();
+        setMonthView();
+
+
+        /*mAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
         userID = mAuth.getCurrentUser().getUid();
 
@@ -173,8 +196,6 @@ public class Terminarz extends Fragment {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                         for(DocumentSnapshot snapshot : value){
-                            System.out.println(snapshot.getString("date"));
-                            System.out.println(dateString);
                             if(snapshot.getString("date").equals(dateString)) {
                                 HashMap<String, String> item = new HashMap<String, String>();
                                 item.put("line1", snapshot.getString("subject"));
@@ -216,6 +237,80 @@ public class Terminarz extends Fragment {
             }
         });
 
+         */
+
+        view.findViewById(R.id.prevMonth).setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onClick(View view) {
+                selectedDate = selectedDate.minusMonths(1);
+                setMonthView();
+            }
+        });
+
+        view.findViewById(R.id.nextMonth).setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onClick(View view) {
+                selectedDate = selectedDate.plusMonths(1);
+                setMonthView();
+
+            }
+        });
+
+
+
+
+
+
         return view;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void setMonthView() {
+        monthYearText.setText(monthYearFromDate(selectedDate));
+        ArrayList<String> daysInMonth = daysInMonthArray(selectedDate);
+        CalendarAdapter calendarAdapter = new CalendarAdapter(daysInMonth,this);
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 7);
+        calendarRecyclerView.setLayoutManager(layoutManager);
+        calendarRecyclerView.setAdapter(calendarAdapter);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private ArrayList<String> daysInMonthArray(LocalDate date) {
+        ArrayList<String> daysInMonthArray = new ArrayList<>();
+        YearMonth yearMonth = YearMonth.from(date);
+
+        int daysInMonth = yearMonth.lengthOfMonth();
+        LocalDate firstOfMonth = selectedDate.withDayOfMonth(1);
+        int dayOfWeek = firstOfMonth.getDayOfWeek().getValue();
+
+        for(int i=1; i< 42;i++){
+            if(i<= dayOfWeek || i > dayOfWeek +daysInMonth){
+                daysInMonthArray.add("");
+            }else{
+                daysInMonthArray.add(String.valueOf(i - dayOfWeek));
+            }
+        }
+        return daysInMonthArray;
+    }
+
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private String monthYearFromDate(LocalDate date){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM yyyy");
+        DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("MM.yy");
+        monthYear = date.format(formatter2);
+        return  date.format(formatter);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @Override
+    public void onItemClick(int position, String dayText) {
+        if(!dayText.equals("") ){
+            Bundle bundle = new Bundle();
+            bundle.putString("date",dayText + "." + monthYear);
+            Navigation.findNavController(getView()).navigate(R.id.action_menuTerminarz_to_eventEdit,bundle);
+        }
     }
 }
