@@ -8,20 +8,36 @@
     android:background="@color/colorBackground"
     tools:context=".LearnFlashcards">
 
+    <TextView
+        android:id="@+id/titleKit"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="40dp"
+        android:background="@color/blue1"
+        android:gravity="center"
+        android:text="KIT NAME"
+        android:textAllCaps="true"
+        android:textColor="@color/textColor"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
     <com.wajahatkarim3.easyflipview.EasyFlipView
         android:id="@+id/easyFlipView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="32dp"
         app:flipDuration="400"
         app:flipEnabled="true"
         app:flipFrom="front"
         app:flipOnTouch="true"
         app:flipType="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/titleKit">
 
         <!-- Back Layout Goes Here -->
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -68,7 +84,7 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_margin="30dp"
-            android:layout_marginTop="200dp"
+            android:layout_marginTop="300dp"
             android:background="@drawable/flashcard_layout">
 
             <TextView
@@ -104,82 +120,113 @@
 
     </com.wajahatkarim3.easyflipview.EasyFlipView>
 
-    <Button
-        android:id="@+id/nextFlash"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="28dp"
-        android:text="@string/next"
 
-        android:textAllCaps="false"
-        style="?attr/materialButtonOutlinedStyle"
-        app:strokeColor="@color/black"
-        android:textColor="@color/textColor"
-        android:backgroundTint="@color/blue2"
+    <!-- NEXT AND PREV BUTTON -->
+    <RelativeLayout
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/button_share"
+        android:clickable="true"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/easyFlipView"
-
-
-        />
-
-    <Button
-        android:id="@+id/deleteFlash"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="184dp"
-        android:layout_marginEnd="20dp"
-        android:text="@string/delete_set"
-        app:layout_constraintEnd_toStartOf="@+id/nextFlash"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/prevFlash"
-        app:layout_constraintTop_toBottomOf="@+id/easyFlipView"
-
-        android:textAllCaps="false"
-        style="?attr/materialButtonOutlinedStyle"
-        app:strokeColor="@color/black"
-        android:textColor="@color/black"
-        android:backgroundTint="@color/red2"
-
-        />
-
-    <Button
-        android:id="@+id/prevFlash"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="100dp"
-        android:text="@string/back"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/easyFlipView"
+        app:layout_constraintTop_toBottomOf="@+id/easyFlipView">
 
-        android:textAllCaps="false"
-        style="?attr/materialButtonOutlinedStyle"
-        app:strokeColor="@color/black"
-        android:textColor="@color/textColor"
-        android:backgroundTint="@color/blue2"
+        <ImageView
+            android:id="@+id/nextFlash"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:clickable="true"
+            android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
+            app:tint="@color/colorBackground" />
 
-        />
+        <ImageView
+            android:id="@+id/prevFlash"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:clickable="true"
+            android:src="@drawable/ic_baseline_keyboard_arrow_left_24"
+            app:tint="@color/colorBackground" />
+
+    </RelativeLayout>
+    <!-- END NEXT AND PREV BUTTON-->
+
+    <!--DELETE BUTTON--> <!-- -->
+    <RelativeLayout
+        android:id="@+id/deleteFlash"
+        android:layout_width="220dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="64dp"
+        android:background="@drawable/button_delete"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="3dp"
+            android:src="@drawable/button_delete"
+            app:tint="@color/colorBackground" />
+
+        <RelativeLayout
+            android:layout_width="65dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="0dp"
+            android:background="@drawable/button_delete">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:src="@drawable/ic_delete"
+                app:tint="@color/colorBackground" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="65dp"
+            android:gravity="center"
+            android:text="@string/delete_set"
+            android:textAllCaps="true"
+            android:textColor="@color/textColor"
+            android:textSize="13dp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+    <!--END DELETE BUTTON-->
+
 
     <TextView
         android:id="@+id/txtSharedBy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:text="@string/shared_by"
         app:layout_constraintBottom_toTopOf="@+id/easyFlipView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/titleKit"
+        app:layout_constraintTop_toBottomOf="@+id/titleKit" />
 
     <TextView
         android:id="@+id/textUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/easyFlipView"
         app:layout_constraintStart_toEndOf="@+id/txtSharedBy"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/titleKit" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

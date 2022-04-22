@@ -54,10 +54,14 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
     class CardViewHolder extends RecyclerView.ViewHolder {
 
         TextView fiszkisrc;
+        CardView cv;
+        TextView buttonFlashLearn;
 
         public CardViewHolder(@NonNull View itemView) {
             super(itemView);
             fiszkisrc = itemView.findViewById(R.id.fiszkiText);
+            cv = itemView.findViewById(R.id.cardviewitem);
+            buttonFlashLearn = itemView.findViewById(R.id.buttonFlashLearn);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -74,6 +78,9 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
 
         void setCardImage(CardItem cardItem) {
             fiszkisrc.setText(cardItem.getText());
+            int col = cardItem.getColor();
+            cv.setCardBackgroundColor(col);
+            buttonFlashLearn.setBackgroundColor(col);
         }
 
 

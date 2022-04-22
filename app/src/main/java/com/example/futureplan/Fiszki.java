@@ -22,6 +22,7 @@ import android.widget.GridLayout;
 import android.widget.ScrollView;
 
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
@@ -96,6 +97,7 @@ public class Fiszki extends Fragment {
         RecyclerView fiszkiRecycler = view.findViewById(R.id.fiszkiRecycler);
         ExtendedFloatingActionButton efab = view.findViewById(R.id.FABfiszki);
         NestedScrollView sv = view.findViewById(R.id.scrollView2);;
+        FloatingActionButton fab = view.findViewById(R.id.floatingActionButton);
 
 
         fiszkiRecycler.setLayoutManager(
@@ -109,8 +111,10 @@ public class Fiszki extends Fragment {
             public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
                 if (scrollY > oldScrollY) {
                     efab.hide();
+                    fab.hide();
                 }else {
                     efab.show();
+                    fab.show();
                 }
             }
         });
@@ -128,6 +132,7 @@ public class Fiszki extends Fragment {
                 fiszkiRecycler.setAdapter(mAdapter);
             }
         });
+
 
         //Extended Floating Action Button on click to add new flashcards
         efab.setOnClickListener(new View.OnClickListener() {
@@ -147,8 +152,8 @@ public class Fiszki extends Fragment {
             }
         });
 
-        Button btnViewShared = view.findViewById(R.id.btnViewShared);
-        btnViewShared.setOnClickListener(new View.OnClickListener() {
+
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Navigation.findNavController(view).navigate(R.id.action_menuFiszki_to_sharedFlashcards);

@@ -109,7 +109,7 @@ public class Profil extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_profil, container, false);
 
-        //SET THEME FROM SETTINGS
+       //SET THEME FROM SETTINGS
         SharedPreferences settings = getContext().getSharedPreferences("PREFS_NAME", 0);
         boolean silent = settings.getBoolean("switchkey", false);
         if(silent)
@@ -135,7 +135,8 @@ public class Profil extends Fragment {
         EditText PeditTextDate = view.findViewById(R.id.PeditTextDate);
 
         DocumentReference documentReference = fStore.collection("users").document(userID);
-        documentReference.addSnapshotListener((Activity) getContext(), new EventListener<DocumentSnapshot>() {
+
+        /*documentReference.addSnapshotListener((Activity) getContext(), new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
                 PeditTextEmail.setText(documentSnapshot.getString("email"));
@@ -145,10 +146,11 @@ public class Profil extends Fragment {
                 PeditTextNumber.setText(documentSnapshot.getString("phone"));
                 PeditTextDate.setText(documentSnapshot.getString("birthdate"));
                 mDrawableName = documentSnapshot.getString("avatar");
-                int resID = getResources().getIdentifier(mDrawableName , "drawable", getContext().getPackageName());
+                int resID = getResources().getIdentifier(mDrawableName, "drawable", getContext().getPackageName());
                 profileImage.setImageResource(resID);
             }
-        });
+        });*/
+
 
         Button btnLogout = view.findViewById(R.id.btnLogout);
         btnLogout.setOnClickListener(new View.OnClickListener() {
@@ -216,7 +218,6 @@ public class Profil extends Fragment {
                 builder.show();
             }
         });
-
         return view;
     }
 

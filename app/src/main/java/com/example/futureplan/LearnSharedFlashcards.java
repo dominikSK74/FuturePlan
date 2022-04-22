@@ -3,6 +3,7 @@ package com.example.futureplan;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
@@ -10,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -20,6 +23,9 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.wajahatkarim3.easyflipview.EasyFlipView;
+
+import org.w3c.dom.Text;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -88,13 +94,16 @@ public class LearnSharedFlashcards extends Fragment {
         TextView frontNotatka = view.findViewById(R.id.frontNotatka);
         TextView backOpis = view.findViewById(R.id.backOpis);
         TextView backNotatka = view.findViewById(R.id.backNotatka);
-        Button nextFlash = view.findViewById(R.id.nextFlash);
-        Button deleteFlash = view.findViewById(R.id.deleteFlash);
-        Button prevFlash = view.findViewById(R.id.prevFlash);
+        ImageView nextFlash = view.findViewById(R.id.nextFlash);
+        RelativeLayout deleteFlash = view.findViewById(R.id.deleteFlash);
+        ImageView prevFlash = view.findViewById(R.id.prevFlash);
+        TextView titleKit = view.findViewById(R.id.titleKit);
+        EasyFlipView efv = view.findViewById(R.id.easyFlipView);
 
         TextView txtUser = view.findViewById(R.id.textUser);
 
         String nazwa = getArguments().getString("nazwa");
+        titleKit.setText(nazwa);
 
         count =0;
         cardID = 0;
@@ -127,6 +136,8 @@ public class LearnSharedFlashcards extends Fragment {
                 if(cardID < (count -1) ){
                     cardID++;
                 }
+                if(efv.isBackSide())
+                    efv.flipTheView();
                 DocumentReference documentReference = fStore.collection("sharedFlashcards").document(nazwa).collection("cards").document("" + cardID);
                 documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
                     @Override
@@ -146,6 +157,8 @@ public class LearnSharedFlashcards extends Fragment {
                 if(!(cardID == 0)){
                     cardID--;
                 }
+                if(efv.isBackSide())
+                    efv.flipTheView();
                 DocumentReference documentReference = fStore.collection("sharedFlashcards").document(nazwa).collection("cards").document("" + cardID);
                 documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
                     @Override
