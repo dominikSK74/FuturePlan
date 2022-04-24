@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="38dp"
-    android:layout_marginBottom="140dp"
+    android:layout_marginBottom="70dp"
     android:background="@color/colorBackground"
     tools:context=".Terminarz"
     android:orientation="vertical">
@@ -15,17 +15,18 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginBottom="20dp"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="20dp"
+        android:layout_margin="10px">
 
-    <Button
-        android:id="@+id/prevMonth"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:background="@drawable/arrow_left"
-        android:textColor="@color/primary"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        <Button
+            android:id="@+id/prevMonth"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:background="@drawable/arrow_left"
+            android:textColor="@color/primary"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/monthYearTxt"
@@ -40,7 +41,7 @@
             android:id="@+id/nextMonth"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="0.5"
             android:background="@drawable/arrow_right"
             android:textColor="@color/primary"
             android:textSize="20sp"
@@ -115,6 +116,26 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/calendarRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="300dp" />
+
+    <TextView
+        android:id="@+id/txtDate"
+        android:visibility="invisible"
+        android:textColor="@color/textColor"
+        android:layout_marginLeft="40px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="date" />
+
+    <ListView
+        android:layout_marginLeft="40px"
+        android:id="@+id/listViewTests"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <ListView
+        android:layout_marginLeft="40px"
+        android:id="@+id/listViewHomework"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>

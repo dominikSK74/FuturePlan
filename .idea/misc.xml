@@ -96,9 +96,12 @@
         <entry key="..\:/Users/Julia0n3/AndroidStudioProjects/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_ustawienia.xml" value="0.42916666666666664" />
         <entry key="..\:/Users/Julia0n3/AndroidStudioProjects/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_wednesday.xml" value="0.42916666666666664" />
         <entry key="..\:/Users/Julia0n3/Desktop/Nowy folder/FuturePlan/app/src/main/res/drawable-anydpi/ic_note.xml" value="0.4453125" />
+        <entry key="..\:/Users/Julia0n3/Desktop/Nowy folder/FuturePlan/app/src/main/res/drawable/border_square.xml" value="0.4453125" />
+        <entry key="..\:/Users/Julia0n3/Desktop/Nowy folder/FuturePlan/app/src/main/res/drawable/calendar_month_year_txt.xml" value="0.4453125" />
         <entry key="..\:/Users/Julia0n3/Desktop/Nowy folder/FuturePlan/app/src/main/res/drawable/calendar_selected.xml" value="0.32760416666666664" />
         <entry key="..\:/Users/Julia0n3/Desktop/Nowy folder/FuturePlan/app/src/main/res/drawable/circle.xml" value="0.4453125" />
         <entry key="..\:/Users/Julia0n3/Desktop/Nowy folder/FuturePlan/app/src/main/res/drawable/circle_text.xml" value="0.4453125" />
+        <entry key="..\:/Users/Julia0n3/Desktop/Nowy folder/FuturePlan/app/src/main/res/drawable/custom_avatar.xml" value="0.4453125" />
         <entry key="..\:/Users/Julia0n3/Desktop/Nowy folder/FuturePlan/app/src/main/res/drawable/custom_corners.xml" value="0.4453125" />
         <entry key="..\:/Users/Julia0n3/Desktop/Nowy folder/FuturePlan/app/src/main/res/drawable/custom_input.xml" value="0.43846153846153846" />
         <entry key="..\:/Users/Julia0n3/Desktop/Nowy folder/FuturePlan/app/src/main/res/drawable/custom_text_class.xml" value="0.265625" />
@@ -113,6 +116,7 @@
         <entry key="..\:/Users/Julia0n3/Desktop/Nowy folder/FuturePlan/app/src/main/res/layout/activity_main.xml" value="0.30885416666666665" />
         <entry key="..\:/Users/Julia0n3/Desktop/Nowy folder/FuturePlan/app/src/main/res/layout/activity_reg.xml" value="0.42916666666666664" />
         <entry key="..\:/Users/Julia0n3/Desktop/Nowy folder/FuturePlan/app/src/main/res/layout/calendar_cell.xml" value="0.42916666666666664" />
+        <entry key="..\:/Users/Julia0n3/Desktop/Nowy folder/FuturePlan/app/src/main/res/layout/calendar_month_year_txt.xml" value="0.42916666666666664" />
         <entry key="..\:/Users/Julia0n3/Desktop/Nowy folder/FuturePlan/app/src/main/res/layout/card_item.xml" value="0.24010416666666667" />
         <entry key="..\:/Users/Julia0n3/Desktop/Nowy folder/FuturePlan/app/src/main/res/layout/custom_image_layout.xml" value="0.42916666666666664" />
         <entry key="..\:/Users/Julia0n3/Desktop/Nowy folder/FuturePlan/app/src/main/res/layout/drawer_header.xml" value="0.42916666666666664" />

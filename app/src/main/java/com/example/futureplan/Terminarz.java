@@ -1,5 +1,7 @@
 package com.example.futureplan;
 
+import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -11,6 +13,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +31,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.YearMonth;
@@ -58,6 +62,9 @@ public class Terminarz extends Fragment implements CalendarAdapter.onItemListene
     private LocalDate selectedDate;
 
     private String monthYear;
+    private TextView txtDate;
+    private  ListView listViewTests;
+    private  ListView listViewHomework;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -105,16 +112,19 @@ public class Terminarz extends Fragment implements CalendarAdapter.onItemListene
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_terminarz, container, false);
 
+        txtDate = view.findViewById(R.id.txtDate);
         calendarRecyclerView = view.findViewById(R.id.calendarRecyclerView);
         monthYearText = view.findViewById(R.id.monthYearTxt);
         selectedDate = LocalDate.now();
         setMonthView();
 
+        listViewTests = view.findViewById(R.id.listViewTests);
+        listViewHomework = view.findViewById(R.id.listViewHomework);
 
-        /*mAuth = FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
         userID = mAuth.getCurrentUser().getUid();
-
+/*
         CalendarView simpleCalendarView = view.findViewById(R.id.simpleCalendarView);
 
         TextView date = view.findViewById(R.id.date);
@@ -186,54 +196,6 @@ public class Terminarz extends Fragment implements CalendarAdapter.onItemListene
                 });
 
                 listViewCalendar.setVisibility(View.VISIBLE);
-
-                //---------------------------------------\\
-
-                ArrayList<HashMap<String,String>> list2 = new ArrayList<>();
-
-                CollectionReference tests = fStore.collection("users").document(userID).collection("tests");
-                tests.addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                        for(DocumentSnapshot snapshot : value){
-                            if(snapshot.getString("date").equals(dateString)) {
-                                HashMap<String, String> item = new HashMap<String, String>();
-                                item.put("line1", snapshot.getString("subject"));
-                                item.put("line2", snapshot.getString("title"));
-                                list.add(item);
-                            }
-                        }
-                        sa2 = new SimpleAdapter(getContext(), list2,
-                                R.layout.list_terminarz,
-                                new String[] { "line1","line2" },
-                                new int[] {R.id.line_b, R.id.line_a});
-                        ((ListView)view.findViewById(R.id.listViewTests)).setAdapter(sa2);
-                    }
-                });
-
-                //---------------------------------------\\
-
-                ArrayList<HashMap<String,String>> list3 = new ArrayList<>();
-
-                CollectionReference homework = fStore.collection("users").document(userID).collection("homework");
-                homework.addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                        for(DocumentSnapshot snapshot : value){
-                            if(snapshot.getString("date").equals(dateString)) {
-                                HashMap<String, String> item = new HashMap<String, String>();
-                                item.put("line1", snapshot.getString("subject"));
-                                item.put("line2", snapshot.getString("title"));
-                                list.add(item);
-                            }
-                        }
-                        sa2 = new SimpleAdapter(getContext(), list2,
-                                R.layout.list_terminarz,
-                                new String[] { "line1","line2" },
-                                new int[] {R.id.line_b, R.id.line_a});
-                        ((ListView)view.findViewById(R.id.listViewHomework)).setAdapter(sa2);
-                    }
-                });
             }
         });
 
@@ -257,11 +219,6 @@ public class Terminarz extends Fragment implements CalendarAdapter.onItemListene
 
             }
         });
-
-
-
-
-
 
         return view;
     }
@@ -306,11 +263,63 @@ public class Terminarz extends Fragment implements CalendarAdapter.onItemListene
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
-    public void onItemClick(int position, String dayText) {
-        if(!dayText.equals("") ){
-            Bundle bundle = new Bundle();
-            bundle.putString("date",dayText + "." + monthYear);
-            Navigation.findNavController(getView()).navigate(R.id.action_menuTerminarz_to_eventEdit,bundle);
+    public void onItemClick(int position, String dayText, boolean addEvent) {
+        if(!dayText.equals("")){
+            String date = (dayText + "." + monthYear);
+            dateString = date.substring(0, (date.lastIndexOf(".")));
+            if(addEvent){
+                Bundle bundle = new Bundle();
+                bundle.putString("date", dateString);
+                Navigation.findNavController(getView()).navigate(R.id.action_menuTerminarz_to_eventEdit, bundle);
+            }else {
+                txtDate.setText(dateString);
+                txtDate.setVisibility(View.VISIBLE);
+
+                ArrayList<HashMap<String,String>> testsArrayList = new ArrayList<>();
+
+                CollectionReference tests = fStore.collection("users").document(userID).collection("tests");
+                tests.addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        for(DocumentSnapshot snapshot : value){
+                            if(snapshot.getString("date").equals(dateString)) {
+                                HashMap<String, String> item = new HashMap<String, String>();
+                                item.put("line1", snapshot.getString("subject"));
+                                item.put("line2", snapshot.getString("title"));
+                                testsArrayList.add(item);
+                            }
+                        }
+                        sa = new SimpleAdapter(getContext(), testsArrayList,
+                                R.layout.list_terminarz,
+                                new String[] { "line1","line2" },
+                                new int[] {R.id.line_b, R.id.line_a});
+                        listViewTests.setAdapter(sa);
+                    }
+                });
+
+                ArrayList<HashMap<String,String>> arrayListHomework = new ArrayList<>();
+
+                CollectionReference homework = fStore.collection("users").document(userID).collection("homework");
+                homework.addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        for(DocumentSnapshot snapshot : value){
+                            if(snapshot.getString("date").equals(dateString)) {
+                                HashMap<String, String> item = new HashMap<String, String>();
+                                item.put("line1", snapshot.getString("subject"));
+                                item.put("line2", snapshot.getString("title"));
+                                arrayListHomework.add(item);
+                            }
+                        }
+                        sa = new SimpleAdapter(getContext(), arrayListHomework,
+                                R.layout.list_terminarz,
+                                new String[] { "line1","line2" },
+                                new int[] {R.id.line_b, R.id.line_a});
+                        listViewHomework.setAdapter(sa);
+                    }
+                });
+
+            }
         }
     }
 }

@@ -1,9 +1,7 @@
 package com.example.futureplan;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -16,6 +14,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.opencsv.CSVReader;
+
+import java.io.FileReader;
+import java.io.InputStreamReader;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -101,6 +104,21 @@ public class FileChooserFragment extends Fragment {
             Uri uri = data.getData();
             pathToFile = uri.getPath();
             System.out.println(uri.getPath());
+
+            try{
+                //new FileReader(pathToFile);
+                /*(CSVReader reader = new CSVReader();//Specify asset file name
+                String [] nextLine;
+                while ((nextLine = reader.readNext()) != null) {
+                    // nextLine[] is an array of values from the line
+                    System.out.println(nextLine[0] + nextLine[1] + "etc...");
+                    Log.d("VariableTag", nextLine[0]);
+                }
+                */
+            }catch(Exception e){
+                e.printStackTrace();
+                Toast.makeText(getContext(), "The specified file was not found", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 

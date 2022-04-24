@@ -71,7 +71,7 @@ public class LogActivity extends AppCompatActivity {
 
                             }else{
                                 mLoadingBar.dismiss();
-                                Toast.makeText(LogActivity.this,"Invalid data",Toast.LENGTH_SHORT);
+                                Toast.makeText(LogActivity.this,"Invalid data",Toast.LENGTH_SHORT).show();
                             }
                         }
                     });

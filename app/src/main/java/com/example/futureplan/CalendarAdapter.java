@@ -38,14 +38,16 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(selectedItem == position){
-                    onItemListener.onItemClick(position,holder.dayOfMonth.getText().toString());
-                }else {
-                    notifyItemChanged(selectedItem);
-                    selectedItem = position;
-                    notifyItemChanged(selectedItem);
+                if(!holder.dayOfMonth.getText().toString().isEmpty()){
+                    if (selectedItem == position) {
+                        onItemListener.onItemClick(position, holder.dayOfMonth.getText().toString(),true);
+                    }else {
+                        notifyItemChanged(selectedItem);
+                        selectedItem = position;
+                        notifyItemChanged(selectedItem);
+                        onItemListener.onItemClick(position, holder.dayOfMonth.getText().toString(),false);
+                    }
                 }
-
             }
         });
         holder.itemView.setSelected(position == selectedItem);
@@ -57,7 +59,7 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
     }
 
     public interface onItemListener{
-    void onItemClick(int position, String dayText);
+    void onItemClick(int position, String dayText, boolean addEvent);
     }
 
 
