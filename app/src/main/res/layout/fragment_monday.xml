@@ -54,8 +54,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/fragmentContainerView2"
+        app:layout_constraintBottom_toTopOf="@+id/editPlan"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
@@ -76,15 +75,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:tint="@android:color/white" />
 
+
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainerView2"
+        android:id="@+id/fragmentContainerView"
         android:name="com.example.futureplan.FileChooserFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/editPlan"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/listTimetable" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,80 +1,223 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="38dp"
+    android:layout_marginBottom="70dp"
     android:background="@color/colorBackground"
-    tools:context=".Terminarz">
+    tools:context=".Terminarz"
+    android:orientation="vertical">
 
-    <CalendarView
-        android:id="@+id/simpleCalendarView"
-        android:layout_width="fill_parent"
-        android:layout_height="338dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="10dp"
-        android:dateTextAppearance="@style/CalenderViewDateCustomText"
-        android:focusedMonthDateColor="@color/blue1"
-        android:selectedWeekBackgroundColor="@color/blue1"
-        android:theme="@style/CalenderViewCustom"
-        android:weekDayTextAppearance="@style/CalenderViewDateCustomText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_margin="10px">
 
+        <Button
+            android:id="@+id/prevMonth"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:background="@drawable/arrow_left"
+            android:textColor="@color/primary"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/monthYearTxt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="Feb 2021"
+            android:textAlignment="center"
+            android:textColor="@color/textColor"/>
+
+        <Button
+            android:id="@+id/nextMonth"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:background="@drawable/arrow_right"
+            android:textColor="@color/primary"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+
+
+</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="SUN"
+            android:textColor="@color/primary"
+            android:textAlignment="center"
+            android:textSize="16sp"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="MON"
+            android:textColor="@color/primary"
+            android:textAlignment="center"
+            android:textSize="16sp"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="TUE"
+            android:textColor="@color/primary"
+            android:textAlignment="center"
+            android:textSize="16sp"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="WED"
+            android:textColor="@color/primary"
+            android:textAlignment="center"
+            android:textSize="16sp"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="THUR"
+            android:textColor="@color/primary"
+            android:textAlignment="center"
+            android:textSize="16sp"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="FRI"
+            android:textColor="@color/primary"
+            android:textAlignment="center"
+            android:textSize="16sp"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="SAT"
+            android:textColor="@color/primary"
+            android:textAlignment="center"
+            android:textSize="16sp"/>
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/calendarRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="300dp" />
     <TextView
-        android:id="@+id/date"
+        android:id="@+id/txtDate"
+        android:visibility="invisible"
+        android:textColor="@color/primary"
+        android:layout_marginLeft="40px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="date"
+
+        android:textSize="20sp"/>
+    <View
+        android:id="@+id/dividerCalendar"
+        android:visibility="invisible"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/primary"/>
+
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="36dp"
-        android:text="Text"
-        android:textColor="@color/textColor"
-        android:textSize="50px"
-        android:visibility="invisible"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/simpleCalendarView" />
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+        <View
+            android:layout_width="3dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="40px"
+            android:background="@color/primary"/>
+        <ListView
+            android:layout_marginLeft="40px"
+            android:id="@+id/listViewTimetable"
+            android:layout_width="match_parent"
+            android:divider="@null"
+            android:dividerHeight="0dp"
+            android:layout_height="wrap_content"/>
 
-    <ListView
-        android:id="@+id/listViewTests"
-        android:layout_width="700px"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/custom_input"
-        android:divider="@null"
-        android:dividerHeight="0dp"
-        android:paddingStart="20px"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/listViewCalendar" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+        <View
+            android:layout_width="3dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="40px"
+            android:background="@color/primary"/>
+        <ListView
+            android:layout_marginLeft="40px"
+            android:id="@+id/listViewTests"
+            android:layout_width="match_parent"
+            android:divider="@null"
+            android:dividerHeight="0dp"
+            android:layout_height="wrap_content"/>
 
-    <ListView
-        android:id="@+id/listViewHomework"
-        android:layout_width="700px"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/custom_input"
-        android:divider="@null"
-        android:dividerHeight="0dp"
-        android:paddingStart="20px"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/listViewTests" />
+        </LinearLayout>
 
-    <ListView
-        android:id="@+id/listViewCalendar"
-        android:layout_width="700px"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/custom_input"
-        android:divider="@null"
-        android:dividerHeight="0dp"
-        android:paddingStart="20px"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/date" />
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <View
+                android:layout_width="3dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="40px"
+                android:background="@color/primary"/>
+            <ListView
+                android:layout_marginLeft="40px"
+                android:id="@+id/listViewHomework"
+                android:layout_width="match_parent"
+                android:divider="@null"
+                android:dividerHeight="0dp"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <View
+                android:id="@+id/dividerColor"
+                android:layout_width="3dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="40px"
+                android:background="@color/primary"/>
+            <ListView
+                android:layout_marginLeft="40px"
+                android:id="@+id/listViewEvents"
+                android:layout_width="match_parent"
+                android:divider="@null"
+                android:dividerHeight="0dp"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+    </LinearLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

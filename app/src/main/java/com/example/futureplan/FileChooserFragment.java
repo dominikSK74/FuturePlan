@@ -1,21 +1,34 @@
 package com.example.futureplan;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
+import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.opencsv.CSVReader;
+import com.opencsv.exceptions.CsvValidationException;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -80,7 +93,7 @@ public class FileChooserFragment extends Fragment {
         btnBrowse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openFileChooser(view);
+                openFileChooser();
             }
         });
 
@@ -90,28 +103,45 @@ public class FileChooserFragment extends Fragment {
     }
 
     int requestcode = 1;
+    private void proImportCSV(File from) {
+        System.out.println(from.getPath());
+        //System.out.println(Environment.getExternalStorageDirectory() + "/Download/plan.csv");
+        File file = new File(from.getPath());
+        System.out.println(file.exists());
+        System.out.println(file.getPath());
+        if(file.exists()) {
 
-@Override
-    public void onActivityResult(int requestcode,int resulCode,Intent data){
-        super.onActivityResult(requestcode,resulCode,data);
-        if(requestcode == requestcode && resulCode == Activity.RESULT_OK){
-            if(data == null){
-                return;
+            List<List<String>> records = new ArrayList<>();
+            try {
+                CSVReader csvReader = new CSVReader(new FileReader(from));
+                String[] values = null;
+                while ((values = csvReader.readNext()) != null) {
+                    records.add(Arrays.asList(values));
+                    System.out.println(Arrays.asList(values));
+                }
+
+            } catch (IOException | CsvValidationException e) {
+                e.printStackTrace();
             }
-            Uri uri = data.getData();
-            pathToFile = uri.getPath();
-            System.out.println(uri.getPath());
+            System.out.println(records);
+        }
+
+    }
+
+    private void openFileChooser() {
+        Intent intent = new Intent();
+        intent.setType("text/comma-separated-values");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Open CSV"),requestcode);
+    }
+
+    @Override
+    public void onActivityResult(int requestcode, int resulCode, @Nullable Intent data){
+        super.onActivityResult(requestcode,resulCode,data);
+        if(requestcode == requestcode && data!=null && data.getData()!=null){
+            proImportCSV(new File(data.getData().getPath()));
         }
     }
-
-    private void openFileChooser(View view) {
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType("*/*");
-
-        startActivityForResult(intent,requestcode);
-    }
-
-
 
 
 }

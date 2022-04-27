@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="38dp"
     android:background="@color/colorBackground"
     tools:context=".LearnFlashcards">
 
@@ -146,19 +145,19 @@
 
     <Button
         android:id="@+id/prevFlash"
+        style="?attr/materialButtonOutlinedStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
         android:layout_marginTop="100dp"
-        android:text="@string/back"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/easyFlipView"
+        android:backgroundTint="@color/blue2"
+        android:text="@string/previous"
 
         android:textAllCaps="false"
-        style="?attr/materialButtonOutlinedStyle"
-        app:strokeColor="@color/black"
         android:textColor="@color/textColor"
-        android:backgroundTint="@color/blue2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/easyFlipView"
+        app:strokeColor="@color/black"
 
         />
 

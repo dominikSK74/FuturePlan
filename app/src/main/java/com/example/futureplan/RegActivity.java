@@ -22,6 +22,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class RegActivity extends AppCompatActivity {
     private Button buttonLogowanie;
@@ -63,10 +65,11 @@ public class RegActivity extends AppCompatActivity {
                 String name = editTextName.getText().toString();
                 String pass = editTextPassword.getText().toString();
                 String repass = editTextRepassword.getText().toString();
+
                 if(email.equals("") || pass.equals("") || repass.equals("")){
                     Toast.makeText(RegActivity.this, "Fill all the fields", Toast.LENGTH_SHORT).show();
-                }else if (pass.length() < 7) {
-                    Toast.makeText(RegActivity.this, "Password to short. Password must have 8 characters length", Toast.LENGTH_SHORT).show();
+                }else if (!isValidPassword(pass)) {
+                    Toast.makeText(RegActivity.this, "Password must contain one uppercase, lowercase, numeric and special character. Password must have 8 characters length ", Toast.LENGTH_SHORT).show();
                 }else if (!pass.equals(repass)) {
                     Toast.makeText(RegActivity.this, "Passwords not equal", Toast.LENGTH_SHORT).show();
                 }else {
@@ -75,7 +78,7 @@ public class RegActivity extends AppCompatActivity {
                     mLoadingBar.setCanceledOnTouchOutside(false);
                     mLoadingBar.show();
 
-                    mAuth.createUserWithEmailAndPassword(email,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                   mAuth.createUserWithEmailAndPassword(email,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
@@ -83,9 +86,21 @@ public class RegActivity extends AppCompatActivity {
                                 mLoadingBar.dismiss();
                                 userID = mAuth.getCurrentUser().getUid();
                                 DocumentReference documentReference = fStore.collection("users").document(userID);
+
+                                String fName = "";
+                                String sName = "";
+                                String avatar = "avatar1";
+                                String phone ="";
+                                String date = "";
+
                                 Map<String,Object> user = new HashMap<>();
                                 user.put("nickname",name);
                                 user.put("email",email);
+                                user.put("fName",fName);
+                                user.put("sName",sName);
+                                user.put("phone",phone);
+                                user.put("birthdate",date);
+                                user.put("avatar",avatar);
                                 documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void unused) {
@@ -101,10 +116,23 @@ public class RegActivity extends AppCompatActivity {
                             }
                     }
 
+
+
                     });
                 }
 
             }
         });
+    }
+
+    private boolean isValidPassword(final String password) {
+        Pattern pattern;
+        Matcher matcher;
+
+        final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
+        pattern = Pattern.compile(PASSWORD_PATTERN);
+        matcher = pattern.matcher(password);
+
+        return matcher.matches();
     }
 }
