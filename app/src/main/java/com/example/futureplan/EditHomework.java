@@ -18,6 +18,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputLayout;
@@ -154,7 +155,7 @@ public class EditHomework extends Fragment {
 
         TextInputLayout titleEdTxt = view.findViewById(R.id.title_text_input);
 
-        Button saveBtn = view.findViewById(R.id.saveBtn);
+        RelativeLayout saveBtn = view.findViewById(R.id.saveBtn);
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

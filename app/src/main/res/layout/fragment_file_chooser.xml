@@ -1,15 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".FileChooserFragment">
 
 
-    <Button
+    <!--<Button
         android:id="@+id/btnBrowse"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Browse" />
-</LinearLayout>
+        android:text="Browse" />-->
+
+    <!--BACK BUTTON--> <!-- -->
+    <RelativeLayout
+        android:id="@+id/btnBrowse"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="0dp"
+        android:background="@drawable/back_button"
+        android:clickable="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="3dp"
+            android:src="@drawable/back_button"
+            app:tint="@color/colorBackground" />
+
+        <RelativeLayout
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="0dp"
+            android:background="@drawable/back_button">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:src="@drawable/ic_insert_file"
+                app:tint="@color/colorBackground" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="60dp"
+            android:gravity="center"
+            android:text="BROWSE"
+            android:textAllCaps="true"
+            android:textColor="@color/textColor"
+            android:textSize="13dp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+    <!--END BACK BUTTON-->
+</androidx.constraintlayout.widget.ConstraintLayout>

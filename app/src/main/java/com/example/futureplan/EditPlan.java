@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
@@ -111,7 +112,7 @@ public class EditPlan extends Fragment {
         //String day = PreferenceUtils.getDay(getContext());
         String day = getArguments().getString("day");
 
-        Button saveButton = view.findViewById(R.id.saveButton);
+        RelativeLayout saveButton = view.findViewById(R.id.saveButton);
 
         TextInputLayout classInputTxt = view.findViewById(R.id.class_text_input);
         TextInputLayout dateInputTxt = view.findViewById(R.id.date_text_input);

@@ -78,7 +78,7 @@ public class BasicActivity extends AppCompatActivity {
         TextView profileEmail = header.findViewById(R.id.profileEmail);
         imageProfile = header.findViewById(R.id.imageProfile);
 
-        DocumentReference documentReference = fStore.collection("users").document(userID);
+        /*DocumentReference documentReference = fStore.collection("users").document(userID);
         documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
@@ -93,7 +93,7 @@ public class BasicActivity extends AppCompatActivity {
                     imageProfile.setImageResource(resID);
                 }
             }
-        });
+        });*/
 
 
 

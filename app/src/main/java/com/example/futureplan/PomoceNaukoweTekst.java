@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -72,7 +73,7 @@ public class PomoceNaukoweTekst extends Fragment {
 
         TextView txtParagraph = view.findViewById(R.id.txtParagraph);
 
-        Button btnBack = view.findViewById(R.id.btnBack);
+        RelativeLayout btnBack = view.findViewById(R.id.btnBack);
 
         String jsonFileString = MyJSON.getAssetJsonData(getContext(), "pomoce_naukowe.json");
         Gson gson = new Gson();

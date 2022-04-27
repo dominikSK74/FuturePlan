@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
@@ -88,7 +89,7 @@ public class DeleteTimetableTests extends Fragment {
             }
         });
 
-        Button btnDelete = view.findViewById(R.id.btnDelete);
+        RelativeLayout btnDelete = view.findViewById(R.id.btnDelete);
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -96,7 +97,7 @@ public class DeleteTimetableTests extends Fragment {
                 Navigation.findNavController(view).navigate(R.id.action_deleteTimetableTests_to_timetableTest);
             }
         });
-        Button btnBack = view.findViewById(R.id.btnBack);
+        RelativeLayout btnBack = view.findViewById(R.id.btnBack);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

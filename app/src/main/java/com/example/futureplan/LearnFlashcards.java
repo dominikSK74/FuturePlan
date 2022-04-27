@@ -11,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -97,11 +99,15 @@ public class LearnFlashcards extends Fragment {
         TextView frontNotatka = view.findViewById(R.id.frontNotatka);
         TextView backOpis = view.findViewById(R.id.backOpis);
         TextView backNotatka = view.findViewById(R.id.backNotatka);
-        Button nextFlash = view.findViewById(R.id.nextFlash);
-        Button deleteFlash = view.findViewById(R.id.deleteFlash);
-        Button prevFlash = view.findViewById(R.id.prevFlash);
+        ImageView nextFlash = view.findViewById(R.id.nextFlash);
+        RelativeLayout deleteFlash = view.findViewById(R.id.deleteFlash);
+        ImageView prevFlash = view.findViewById(R.id.prevFlash);
+        RelativeLayout btnShare = view.findViewById(R.id.btnShare);
+        TextView titleKit = view.findViewById(R.id.titleKit);
+        EasyFlipView efv = view.findViewById(R.id.easyFlipView);
 
         String nazwa = getArguments().getString("nazwa");
+        titleKit.setText(nazwa);
 
         count =0;
         cardID = 0;
@@ -134,6 +140,8 @@ public class LearnFlashcards extends Fragment {
                 if(cardID < (count -1) ){
                     cardID++;
                 }
+                if(efv.isBackSide())
+                    efv.flipTheView();
                 DocumentReference documentReference = fStore.collection("users").document(userID).collection("flashcards").document(nazwa).collection("cards").document("" + cardID);
                 documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
                     @Override
@@ -153,6 +161,9 @@ public class LearnFlashcards extends Fragment {
                 if(!(cardID == 0)){
                     cardID--;
                 }
+                if(efv.isBackSide())
+                    efv.flipTheView();
+
                 DocumentReference documentReference = fStore.collection("users").document(userID).collection("flashcards").document(nazwa).collection("cards").document("" + cardID);
                 documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
                     @Override
@@ -166,6 +177,7 @@ public class LearnFlashcards extends Fragment {
             }
         });
 
+        // DELETE BUTTON
         deleteFlash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -174,7 +186,8 @@ public class LearnFlashcards extends Fragment {
             }
         });
 
-        Button btnShare = view.findViewById(R.id.btnShare);
+
+        // NEW SHARE BUTTON
         btnShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -211,7 +224,6 @@ public class LearnFlashcards extends Fragment {
                     }
                 });
                 Toast.makeText(getContext(), "Udostępniono zestaw", Toast.LENGTH_SHORT).show();
-
             }
         });
 

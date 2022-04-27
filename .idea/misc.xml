@@ -5,56 +5,94 @@
       <map>
         <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/drawable-anydpi/ic_email.xml" value="0.3828125" />
         <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/drawable-anydpi/ic_lock.xml" value="0.22135416666666666" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/drawable/back_button.xml" value="0.23697916666666666" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/drawable/button_share.xml" value="0.23697916666666666" />
         <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/drawable/card_button.xml" value="0.3828125" />
         <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/drawable/custom_button.xml" value="0.3828125" />
         <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/drawable/custom_button1.xml" value="0.3828125" />
         <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/drawable/custom_corners.xml" value="0.3828125" />
         <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/drawable/custom_input.xml" value="0.3828125" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/drawable/delete_button.xml" value="0.24934895833333334" />
         <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/drawable/edit_txt_note.xml" value="0.30277777777777776" />
         <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/drawable/flashcard_layout.xml" value="0.3769230769230769" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/drawable/ic_launcher_background.xml" value="0.27294921875" />
         <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/drawable/ic_menu.xml" value="0.3015625" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout-h2000dp/fragment_learn_flashcards.xml" value="0.275" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout-h400dp/fragment_learn_flashcards.xml" value="0.275" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout-h500dp/fragment_learn_flashcards.xml" value="0.275" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout-h550dp/fragment_learn_flashcards.xml" value="0.3070652173913043" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout-h555dp/fragment_learn_flashcards.xml" value="0.275" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout-h600dp/fragment_learn_flashcards.xml" value="0.3070652173913043" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout-h650dp/fragment_learn_flashcards.xml" value="0.22" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout-h750dp/fragment_learn_flashcards.xml" value="0.3070652173913043" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout-h790dp/fragment_learn_flashcards.xml" value="0.21346153846153845" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout-h840dp/fragment_learn_flashcards.xml" value="0.3070652173913043" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout-h845dp/fragment_learn_flashcards.xml" value="0.3070652173913043" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout-h870dp/fragment_learn_flashcards.xml" value="0.26707132018209406" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout-h879dp/fragment_learn_flashcards.xml" value="0.26707132018209406" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout-h880dp/fragment_learn_flashcards.xml" value="0.18585526315789475" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout-h881dp/fragment_learn_flashcards.xml" value="0.18585526315789475" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout-h890dp/fragment_learn_flashcards.xml" value="0.18585526315789475" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout-h900dp/fragment_learn_flashcards.xml" value="0.18585526315789475" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout-h930dp/fragment_learn_flashcards.xml" value="0.18585526315789475" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout-hdpi/fragment_learn_flashcards.xml" value="0.31614583333333335" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout-land/fragment_learn_flashcards.xml" value="0.2328042328042328" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout-large/fragment_learn_flashcards.xml" value="0.18914473684210525" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout-normal/fragment_learn_flashcards.xml" value="0.3125" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout-sw1080dp/fragment_learn_flashcards.xml" value="0.31614583333333335" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout-sw440dp/fragment_learn_flashcards.xml" value="0.18914473684210525" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout-sw600dp/fragment_learn_flashcards.xml" value="0.18914473684210525" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout-w1080dp-h2400dp/fragment_learn_flashcards.xml" value="0.3125" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout-w1080dp/fragment_learn_flashcards.xml" value="0.16370010787486516" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout-xhdpi/fragment_learn_flashcards.xml" value="0.24917763157894737" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout-xxhdpi/fragment_learn_flashcards.xml" value="0.25" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout-xxxhdpi/fragment_learn_flashcards.xml" value="0.25" />
         <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/activity_log.xml" value="0.3292572463768116" />
-        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/activity_main.xml" value="0.128" />
         <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/activity_reg.xml" value="0.3292572463768116" />
         <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/card_item.xml" value="0.36666666666666664" />
         <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/custom_image_layout.xml" value="0.36666666666666664" />
         <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/drawer_header.xml" value="0.3432971014492754" />
-        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_add_new_flashcards.xml" value="0.36666666666666664" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_add_new_flashcards.xml" value="0.176" />
         <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_add_new_note.xml" value="0.36666666666666664" />
-        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_delete_homework.xml" value="0.36666666666666664" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_delete_homework.xml" value="0.16799999999999998" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_delete_timetable.xml" value="0.16474358974358974" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_delete_timetable_tests.xml" value="0.2" />
         <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_drawer.xml" value="0.25" />
-        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_edit_homework.xml" value="0.36666666666666664" />
-        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_edit_plan.xml" value="0.36666666666666664" />
-        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_edit_timetable_test.xml" value="0.36666666666666664" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_edit_homework.xml" value="0.176" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_edit_plan.xml" value="0.176" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_edit_timetable_test.xml" value="0.176" />
         <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_file_chooser.xml" value="0.36666666666666664" />
-        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_fiszki.xml" value="0.25" />
-        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_friday.xml" value="0.36666666666666664" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_fiszki.xml" value="0.128" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_friday.xml" value="0.136" />
         <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_gridview_pomoce.xml" value="0.36666666666666664" />
         <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_home_page.xml" value="0.33" />
-        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_homework.xml" value="0.36666666666666664" />
-        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_learn_flashcards.xml" value="0.33" />
-        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_monday.xml" value="0.36666666666666664" />
-        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_notatki.xml" value="0.34782608695652173" />
-        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_notes_list.xml" value="0.36666666666666664" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_homework.xml" value="0.10400000000000001" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_learn_flashcards.xml" value="0.25" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_learn_shared_flashcards.xml" value="0.21346153846153845" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_monday.xml" value="0.16799999999999998" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_notatki.xml" value="0.2" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_notes_list.xml" value="0.176" />
         <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_o_aplikacji.xml" value="0.34782608695652173" />
-        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_plan_lekcji.xml" value="0.22" />
-        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_plan_lekcji_page1.xml" value="0.33" />
-        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_plan_lekcji_page2.xml" value="0.3292572463768116" />
-        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_plan_lekcji_page3.xml" value="0.3292572463768116" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_plan_lekcji.xml" value="0.152" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_plan_lekcji_page1.xml" value="0.16799999999999998" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_plan_lekcji_page2.xml" value="0.16" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_plan_lekcji_page3.xml" value="0.176" />
         <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_pomoce_naukowe.xml" value="0.33" />
-        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_pomoce_naukowe_rozdzialy.xml" value="0.36666666666666664" />
-        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_pomoce_naukowe_tekst.xml" value="0.36666666666666664" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_pomoce_naukowe_rozdzialy.xml" value="0.16" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_pomoce_naukowe_tekst.xml" value="0.12" />
         <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_profil.xml" value="0.22" />
-        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_saturday.xml" value="0.36666666666666664" />
-        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_sunday.xml" value="0.33" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_saturday.xml" value="0.2" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_shared_flashcards.xml" value="0.25" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_sunday.xml" value="0.10400000000000001" />
         <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_terminarz.xml" value="0.22" />
-        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_thursday.xml" value="0.36666666666666664" />
-        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_timetable_test.xml" value="0.36666666666666664" />
-        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_tuesday.xml" value="0.36666666666666664" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_thursday.xml" value="0.144" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_timetable_test.xml" value="0.16799999999999998" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_tuesday.xml" value="0.152" />
         <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_ustawienia.xml" value="0.34782608695652173" />
         <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_view_note.xml" value="0.36666666666666664" />
-        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_wednesday.xml" value="0.36666666666666664" />
-        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/grid_layout.xml" value="0.3632246376811594" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/fragment_wednesday.xml" value="0.152" />
+        <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/grid_layout.xml" value="0.264" />
         <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/grid_view_note.xml" value="0.36666666666666664" />
         <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/list_terminarz.xml" value="0.36666666666666664" />
         <entry key="..\:/SCI/-=KLASA3=-/Projekt Praktyka Zawodowa/FuturePlan/FuturePlan/app/src/main/res/layout/list_timetable.xml" value="0.36666666666666664" />
@@ -116,7 +154,7 @@
         <entry key="..\:/Users/Julia0n3/Desktop/Nowy folder/FuturePlan/app/src/main/res/layout/activity_main.xml" value="0.30885416666666665" />
         <entry key="..\:/Users/Julia0n3/Desktop/Nowy folder/FuturePlan/app/src/main/res/layout/activity_reg.xml" value="0.42916666666666664" />
         <entry key="..\:/Users/Julia0n3/Desktop/Nowy folder/FuturePlan/app/src/main/res/layout/calendar_cell.xml" value="0.42916666666666664" />
-        <entry key="..\:/Users/Julia0n3/Desktop/Nowy folder/FuturePlan/app/src/main/res/layout/calendar_month_year_txt.xml" value="0.42916666666666664" />
+       <entry key="..\:/Users/Julia0n3/Desktop/Nowy folder/FuturePlan/app/src/main/res/layout/calendar_month_year_txt.xml" value="0.42916666666666664" />
         <entry key="..\:/Users/Julia0n3/Desktop/Nowy folder/FuturePlan/app/src/main/res/layout/card_item.xml" value="0.24010416666666667" />
         <entry key="..\:/Users/Julia0n3/Desktop/Nowy folder/FuturePlan/app/src/main/res/layout/custom_image_layout.xml" value="0.42916666666666664" />
         <entry key="..\:/Users/Julia0n3/Desktop/Nowy folder/FuturePlan/app/src/main/res/layout/drawer_header.xml" value="0.42916666666666664" />

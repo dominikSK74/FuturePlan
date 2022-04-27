@@ -147,7 +147,7 @@ public class Profil extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_profil, container, false);
 
-        //SET THEME FROM SETTINGS
+       //SET THEME FROM SETTINGS
         SharedPreferences settings = getContext().getSharedPreferences("PREFS_NAME", 0);
         boolean silent = settings.getBoolean("switchkey", false);
         if(silent)
@@ -220,6 +220,7 @@ public class Profil extends Fragment {
         };
 
         DocumentReference documentReference = fStore.collection("users").document(userID);
+
         documentReference.addSnapshotListener((Activity) getContext(), new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
@@ -230,6 +231,7 @@ public class Profil extends Fragment {
                 PeditTextNumber.setText(documentSnapshot.getString("phone"));
                 PeditTextDate.setText(documentSnapshot.getString("birthdate"));
                 mDrawableName = documentSnapshot.getString("avatar");
+
                 if(mDrawableName == null || mDrawableName.equals("")){
                     downloadFile();
                 }else{
@@ -239,6 +241,7 @@ public class Profil extends Fragment {
 
             }
         });
+
 
 
         Button btnLogout = view.findViewById(R.id.btnLogout);
@@ -313,7 +316,6 @@ public class Profil extends Fragment {
                 builder.show();
             }
         });
-
         return view;
     }
     public static final int PICK_IMAGE = 1;

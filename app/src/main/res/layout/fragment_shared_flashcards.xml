@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="15dp"
         android:layout_marginBottom="16dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,14 +26,55 @@
             android:layout_height="wrap_content" />
     </androidx.core.widget.NestedScrollView>
 
-    <Button
+    <!--BACK BUTTON--> <!-- -->
+    <RelativeLayout
         android:id="@+id/btnBack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginBottom="42dp"
-        android:text="@string/back"
-        app:layout_constraintBottom_toBottomOf="@+id/scrollView2"
-        app:layout_constraintStart_toStartOf="@+id/scrollView2" />
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/back_button"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="3dp"
+            android:src="@drawable/back_button"
+            app:tint="@color/colorBackground" />
+
+        <RelativeLayout
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="0dp"
+            android:background="@drawable/back_button">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:src="@drawable/ic_back"
+                app:tint="@color/colorBackground" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="60dp"
+            android:gravity="center"
+            android:text="@string/back"
+            android:textAllCaps="true"
+            android:textColor="@color/textColor"
+            android:textSize="13dp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+    <!--END BACK BUTTON-->
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
