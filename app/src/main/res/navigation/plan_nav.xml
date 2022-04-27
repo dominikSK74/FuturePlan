@@ -19,9 +19,6 @@
         <action
             android:id="@+id/action_monday_to_editPlan2"
             app:destination="@id/editPlan2" />
-        <action
-            android:id="@+id/action_monday_to_loginWithLibrus"
-            app:destination="@id/loginWithLibrus" />
     </fragment>
     <fragment
         android:id="@+id/tuesday"
@@ -140,14 +137,6 @@
             android:id="@+id/action_editPlan2_to_sunday"
             app:destination="@id/sunday" />
     </fragment>
-    <fragment
-        android:id="@+id/loginWithLibrus"
-        android:name="com.example.futureplan.LoginWithLibrus"
-        android:label="fragment_login_with_librus"
-        tools:layout="@layout/fragment_login_with_librus" >
-        <action
-            android:id="@+id/action_loginWithLibrus_to_monday"
-            app:destination="@id/monday" />
-    </fragment>
+
 
 </navigation>

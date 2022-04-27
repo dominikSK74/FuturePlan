@@ -160,13 +160,6 @@ public class Monday extends Fragment {
             }
         });
 
-        Button btnConnect = view.findViewById(R.id.btnconect);
-        btnConnect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.action_monday_to_loginWithLibrus);
-            }
-        });
 
         return view;
     }

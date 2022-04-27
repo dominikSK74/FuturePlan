@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="38dp"
     android:layout_marginBottom="70dp"
     android:background="@color/colorBackground"
     tools:context=".Terminarz"
@@ -117,25 +116,108 @@
         android:id="@+id/calendarRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="300dp" />
-
     <TextView
         android:id="@+id/txtDate"
         android:visibility="invisible"
-        android:textColor="@color/textColor"
+        android:textColor="@color/primary"
         android:layout_marginLeft="40px"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="date" />
+        android:text="date"
 
-    <ListView
-        android:layout_marginLeft="40px"
-        android:id="@+id/listViewTests"
+        android:textSize="20sp"/>
+    <View
+        android:id="@+id/dividerCalendar"
+        android:visibility="invisible"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    <ListView
-        android:layout_marginLeft="40px"
-        android:id="@+id/listViewHomework"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="1dp"
+        android:background="@color/primary"/>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+        <View
+            android:layout_width="3dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="40px"
+            android:background="@color/primary"/>
+        <ListView
+            android:layout_marginLeft="40px"
+            android:id="@+id/listViewTimetable"
+            android:layout_width="match_parent"
+            android:divider="@null"
+            android:dividerHeight="0dp"
+            android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+        <View
+            android:layout_width="3dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="40px"
+            android:background="@color/primary"/>
+        <ListView
+            android:layout_marginLeft="40px"
+            android:id="@+id/listViewTests"
+            android:layout_width="match_parent"
+            android:divider="@null"
+            android:dividerHeight="0dp"
+            android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <View
+                android:layout_width="3dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="40px"
+                android:background="@color/primary"/>
+            <ListView
+                android:layout_marginLeft="40px"
+                android:id="@+id/listViewHomework"
+                android:layout_width="match_parent"
+                android:divider="@null"
+                android:dividerHeight="0dp"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <View
+                android:id="@+id/dividerColor"
+                android:layout_width="3dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="40px"
+                android:background="@color/primary"/>
+            <ListView
+                android:layout_marginLeft="40px"
+                android:id="@+id/listViewEvents"
+                android:layout_width="match_parent"
+                android:divider="@null"
+                android:dividerHeight="0dp"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
 
 </LinearLayout>

@@ -101,7 +101,7 @@ public class Ustawienia extends Fragment {
 
         Switch switch1 = view.findViewById(R.id.switch1);
 
-        /*//Set switch status
+        //Set switch status
         SharedPreferences settings = getContext().getSharedPreferences("PREFS_NAME", 0);
         boolean silent = settings.getBoolean("switchkey", false);
         switch1.setChecked(silent);
@@ -161,7 +161,7 @@ public class Ustawienia extends Fragment {
 
 
 
-         */
+
 
         return view;
     }

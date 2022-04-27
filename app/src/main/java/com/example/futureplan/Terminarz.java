@@ -33,6 +33,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
@@ -47,11 +48,10 @@ import java.util.HashMap;
  * create an instance of this fragment.
  */
 public class Terminarz extends Fragment implements CalendarAdapter.onItemListener{
-    private SimpleAdapter sa, sa2, sa3;
+    private SimpleAdapter sa;
     private String nameOfDay;
     private String dateString;
-    private String dayString;
-    private String monthString;
+    String day,month,year;
 
     private FirebaseAuth mAuth;
     private FirebaseFirestore fStore;
@@ -65,6 +65,12 @@ public class Terminarz extends Fragment implements CalendarAdapter.onItemListene
     private TextView txtDate;
     private  ListView listViewTests;
     private  ListView listViewHomework;
+    private  ListView listViewTimetable;
+    private  ListView listViewEvents;
+
+
+    View dividerCalendar;
+    View dividerColor;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -120,86 +126,14 @@ public class Terminarz extends Fragment implements CalendarAdapter.onItemListene
 
         listViewTests = view.findViewById(R.id.listViewTests);
         listViewHomework = view.findViewById(R.id.listViewHomework);
+        listViewTimetable = view.findViewById(R.id.listViewTimetable);
+        dividerCalendar = view.findViewById(R.id.dividerCalendar);
+        listViewEvents = view.findViewById(R.id.listViewEvents);
+        dividerColor = view.findViewById(R.id.dividerColor);
 
         mAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
         userID = mAuth.getCurrentUser().getUid();
-/*
-        CalendarView simpleCalendarView = view.findViewById(R.id.simpleCalendarView);
-
-        TextView date = view.findViewById(R.id.date);
-
-        simpleCalendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-            @Override
-            public void onSelectedDayChange(@NonNull CalendarView calendarView, int year, int month, int day) {
-                Calendar calendar = Calendar.getInstance();
-                calendar.set(year, month, day);
-                int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
-                switch (dayOfWeek) {
-                    case Calendar.SUNDAY:
-                        nameOfDay= "Sunday";
-                        break;
-                    case Calendar.MONDAY:
-                        nameOfDay= "Monday";
-                        break;
-                    case Calendar.TUESDAY:
-                        nameOfDay= "Tuesday";
-                        break;
-                    case Calendar.THURSDAY:
-                        nameOfDay= "Thursday";
-                        break;
-                    case Calendar.SATURDAY:
-                        nameOfDay= "Saturday";
-                        break;
-                    case Calendar.WEDNESDAY:
-                        nameOfDay= "Wednesday";
-                        break;
-                    case Calendar.FRIDAY:
-                        nameOfDay= "Friday";
-                        break;
-                }
-                month = month + 1;
-
-                dayString = day + "";
-                monthString = month + "";
-                if(day<10){
-                    dayString = "0" + day;
-                }
-                if(month<10){
-                    monthString = "0" + month;
-                }
-
-                dateString = dayString + "." + monthString;
-
-                date.setText(dateString);
-                date.setVisibility(View.VISIBLE);
-                ListView listViewCalendar = view.findViewById(R.id.listViewCalendar);
-
-                ArrayList<HashMap<String,String>> list = new ArrayList<>();
-
-                CollectionReference collectionReference = fStore.collection("users").document(userID).collection("timetable").document("lessons").collection(nameOfDay);
-                collectionReference.addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                        for(DocumentSnapshot snapshot : value){
-                            HashMap<String,String> item = new HashMap<String,String>();
-                            item.put( "line1", snapshot.getString("time"));
-                            item.put( "line2", snapshot.getString("subject"));
-                            list.add( item );
-                        }
-                        sa = new SimpleAdapter(getContext(), list,
-                                R.layout.list_terminarz,
-                                new String[] { "line1","line2" },
-                                new int[] {R.id.line_b, R.id.line_a});
-                        ((ListView)view.findViewById(R.id.listViewCalendar)).setAdapter(sa);
-                    }
-                });
-
-                listViewCalendar.setVisibility(View.VISIBLE);
-            }
-        });
-
-         */
 
         view.findViewById(R.id.prevMonth).setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
@@ -265,8 +199,12 @@ public class Terminarz extends Fragment implements CalendarAdapter.onItemListene
     @Override
     public void onItemClick(int position, String dayText, boolean addEvent) {
         if(!dayText.equals("")){
+            dividerCalendar.setVisibility(View.VISIBLE);
             String date = (dayText + "." + monthYear);
+            day = dayText;
             dateString = date.substring(0, (date.lastIndexOf(".")));
+            month = monthYear.substring(0, monthYear.lastIndexOf("."));
+            year = monthYear.substring(monthYear.lastIndexOf(".") + 1);
             if(addEvent){
                 Bundle bundle = new Bundle();
                 bundle.putString("date", dateString);
@@ -274,6 +212,33 @@ public class Terminarz extends Fragment implements CalendarAdapter.onItemListene
             }else {
                 txtDate.setText(dateString);
                 txtDate.setVisibility(View.VISIBLE);
+
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day));
+                int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+                switch (dayOfWeek) {
+                    case Calendar.SUNDAY:
+                        nameOfDay= "Sunday";
+                        break;
+                    case Calendar.MONDAY:
+                        nameOfDay= "Monday";
+                        break;
+                    case Calendar.TUESDAY:
+                        nameOfDay= "Tuesday";
+                        break;
+                    case Calendar.THURSDAY:
+                        nameOfDay= "Thursday";
+                        break;
+                    case Calendar.SATURDAY:
+                        nameOfDay= "Saturday";
+                        break;
+                    case Calendar.WEDNESDAY:
+                        nameOfDay= "Wednesday";
+                        break;
+                    case Calendar.FRIDAY:
+                        nameOfDay= "Friday";
+                        break;
+                }
 
                 ArrayList<HashMap<String,String>> testsArrayList = new ArrayList<>();
 
@@ -318,6 +283,51 @@ public class Terminarz extends Fragment implements CalendarAdapter.onItemListene
                         listViewHomework.setAdapter(sa);
                     }
                 });
+
+                ArrayList<HashMap<String,String>> arrayListTimetable = new ArrayList<>();
+
+                CollectionReference collectionReference = fStore.collection("users").document(userID).collection("timetable").document("lessons").collection(nameOfDay);
+                collectionReference.addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        for(DocumentSnapshot snapshot : value){
+                            HashMap<String,String> item = new HashMap<String,String>();
+                            item.put( "line1", snapshot.getString("time"));
+                            item.put( "line2", snapshot.getString("subject"));
+                            arrayListTimetable.add( item );
+                        }
+                        sa = new SimpleAdapter(getContext(), arrayListTimetable,
+                                R.layout.list_terminarz,
+                                new String[] { "line1","line2" },
+                                new int[] {R.id.line_a, R.id.line_b});
+                        listViewTimetable.setAdapter(sa);
+                    }
+                });
+
+                ArrayList<HashMap<String,String>> arrayListEvents = new ArrayList<>();
+
+                CollectionReference events = fStore.collection("users").document(userID).collection("events");
+                events.addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        for(DocumentSnapshot snapshot : value){
+                            if(snapshot.get("date").equals(dateString)) {
+                                HashMap<String, String> item = new HashMap<String, String>();
+                                item.put("line1", snapshot.getString("timeStart") + "-" + snapshot.getString("timeEnd"));
+                                item.put("line2", snapshot.getString("title"));
+                                dividerColor.setBackgroundColor(Integer.parseInt(snapshot.getString("color")));
+                                arrayListEvents.add(item);
+                            }
+                        }
+                        sa = new SimpleAdapter(getContext(), arrayListEvents,
+                                R.layout.list_terminarz,
+                                new String[] { "line1","line2" },
+                                new int[] {R.id.line_a, R.id.line_b});
+                        listViewEvents.setAdapter(sa);
+                    }
+                });
+
+
 
             }
         }

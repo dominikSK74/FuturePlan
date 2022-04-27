@@ -1,5 +1,7 @@
 package com.example.futureplan;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -10,8 +12,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
@@ -20,6 +24,8 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,10 +36,14 @@ public class LearnSharedFlashcards extends Fragment {
     private FirebaseAuth mAuth;
     private FirebaseFirestore fStore;
     private String userID;
-
     private int cardID;
     private int count;
     private String username;
+    private ImageView imageProfile;
+    private StorageReference storageReference;
+    private FirebaseStorage storage;
+
+    String userFlashcardID;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -84,6 +94,9 @@ public class LearnSharedFlashcards extends Fragment {
         fStore = FirebaseFirestore.getInstance();
         userID = mAuth.getCurrentUser().getUid();
 
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
+
         TextView frontOpis = view.findViewById(R.id.frontOpis);
         TextView frontNotatka = view.findViewById(R.id.frontNotatka);
         TextView backOpis = view.findViewById(R.id.backOpis);
@@ -91,6 +104,8 @@ public class LearnSharedFlashcards extends Fragment {
         Button nextFlash = view.findViewById(R.id.nextFlash);
         Button deleteFlash = view.findViewById(R.id.deleteFlash);
         Button prevFlash = view.findViewById(R.id.prevFlash);
+
+        imageProfile = view.findViewById(R.id.imageProfile);
 
         TextView txtUser = view.findViewById(R.id.textUser);
 
@@ -171,11 +186,49 @@ public class LearnSharedFlashcards extends Fragment {
         userName.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                username = value.getString("username");
                 txtUser.setText(value.getString("username"));
+                userFlashcardID = value.getString("userID");
+                fStore.collection("users").document(userFlashcardID).addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                        String mDrawableName = value.getString("avatar");
+                        if(mDrawableName == null || mDrawableName.equals("")){
+                            downloadFile(userFlashcardID);
+                        }else{
+                            int resID = getResources().getIdentifier(mDrawableName , "drawable", getContext().getPackageName());
+                            imageProfile.setImageResource(resID);
+                        }
+
+                    }
+                });
+
+                fStore.collection("users").document(userID).addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                        if(value.getString("nickname").equals(username)){
+                            deleteFlash.setVisibility(View.VISIBLE);
+                        }
+                    }
+                });
             }
         });
 
 
         return view;
+    }
+
+    private void downloadFile(String id){
+        StorageReference imageRef = storageReference.child("profileImages").child(id + ".jpeg");
+        long MAXBYTES = 1024*1024;
+        imageRef.getBytes(MAXBYTES).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+            @Override
+            public void onSuccess(byte[] bytes) {
+                //convert byte[] to bitmap
+                Bitmap bitmap = BitmapFactory.decodeByteArray(bytes,0, bytes.length);
+                imageProfile.setImageBitmap(bitmap);
+            }
+        });
+
     }
 }

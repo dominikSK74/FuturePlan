@@ -148,7 +148,7 @@ public class Profil extends Fragment {
         View view = inflater.inflate(R.layout.fragment_profil, container, false);
 
         //SET THEME FROM SETTINGS
-        /*SharedPreferences settings = getContext().getSharedPreferences("PREFS_NAME", 0);
+        SharedPreferences settings = getContext().getSharedPreferences("PREFS_NAME", 0);
         boolean silent = settings.getBoolean("switchkey", false);
         if(silent)
         {
@@ -157,7 +157,7 @@ public class Profil extends Fragment {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
 
-         */
+
         avatar = "";
         mAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
@@ -374,14 +374,7 @@ public class Profil extends Fragment {
                 Bitmap bitmap = BitmapFactory.decodeByteArray(bytes,0, bytes.length);
                 profileImage.setImageBitmap(bitmap);
             }
-        });/*.addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                int resID = getResources().getIdentifier(mDrawableName , "drawable", getContext().getPackageName());
-                profileImage.setImageResource(resID);
-            }
         });
-        */
 
     }
 

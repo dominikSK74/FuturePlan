@@ -98,7 +98,11 @@
         android:id="@+id/learnSharedFlashcards"
         android:name="com.example.futureplan.LearnSharedFlashcards"
         android:label="fragment_learn_shared_flashcards"
-        tools:layout="@layout/fragment_learn_shared_flashcards" />
+        tools:layout="@layout/fragment_learn_shared_flashcards" >
+        <action
+            android:id="@+id/action_learnSharedFlashcards_to_menuFiszki"
+            app:destination="@id/menuFiszki" />
+    </fragment>
     <fragment
         android:id="@+id/eventEdit"
         android:name="com.example.futureplan.EventEdit"

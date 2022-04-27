@@ -86,7 +86,12 @@ public class BasicActivity extends AppCompatActivity {
                 profileName.setText(documentSnapshot.getString("fName"));
                 profileSurname.setText(documentSnapshot.getString("sName"));
                 String mDrawableName = documentSnapshot.getString("avatar");
-                downloadFile(mDrawableName);
+                if(mDrawableName == null || mDrawableName.equals("")){
+                    downloadFile();
+                }else{
+                    int resID = getResources().getIdentifier(mDrawableName , "drawable", getPackageName());
+                    imageProfile.setImageResource(resID);
+                }
             }
         });
 
@@ -97,7 +102,7 @@ public class BasicActivity extends AppCompatActivity {
 
     }
 
-    private void downloadFile(String mDrawableName){
+    private void downloadFile(){
         StorageReference imageRef = storageReference.child("profileImages").child(userID + ".jpeg");
         long MAXBYTES = 1024*1024;
         imageRef.getBytes(MAXBYTES).addOnSuccessListener(new OnSuccessListener<byte[]>() {
@@ -106,12 +111,6 @@ public class BasicActivity extends AppCompatActivity {
                 //convert byte[] to bitmap
                 Bitmap bitmap = BitmapFactory.decodeByteArray(bytes,0, bytes.length);
                 imageProfile.setImageBitmap(bitmap);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                int resID = getResources().getIdentifier(mDrawableName , "drawable", getPackageName());
-                imageProfile.setImageResource(resID);
             }
         });
 

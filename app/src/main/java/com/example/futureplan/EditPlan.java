@@ -108,7 +108,6 @@ public class EditPlan extends Fragment {
         });
 
 
-
         //String day = PreferenceUtils.getDay(getContext());
         String day = getArguments().getString("day");
 
