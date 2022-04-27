@@ -200,14 +200,11 @@ public class LearnFlashcards extends Fragment {
                     @Override
                     public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
                         username = value.getString("nickname");
-                        PreferenceUtils.saveName(username,getContext());
+                        flashcard.put("username", username);
+                        flashcard.put("userID", userID);
+                        documentReference.set(flashcard);
                     }
                 });
-
-                username = PreferenceUtils.getName(getContext());
-
-                flashcard.put("username", username);
-                documentReference.set(flashcard);
 
                 CollectionReference collectionReference =fStore.collection("users").document(userID).collection("flashcards").document(nazwa).collection("cards");
                 collectionReference.addSnapshotListener(new EventListener<QuerySnapshot>() {

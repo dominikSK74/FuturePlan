@@ -15,6 +15,9 @@
         android:name="com.example.futureplan.Terminarz"
         android:label="fragment_terminarz"
         tools:layout="@layout/fragment_terminarz" >
+        <action
+            android:id="@+id/action_menuTerminarz_to_eventEdit"
+            app:destination="@id/eventEdit" />
     </fragment>
     <fragment
         android:id="@+id/menuPlanLekcji"
@@ -95,5 +98,18 @@
         android:id="@+id/learnSharedFlashcards"
         android:name="com.example.futureplan.LearnSharedFlashcards"
         android:label="fragment_learn_shared_flashcards"
-        tools:layout="@layout/fragment_learn_shared_flashcards" />
+        tools:layout="@layout/fragment_learn_shared_flashcards" >
+        <action
+            android:id="@+id/action_learnSharedFlashcards_to_menuFiszki"
+            app:destination="@id/menuFiszki" />
+    </fragment>
+    <fragment
+        android:id="@+id/eventEdit"
+        android:name="com.example.futureplan.EventEdit"
+        android:label="fragment_event_edit"
+        tools:layout="@layout/fragment_event_edit" >
+        <action
+            android:id="@+id/action_eventEdit_to_menuTerminarz"
+            app:destination="@id/menuTerminarz" />
+    </fragment>
 </navigation>

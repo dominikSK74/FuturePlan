@@ -138,4 +138,5 @@
             app:destination="@id/sunday" />
     </fragment>
 
+
 </navigation>

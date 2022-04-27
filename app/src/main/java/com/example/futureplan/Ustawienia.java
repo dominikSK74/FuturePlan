@@ -151,7 +151,6 @@ public class Ustawienia extends Fragment {
         });
 
 
-
         return view;
     }
 }

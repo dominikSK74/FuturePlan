@@ -2,11 +2,22 @@ package com.example.futureplan;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatDelegate;
 import android.content.res.Resources;
 import android.database.Cursor;
@@ -22,6 +33,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.GridView;
 
@@ -30,7 +42,9 @@ import android.widget.ImageView;
 
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.imageview.ShapeableImageView;
@@ -41,12 +55,26 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.makeramen.roundedimageview.RoundedImageView;
 
+import java.io.File;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Executor;
+
+import javax.xml.transform.Result;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -58,11 +86,21 @@ import java.util.concurrent.Executor;
 
 public class Profil extends Fragment {
     String userID;
-    FirebaseFirestore fStore;
-    FirebaseAuth mAuth;
+    private FirebaseFirestore fStore;
+    private FirebaseAuth mAuth;
     String avatar;
 
     String mDrawableName;
+
+    private RoundedImageView profileImage;
+
+    public Uri imageUri;
+    private FirebaseStorage storage;
+    private StorageReference storageReference;
+
+    AlertDialog.Builder builder;
+
+    private DatePickerDialog.OnDateSetListener mDateSetListener;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -119,24 +157,71 @@ public class Profil extends Fragment {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
 
+
+        avatar = "";
         mAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
         userID = mAuth.getCurrentUser().getUid();
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
+
+
 
         int images[]={R.drawable.awatar1,R.drawable.awatar2,R.drawable.awatar3,R.drawable.awatar4,R.drawable.awatar5,R.drawable.awatar6,R.drawable.awatar7, R.drawable.awatar8};
 
-        ShapeableImageView profileImage = view.findViewById(R.id.profileImage);
+        profileImage = view.findViewById(R.id.profileImage);
 
-        EditText PeditTextEmail = view.findViewById(R.id.PeditTextEmail);
+        imageUri=Uri.parse("android.resource://my.package.name/"+profileImage);
+
+        TextView PeditTextEmail = view.findViewById(R.id.PeditTextEmail);
         EditText PeditTextN = view.findViewById(R.id.PeditTextN);
         EditText PeditTextName = view.findViewById(R.id.PeditTextName);
         EditText PeditTextSName = view.findViewById(R.id.PeditTextSName);
         EditText PeditTextNumber = view.findViewById(R.id.PeditTextNumber);
-        EditText PeditTextDate = view.findViewById(R.id.PeditTextDate);
+        TextView PeditTextDate = view.findViewById(R.id.PeditTextDate);
+
+        PeditTextDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar cal = Calendar.getInstance();
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog dialog = new DatePickerDialog(
+                        getContext(),
+                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                        mDateSetListener,
+                        year,month,day);
+                dialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+            }
+        });
+
+        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                month++;
+                String date = day + "-" + month + "-" + year;
+                SimpleDateFormat spf = new SimpleDateFormat("dd-MM-yyyy");
+                Date newDate = null;
+                try {
+                    newDate = spf.parse(date);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                spf= new SimpleDateFormat("dd-MM-yyyy");
+                date = spf.format(newDate);
+                PeditTextDate.setText(date);
+
+            }
+        };
 
         DocumentReference documentReference = fStore.collection("users").document(userID);
 
-        /*documentReference.addSnapshotListener((Activity) getContext(), new EventListener<DocumentSnapshot>() {
+        documentReference.addSnapshotListener((Activity) getContext(), new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
                 PeditTextEmail.setText(documentSnapshot.getString("email"));
@@ -146,19 +231,25 @@ public class Profil extends Fragment {
                 PeditTextNumber.setText(documentSnapshot.getString("phone"));
                 PeditTextDate.setText(documentSnapshot.getString("birthdate"));
                 mDrawableName = documentSnapshot.getString("avatar");
-                int resID = getResources().getIdentifier(mDrawableName, "drawable", getContext().getPackageName());
-                profileImage.setImageResource(resID);
+
+                if(mDrawableName == null || mDrawableName.equals("")){
+                    downloadFile();
+                }else{
+                    int resID = getResources().getIdentifier(mDrawableName , "drawable", getContext().getPackageName());
+                    profileImage.setImageResource(resID);
+                }
+
             }
-        });*/
+        });
+
 
 
         Button btnLogout = view.findViewById(R.id.btnLogout);
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                startActivity(new Intent(getContext(),LogActivity.class));
                 FirebaseAuth.getInstance().signOut();
-                PreferenceUtils.saveEmail("", getContext());
-                startActivity(new Intent(getContext(), LogActivity.class));
             }
         });
 
@@ -173,21 +264,25 @@ public class Profil extends Fragment {
                 String phone = PeditTextNumber.getText().toString();
                 String date = PeditTextDate.getText().toString();
 
-                DocumentReference documentReference = fStore.collection("users").document(userID);
-                Map<String,Object> user = new HashMap<>();
-                user.put("nickname",name);
-                user.put("email",email);
-                user.put("fName",fName);
-                user.put("sName",sName);
-                user.put("phone",phone);
-                user.put("birthdate",date);
-                user.put("avatar",avatar);
-                documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        Log.d("TAG","onSuccess: user profile is saved " + userID);
+                if(phone.length() > 9 ){
+                    Toast.makeText(getContext(), "To long phone number ", Toast.LENGTH_SHORT).show();
+                }else {
+                    DocumentReference documentReference = fStore.collection("users").document(userID);
+                    Map<String, Object> user = new HashMap<>();
+                    user.put("nickname", name);
+                    user.put("email", email);
+                    user.put("fName", fName);
+                    user.put("sName", sName);
+                    user.put("phone", phone);
+                    user.put("birthdate", date);
+                    user.put("avatar", avatar);
+
+                    documentReference.set(user);
+                    if(avatar.equals("")){
+                        uploadPicture();
                     }
-                });
+
+                }
             }
         });
 
@@ -206,13 +301,16 @@ public class Profil extends Fragment {
                 gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        profileImage.setImageResource(images[position]);
-                        avatar = "awatar" + (position+1);
-                        //PreferenceUtils.saveAvatar("awatar" + (position+1),getContext());
+                        if(position == 8){
+                            choosePicture();
+                        }else {
+                            profileImage.setImageResource(images[position]);
+                            avatar = "awatar" + (position + 1);
+                        }
                     }
                 });
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder = new AlertDialog.Builder(getActivity());
                 builder.setView(gridView);
                 builder.setTitle("Wybierz zdjecie profilowe:");
                 builder.show();
@@ -220,5 +318,67 @@ public class Profil extends Fragment {
         });
         return view;
     }
+    public static final int PICK_IMAGE = 1;
+    private void choosePicture() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PICK_IMAGE && data!=null && data.getData()!=null) {
+            imageUri = data.getData();
+            profileImage.setImageURI(imageUri);
+        }
+    }
+
+    private void uploadPicture() {
+        final ProgressDialog pd = new ProgressDialog(getContext());
+        pd.setTitle("Uploading image...");
+        pd.show();
+
+        StorageReference ref = storageReference.child("profileImages").child(userID + ".jpeg");
+        ref.putFile(imageUri)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        fStore.collection("users").document(userID).update("avatar","");
+                        pd.dismiss();
+                        Toast.makeText(getContext(), "Image uploaded", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                            pd.dismiss();
+                    }
+                })
+                .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+                        double progressPercent = (100.00 * snapshot.getBytesTransferred() / snapshot.getTotalByteCount());
+                        pd.setMessage("Progress: " + progressPercent + "%");
+                    }
+                });
+    }
+
+    private void downloadFile(){
+        StorageReference imageRef = storageReference.child("profileImages").child(userID + ".jpeg");
+        long MAXBYTES = 1024*1024;
+        imageRef.getBytes(MAXBYTES).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+            @Override
+            public void onSuccess(byte[] bytes) {
+                //convert byte[] to bitmap
+                Bitmap bitmap = BitmapFactory.decodeByteArray(bytes,0, bytes.length);
+                profileImage.setImageBitmap(bitmap);
+            }
+        });
+
+    }
+
 
 }
