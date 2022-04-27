@@ -61,13 +61,12 @@
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
 
 
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/editPlan"
         android:layout_width="55dp"
         android:layout_height="55dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="16dp"
         android:backgroundTint="@color/blue1"
         android:clickable="true"
         android:focusable="true"
@@ -81,9 +80,9 @@
         android:name="com.example.futureplan.FileChooserFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/editPlan"
         app:layout_constraintStart_toStartOf="parent" />
 
 

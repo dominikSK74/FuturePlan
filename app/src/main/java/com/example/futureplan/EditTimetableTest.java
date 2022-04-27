@@ -17,6 +17,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputLayout;
@@ -151,7 +152,7 @@ public class EditTimetableTest extends Fragment {
         };
 
 
-        Button saveBtnTests = view.findViewById(R.id.saveBtnTests);
+        RelativeLayout saveBtnTests = view.findViewById(R.id.saveBtnTests);
         saveBtnTests.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

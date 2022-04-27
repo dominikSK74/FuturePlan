@@ -1,5 +1,6 @@
 package com.example.futureplan;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.UiModeManager;
 import android.content.Context;
@@ -93,25 +94,17 @@ public class Ustawienia extends Fragment {
         RestartActivity();
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_ustawienia, container, false);
 
-        Switch switch1 = view.findViewById(R.id.switch1);
+       SwitchCompat switch1 = view.findViewById(R.id.switch1);
 
         //Set switch status
         SharedPreferences settings = getContext().getSharedPreferences("PREFS_NAME", 0);
         boolean silent = settings.getBoolean("switchkey", false);
         switch1.setChecked(silent);
-        //Set theme
-        if(switch1.isChecked())
-        {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-        }else{
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        }
 
 
         //On change switch status method and save settings
@@ -125,10 +118,9 @@ public class Ustawienia extends Fragment {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                 }
                 //Save status switch in settings
-                SharedPreferences settings = getContext().getSharedPreferences("PREFS_NAME", 0);
                 SharedPreferences.Editor editor = settings.edit();
                 editor.putBoolean("switchkey", b);
-                editor.commit();
+                editor.apply();
             }
             });
 
@@ -157,7 +149,6 @@ public class Ustawienia extends Fragment {
 
             }
         });
-
 
 
 

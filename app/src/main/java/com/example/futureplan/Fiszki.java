@@ -5,6 +5,9 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.app.AppCompatDialogFragment;
+import androidx.appcompat.app.AppCompatViewInflater;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
@@ -159,7 +162,6 @@ public class Fiszki extends Fragment {
                 Navigation.findNavController(view).navigate(R.id.action_menuFiszki_to_sharedFlashcards);
             }
         });
-
 
 
         return view;

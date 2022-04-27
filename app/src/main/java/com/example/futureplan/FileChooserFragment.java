@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 /**
@@ -76,7 +77,7 @@ public class FileChooserFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_file_chooser, container, false);
 
-        Button btnBrowse = view.findViewById(R.id.btnBrowse);
+        RelativeLayout btnBrowse = view.findViewById(R.id.btnBrowse);
         btnBrowse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
