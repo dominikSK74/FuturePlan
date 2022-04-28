@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
@@ -106,7 +107,7 @@ public class ViewNote extends Fragment {
             }
         });
 
-        Button btnBack = view.findViewById(R.id.btnBack);
+        RelativeLayout btnBack = view.findViewById(R.id.btnBack);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -114,7 +115,7 @@ public class ViewNote extends Fragment {
             }
         });
 
-        Button btnDelete = view.findViewById(R.id.btnDelete);
+        RelativeLayout btnDelete = view.findViewById(R.id.btnDelete);
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -123,7 +124,7 @@ public class ViewNote extends Fragment {
             }
         });
 
-        Button btnSave = view.findViewById(R.id.btnSave);
+        RelativeLayout btnSave = view.findViewById(R.id.btnSave);
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

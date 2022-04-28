@@ -22,6 +22,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.GridLayout;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
@@ -98,10 +99,10 @@ public class Fiszki extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_fiszki, container, false);
         RecyclerView fiszkiRecycler = view.findViewById(R.id.fiszkiRecycler);
-        ExtendedFloatingActionButton efab = view.findViewById(R.id.FABfiszki);
+        //ExtendedFloatingActionButton efab = view.findViewById(R.id.FABfiszki);
         NestedScrollView sv = view.findViewById(R.id.scrollView2);;
         FloatingActionButton fab = view.findViewById(R.id.floatingActionButton);
-
+        RelativeLayout addFlash = view.findViewById(R.id.addNewFlash);
 
         fiszkiRecycler.setLayoutManager(
                 new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
@@ -113,11 +114,13 @@ public class Fiszki extends Fragment {
             @Override
             public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
                 if (scrollY > oldScrollY) {
-                    efab.hide();
+                    //efab.hide();
                     fab.hide();
+                    addFlash.setVisibility(View.INVISIBLE);
                 }else {
-                    efab.show();
+                    //efab.show();
                     fab.show();
+                    addFlash.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -138,7 +141,7 @@ public class Fiszki extends Fragment {
 
 
         //Extended Floating Action Button on click to add new flashcards
-        efab.setOnClickListener(new View.OnClickListener() {
+        addFlash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Navigation.findNavController(view).navigate(R.id.action_menuFiszki_to_addNewFlashcards);

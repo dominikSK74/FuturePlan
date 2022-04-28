@@ -14,11 +14,11 @@
         android:layout_height="150dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="60dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         android:scaleType="centerCrop"
         android:src="@drawable/awatar1"
-        app:riv_oval="true"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:riv_oval="true" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnImage"
@@ -45,12 +45,12 @@
         android:hint="@string/first_name"
         android:padding="5dp"
         android:paddingStart="15dp"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/editTextHint"
         app:layout_constraintBottom_toTopOf="@+id/PeditTextSName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/profileImage"
-        app:layout_constraintTop_toTopOf="parent"
-        android:textColor="@color/textColor"
-        android:textColorHint="@color/editTextHint"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/PeditTextSName"
@@ -63,12 +63,12 @@
         android:hint="@string/last_name"
         android:padding="5dp"
         android:paddingStart="15dp"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/editTextHint"
         app:layout_constraintBottom_toTopOf="@+id/PeditTextN"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/profileImage"
-        app:layout_constraintTop_toBottomOf="@+id/PeditTextName"
-        android:textColor="@color/textColor"
-        android:textColorHint="@color/editTextHint"/>
+        app:layout_constraintTop_toBottomOf="@+id/PeditTextName" />
 
     <EditText
         android:id="@+id/PeditTextN"
@@ -81,98 +81,155 @@
         android:hint="@string/username"
         android:padding="5dp"
         android:paddingStart="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/PeditTextEmail"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/editTextHint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profileImage"
-        android:textColor="@color/textColor"
-        android:textColorHint="@color/editTextHint"/>
+        app:layout_constraintTop_toBottomOf="@+id/profileImage" />
 
     <TextView
         android:id="@+id/PeditTextEmail"
-        android:layout_width="0dp"
+        android:layout_width="331dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="40dp"
         android:background="@drawable/custom_input"
         android:hint="@string/Email"
         android:padding="5dp"
-        android:textSize="19sp"
+        android:layout_marginTop="40dp"
         android:paddingStart="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/PeditTextNumber"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/PeditTextN"
         android:textColor="@color/textColor"
-        android:textColorHint="@color/editTextHint"/>
+        android:textColorHint="@color/editTextHint"
+        android:textSize="19sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/PeditTextN" />
 
     <EditText
         android:id="@+id/PeditTextNumber"
-        android:layout_width="0dp"
+        android:layout_width="331dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="40dp"
         android:background="@drawable/custom_input"
         android:hint="@string/phone_number"
         android:padding="5dp"
         android:paddingStart="15dp"
+        android:layout_marginTop="40dp"
         android:textColor="@color/textColor"
         android:textColorHint="@color/editTextHint"
-        app:layout_constraintBottom_toTopOf="@+id/PeditTextDate"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/PeditTextEmail" />
 
     <TextView
         android:id="@+id/PeditTextDate"
-        android:layout_width="0dp"
+        android:layout_width="331dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="40dp"
         android:background="@drawable/custom_input"
         android:hint="@string/birth_date"
         android:padding="5dp"
-        android:paddingStart="15dp"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/btnSave"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/PeditTextNumber"
-        android:textColor="@color/textColor"
-        android:textColorHint="@color/editTextHint"/>
-
-    <Button
-        android:id="@+id/btnSave"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="303dp"
         android:layout_marginTop="40dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginBottom="175dp"
-        android:text="@string/save"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:paddingStart="15dp"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/editTextHint"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/PeditTextDate" />
+        app:layout_constraintTop_toBottomOf="@+id/PeditTextNumber" />
 
-    <Button
-        android:id="@+id/btnLogout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="280dp"
-        android:layout_marginBottom="60dp"
-        android:backgroundTint="@color/red"
-        android:text="@string/log_out"
+    <!--BACK BUTTON--> <!-- -->
+    <RelativeLayout
+        android:id="@+id/btnSave"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/back_button"
+        android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="3dp"
+            android:src="@drawable/back_button"
+            app:tint="@color/colorBackground" />
+
+        <RelativeLayout
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="0dp"
+            android:background="@drawable/back_button">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:src="@drawable/ic_save"
+                app:tint="@color/colorBackground" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="60dp"
+            android:gravity="center"
+            android:text="@string/save"
+            android:textAllCaps="true"
+            android:textColor="@color/textColor"
+            android:textSize="13dp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+    <!--END BACK BUTTON-->
+
+    <RelativeLayout
+        android:id="@+id/btnLogout"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/delete_button"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="3dp"
+            android:src="@drawable/delete_button"
+            app:tint="@color/colorBackground" />
+
+        <RelativeLayout
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="0dp"
+            android:background="@drawable/delete_button">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:src="@drawable/ic_back"
+                app:tint="@color/colorBackground" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="60dp"
+            android:gravity="center"
+            android:text="@string/log_out"
+            android:textAllCaps="true"
+            android:textColor="@color/textColor"
+            android:textSize="13dp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+    <!--END BACK BUTTON-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

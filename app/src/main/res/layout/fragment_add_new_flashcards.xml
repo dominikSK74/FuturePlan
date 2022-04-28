@@ -6,9 +6,9 @@
     android:layout_height="match_parent"
     android:layout_marginLeft="0dp"
     android:layout_marginRight="0dp"
+    android:background="@color/colorBackground"
     android:paddingLeft="40dp"
     android:paddingRight="40dp"
-    android:background="@color/colorBackground"
     tools:context=".addNewFlashcards">
 
     <EditText
@@ -22,12 +22,12 @@
         android:hint="@string/name_of_the_set"
         android:maxLength="25"
         android:paddingLeft="8dp"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/editTextHint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:textColor="@color/textColor"
-        android:textColorHint="@color/editTextHint"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView"
@@ -36,13 +36,12 @@
         android:layout_marginTop="24dp"
         android:paddingLeft="20dp"
         android:text="1 Strona"
+        android:textColor="@color/textColor"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nazwaZestawu"
-        android:textColor="@color/textColor"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/nazwaZestawu" />
 
     <EditText
         android:id="@+id/opis"
@@ -54,13 +53,12 @@
         android:hint="@string/description"
         android:maxLength="50"
         android:paddingLeft="8dp"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/editTextHint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        android:textColor="@color/textColor"
-        android:textColorHint="@color/editTextHint"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
 
     <EditText
@@ -73,12 +71,12 @@
         android:hint="@string/note"
         android:maxLength="50"
         android:paddingLeft="8dp"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/editTextHint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/opis"
-        android:textColor="@color/textColor"
-        android:textColorHint="@color/editTextHint"/>
+        app:layout_constraintTop_toBottomOf="@+id/opis" />
 
     <TextView
         android:id="@+id/textView2"
@@ -87,12 +85,12 @@
         android:layout_marginTop="32dp"
         android:paddingLeft="20dp"
         android:text="2 Strona"
+        android:textColor="@color/textColor"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/notatka"
-        android:textColor="@color/textColor"/>
+        app:layout_constraintTop_toBottomOf="@+id/notatka" />
 
     <EditText
         android:id="@+id/opis2"
@@ -104,12 +102,12 @@
         android:hint="@string/description"
         android:maxLength="50"
         android:paddingLeft="8dp"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/editTextHint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
-        android:textColor="@color/textColor"
-        android:textColorHint="@color/editTextHint"/>
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <EditText
         android:id="@+id/notatka2"
@@ -121,12 +119,12 @@
         android:hint="@string/note"
         android:maxLength="50"
         android:paddingLeft="8dp"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/editTextHint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/opis2"
-        android:textColor="@color/textColor"
-        android:textColorHint="@color/editTextHint"/>
+        app:layout_constraintTop_toBottomOf="@+id/opis2" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addNewFlashcardsButton"
@@ -141,17 +139,52 @@
         app:layout_constraintTop_toBottomOf="@+id/notatka2"
         app:tint="@color/white" />
 
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+    <!--BACK BUTTON--> <!-- -->
+    <RelativeLayout
         android:id="@+id/saveFlashcards"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:background="@drawable/back_button"
+        android:clickable="true"
         android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/blue1"
-        android:text="@string/save"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
+        android:layout_marginEnd="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="3dp"
+            android:src="@drawable/back_button"
+            app:tint="@color/colorBackground" />
+
+        <RelativeLayout
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="0dp"
+            android:background="@drawable/back_button">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:src="@drawable/ic_save"
+                app:tint="@color/colorBackground" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="60dp"
+            android:gravity="center"
+            android:text="@string/save"
+            android:textAllCaps="true"
+            android:textColor="@color/textColor"
+            android:textSize="13dp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+    <!--END BACK BUTTON-->
 </androidx.constraintlayout.widget.ConstraintLayout>

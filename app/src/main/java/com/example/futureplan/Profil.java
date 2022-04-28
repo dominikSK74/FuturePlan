@@ -40,6 +40,7 @@ import android.widget.GridView;
 
 import android.widget.ImageView;
 
+import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -146,18 +147,6 @@ public class Profil extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_profil, container, false);
-
-       //SET THEME FROM SETTINGS
-        SharedPreferences settings = getContext().getSharedPreferences("PREFS_NAME", 0);
-        boolean silent = settings.getBoolean("switchkey", false);
-        if(silent)
-        {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-        }else{
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        }
-
-
         avatar = "";
         mAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
@@ -246,7 +235,7 @@ public class Profil extends Fragment {
 
 
 
-        Button btnLogout = view.findViewById(R.id.btnLogout);
+        RelativeLayout btnLogout = view.findViewById(R.id.btnLogout);
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -255,7 +244,7 @@ public class Profil extends Fragment {
             }
         });
 
-        Button btnSave = view.findViewById(R.id.btnSave);
+        RelativeLayout btnSave = view.findViewById(R.id.btnSave);
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

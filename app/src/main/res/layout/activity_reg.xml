@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/registration"
     android:layout_width="match_parent"
+    android:background="@color/colorBackground"
     android:layout_height="match_parent">
 
     <ImageView
@@ -20,6 +21,8 @@
     <EditText
         android:id="@+id/editTextEmail"
         android:layout_width="800px"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/textColor"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="10dp"
@@ -40,6 +43,8 @@
     <EditText
         android:id="@+id/editTextName"
         android:layout_width="800px"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/textColor"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:background="@drawable/custom_input"
@@ -60,6 +65,8 @@
         android:id="@+id/editTextPassword"
         android:layout_width="800px"
         android:layout_height="wrap_content"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/textColor"
         android:layout_marginBottom="10dp"
         android:background="@drawable/custom_input"
         android:drawableStart="@drawable/ic_lock"
@@ -81,6 +88,8 @@
         android:layout_width="800px"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/textColor"
         android:background="@drawable/custom_input"
         android:drawableStart="@drawable/ic_lock"
         android:drawablePadding="12dp"

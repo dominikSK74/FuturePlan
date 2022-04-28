@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
@@ -91,9 +92,9 @@ public class addNewNote extends Fragment {
 
         TextInputLayout titleInputTxt = view.findViewById(R.id.title_text_input);
         EditText editTextNote = view.findViewById(R.id.editTextNote);
-        Button btnAdd = view.findViewById(R.id.btnAdd);
+        RelativeLayout btnAdd = view.findViewById(R.id.btnAdd);
 
-        Button btnBack = view.findViewById(R.id.btnBack);
+        RelativeLayout btnBack = view.findViewById(R.id.btnBack);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

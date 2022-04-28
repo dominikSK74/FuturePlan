@@ -10,9 +10,11 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -94,35 +96,61 @@ public class Ustawienia extends Fragment {
         RestartActivity();
     }
 
+    SharedPreferences sharedPreferences = null;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_ustawienia, container, false);
 
-       SwitchCompat switch1 = view.findViewById(R.id.switch1);
+        // DARK THEME
+        Button dark = view.findViewById(R.id.dark);
+        Button light = view.findViewById(R.id.light);
 
-        //Set switch status
-        SharedPreferences settings = getContext().getSharedPreferences("PREFS_NAME", 0);
-        boolean silent = settings.getBoolean("switchkey", false);
-        switch1.setChecked(silent);
+        sharedPreferences = getContext().getSharedPreferences("night", 0);
+        Boolean booleanValue = sharedPreferences.getBoolean("night_mode", true);
 
+        if(booleanValue){
+            dark.setVisibility(View.INVISIBLE);
+            light.setVisibility(View.VISIBLE);
+        }else{
+            dark.setVisibility(View.VISIBLE);
+            light.setVisibility(View.INVISIBLE);
+        }
 
-        //On change switch status method and save settings
-        switch1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        dark.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-
-                } else {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                }
-                //Save status switch in settings
-                SharedPreferences.Editor editor = settings.edit();
-                editor.putBoolean("switchkey", b);
-                editor.apply();
+            public void onClick(View view) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putBoolean("night_mode", true);
+                editor.commit();
+                RestartActivity();
+                Toast.makeText(getContext(), "Dark Mode is ON", Toast.LENGTH_SHORT).show();
             }
-            });
+        });
+
+        light.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putBoolean("night_mode", false);
+                editor.commit();
+                RestartActivity();
+                Toast.makeText(getContext(), "Dark Mode is OFF", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+
 
 
         String[] items = getResources().getStringArray(R.array.languageArray);
@@ -150,7 +178,7 @@ public class Ustawienia extends Fragment {
             }
         });
 
-
         return view;
     }
 }
+

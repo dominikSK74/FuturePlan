@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
@@ -85,7 +86,7 @@ public class addNewFlashcards extends Fragment {
         userID = mAuth.getCurrentUser().getUid();
 
         FloatingActionButton addNewFlash = view.findViewById(R.id.addNewFlashcardsButton);
-        ExtendedFloatingActionButton saveFlashcard = view.findViewById(R.id.saveFlashcards);
+        RelativeLayout saveFlashcard = view.findViewById(R.id.saveFlashcards);
         EditText flashcardsName = view.findViewById(R.id.nazwaZestawu);
         EditText opis1 = view.findViewById(R.id.opis);
         EditText notatka1 = view.findViewById(R.id.notatka);
