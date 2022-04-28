@@ -154,6 +154,7 @@
 
     <!--DELETE BUTTON--> <!-- -->
     <RelativeLayout
+        android:visibility="invisible"
         android:id="@+id/deleteFlash"
         android:layout_width="220dp"
         android:layout_height="50dp"

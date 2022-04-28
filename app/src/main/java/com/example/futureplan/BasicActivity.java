@@ -78,22 +78,24 @@ public class BasicActivity extends AppCompatActivity {
         TextView profileEmail = header.findViewById(R.id.profileEmail);
         imageProfile = header.findViewById(R.id.imageProfile);
 
-        /*DocumentReference documentReference = fStore.collection("users").document(userID);
+        DocumentReference documentReference = fStore.collection("users").document(userID);
         documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
-                profileEmail.setText(documentSnapshot.getString("email"));
-                profileName.setText(documentSnapshot.getString("fName"));
-                profileSurname.setText(documentSnapshot.getString("sName"));
-                String mDrawableName = documentSnapshot.getString("avatar");
-                if(mDrawableName == null || mDrawableName.equals("")){
-                    downloadFile();
-                }else{
-                    int resID = getResources().getIdentifier(mDrawableName , "drawable", getPackageName());
-                    imageProfile.setImageResource(resID);
+                if(!(mAuth.getCurrentUser() == null)) {
+                    profileEmail.setText(documentSnapshot.getString("email"));
+                    profileName.setText(documentSnapshot.getString("fName"));
+                    profileSurname.setText(documentSnapshot.getString("sName"));
+                    String mDrawableName = documentSnapshot.getString("avatar");
+                    if (mDrawableName == null || mDrawableName.equals("")) {
+                        downloadFile();
+                    } else {
+                        int resID = getResources().getIdentifier(mDrawableName, "drawable", getPackageName());
+                        imageProfile.setImageResource(resID);
+                    }
                 }
             }
-        });*/
+        });
 
 
 
