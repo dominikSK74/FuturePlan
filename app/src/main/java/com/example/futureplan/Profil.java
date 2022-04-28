@@ -224,19 +224,21 @@ public class Profil extends Fragment {
         documentReference.addSnapshotListener((Activity) getContext(), new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
-                PeditTextEmail.setText(documentSnapshot.getString("email"));
-                PeditTextN.setText(documentSnapshot.getString("nickname"));
-                PeditTextName.setText(documentSnapshot.getString("fName"));
-                PeditTextSName.setText(documentSnapshot.getString("sName"));
-                PeditTextNumber.setText(documentSnapshot.getString("phone"));
-                PeditTextDate.setText(documentSnapshot.getString("birthdate"));
-                mDrawableName = documentSnapshot.getString("avatar");
+                if(!(mAuth.getCurrentUser() == null)) {
+                    PeditTextEmail.setText(documentSnapshot.getString("email"));
+                    PeditTextN.setText(documentSnapshot.getString("nickname"));
+                    PeditTextName.setText(documentSnapshot.getString("fName"));
+                    PeditTextSName.setText(documentSnapshot.getString("sName"));
+                    PeditTextNumber.setText(documentSnapshot.getString("phone"));
+                    PeditTextDate.setText(documentSnapshot.getString("birthdate"));
+                    mDrawableName = documentSnapshot.getString("avatar");
 
-                if(mDrawableName == null || mDrawableName.equals("")){
-                    downloadFile();
-                }else{
-                    int resID = getResources().getIdentifier(mDrawableName , "drawable", getContext().getPackageName());
-                    profileImage.setImageResource(resID);
+                    if (mDrawableName == null || mDrawableName.equals("")) {
+                        downloadFile();
+                    } else {
+                        int resID = getResources().getIdentifier(mDrawableName, "drawable", getContext().getPackageName());
+                        profileImage.setImageResource(resID);
+                    }
                 }
 
             }

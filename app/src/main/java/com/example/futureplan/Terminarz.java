@@ -321,7 +321,7 @@ public class Terminarz extends Fragment implements CalendarAdapter.onItemListene
                         }
                         sa = new SimpleAdapter(getContext(), arrayListEvents,
                                 R.layout.list_terminarz,
-                                new String[] { "line1","line2" },
+                                new String[] { "line1","line2"},
                                 new int[] {R.id.line_a, R.id.line_b});
                         listViewEvents.setAdapter(sa);
                     }

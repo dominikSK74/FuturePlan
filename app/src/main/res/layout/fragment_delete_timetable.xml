@@ -7,22 +7,74 @@
     tools:context=".DeleteTimetable">
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/title_text_input"
+        android:id="@+id/txtinput"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:layout_marginTop="24dp"
+        android:textColorHint="@color/textColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:startIconDrawable="@drawable/przedmioty_ikona">
+
+        <AutoCompleteTextView
+            android:id="@+id/autoCompleteTextView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:inputType="none"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:text="@string/choose_subject"
+            android:textColor="@color/textColor" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/date_text_input"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textColorHint="@color/textColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/txtinput">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/titleEdTxt"
+            android:id="@+id/date_edit_text"
             android:layout_width="match_parent"
-            android:layout_height="150px"
-            android:drawablePadding="80px"
-            android:drawableTint="@color/blue1"
-            android:hint="@string/title"
-            app:layout_constraintTop_toBottomOf="@+id/dayEdTxt" />
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/time_icon"
+            android:drawablePadding="40px"
+            android:hint="@string/start_and_end_time"
+            android:textColor="@color/textColor"
+            app:layout_constraintTop_toBottomOf="@+id/class_text_input" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/class_text_input"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textColorHint="@color/textColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/date_text_input">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/name_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/class_icon"
+            android:drawablePadding="50px"
+            android:hint="@string/classroom"
+            android:textColor="@color/textColor"
+            app:layout_constraintTop_toBottomOf="@+id/classEdText" />
+
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
@@ -33,15 +85,26 @@
         android:backgroundTint="@color/red"
         android:text="@string/back"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_text_input" />
+        app:layout_constraintTop_toBottomOf="@+id/class_text_input" />
 
     <Button
         android:id="@+id/btnDelete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
         android:backgroundTint="@color/red"
         android:text="@string/delete"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_text_input" />
+        app:layout_constraintTop_toBottomOf="@+id/class_text_input" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/save"
+        app:layout_constraintEnd_toStartOf="@+id/btnDelete"
+        app:layout_constraintTop_toBottomOf="@+id/class_text_input" />
 </androidx.constraintlayout.widget.ConstraintLayout>
