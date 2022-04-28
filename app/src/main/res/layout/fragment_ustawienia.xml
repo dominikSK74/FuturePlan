@@ -31,17 +31,36 @@
             android:text="@string/choose_language" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:text="Wybierz motyw:"
+        android:textColor="@color/textColor"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtInputLanguage" />
 
-    <androidx.appcompat.widget.SwitchCompat
-        android:id="@+id/switch1"
+    <Button
+        android:id="@+id/light"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="Zmien motyw"
-        android:textColor="@color/textColor"
-        android:textSize="20sp"
+        android:layout_marginEnd="32dp"
+        android:text="light"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtInputLanguage" />
+
+    <Button
+        android:id="@+id/dark"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="32dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="dark"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtInputLanguage" />
 
 

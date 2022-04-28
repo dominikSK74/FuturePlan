@@ -11,24 +11,63 @@
         android:id="@+id/gridViewNotes"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:verticalSpacing="15dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="150dp"
+        android:layout_marginBottom="100dp"
         android:numColumns="2"
+        android:verticalSpacing="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <!--DELETE BUTTON--> <!-- -->
+    <RelativeLayout
         android:id="@+id/btnNewNote"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="70dp"
-        android:text="@string/new_note"
-        app:icon="@drawable/ic_plus"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/back_button"
+        android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="3dp"
+            android:src="@drawable/back_button"
+            app:tint="@color/colorBackground" />
+
+        <RelativeLayout
+            android:layout_width="65dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="0dp"
+            android:background="@drawable/back_button">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:src="@drawable/icon_add"
+                app:tint="@color/colorBackground" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="65dp"
+            android:gravity="center"
+            android:text="@string/new_note"
+            android:textAllCaps="true"
+            android:textColor="@color/textColor"
+            android:textSize="13dp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+    <!--END DELETE BUTTON-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

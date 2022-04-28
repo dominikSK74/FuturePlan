@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -133,7 +134,7 @@ public class NotesList extends Fragment {
             }
         });
 
-        Button btnNewNote = view.findViewById(R.id.btnNewNote);
+        RelativeLayout btnNewNote = view.findViewById(R.id.btnNewNote);
         btnNewNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

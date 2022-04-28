@@ -78,25 +78,103 @@
         app:layout_constraintEnd_toEndOf="@+id/titleEdTxtEvent"
         app:layout_constraintTop_toBottomOf="@+id/timeStart" />
 
-    <Button
+    <!--BACK BUTTON--> <!-- -->
+    <RelativeLayout
         android:id="@+id/btnBackEvent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/back"
-        app:layout_constraintBottom_toBottomOf="@+id/btnSaveEvent"
-        app:layout_constraintEnd_toStartOf="@+id/btnSaveEvent"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:background="@drawable/back_button"
+        android:clickable="true"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="16dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/btnSaveEvent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView10">
 
-    <Button
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="3dp"
+            android:src="@drawable/back_button"
+            app:tint="@color/colorBackground" />
+
+        <RelativeLayout
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="0dp"
+            android:background="@drawable/back_button">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:src="@drawable/ic_back"
+                app:tint="@color/colorBackground" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="60dp"
+            android:gravity="center"
+            android:text="@string/back"
+            android:textAllCaps="true"
+            android:textColor="@color/textColor"
+            android:textSize="13dp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+    <!--END BACK BUTTON-->
+
+    <!--BACK BUTTON--> <!-- -->
+    <RelativeLayout
         android:id="@+id/btnSaveEvent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="@string/save"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/back_button"
+        android:clickable="true"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnBackEvent"
-        app:layout_constraintTop_toBottomOf="@+id/timeEnd" />
+        app:layout_constraintTop_toBottomOf="@+id/timeEnd">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="3dp"
+            android:src="@drawable/back_button"
+            app:tint="@color/colorBackground" />
+
+        <RelativeLayout
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="0dp"
+            android:background="@drawable/back_button">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:src="@drawable/ic_save"
+                app:tint="@color/colorBackground" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="60dp"
+            android:gravity="center"
+            android:text="@string/save"
+            android:textAllCaps="true"
+            android:textColor="@color/textColor"
+            android:textSize="13dp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+    <!--END BACK BUTTON-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

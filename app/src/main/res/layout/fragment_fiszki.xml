@@ -29,7 +29,7 @@
 
     </androidx.core.widget.NestedScrollView>
 
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+    <!--<com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/FABfiszki"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -42,19 +42,67 @@
         app:icon="@drawable/icon_add"
         app:iconTint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" />-->
 
+    <!--DELETE BUTTON--> <!-- -->
+    <RelativeLayout
+        android:id="@+id/addNewFlash"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/back_button"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="3dp"
+            android:src="@drawable/back_button"
+            app:tint="@color/colorBackground" />
+
+        <RelativeLayout
+            android:layout_width="65dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="0dp"
+            android:background="@drawable/back_button">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:src="@drawable/icon_add"
+                app:tint="@color/colorBackground" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="65dp"
+            android:gravity="center"
+            android:text="@string/add_new_flashcard_set"
+            android:textAllCaps="true"
+            android:textColor="@color/textColor"
+            android:textSize="13dp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+    <!--END DELETE BUTTON-->
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
+        android:layout_marginStart="16dp"
         android:backgroundTint="@color/blue1"
         android:clickable="true"
         android:src="@drawable/ic_share"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/FABfiszki"
         app:layout_constraintStart_toStartOf="parent"
         app:tint="@color/white" />
 

@@ -88,7 +88,8 @@ public class SharedFlashcards extends Fragment {
         userID = mAuth.getCurrentUser().getUid();
 
         RecyclerView fiszkiRecycler = view.findViewById(R.id.fiszkiRecycler);
-        ExtendedFloatingActionButton efab = view.findViewById(R.id.FABfiszki);
+
+        //ExtendedFloatingActionButton efab = view.findViewById(R.id.FABfiszki);
 
         fiszkiRecycler.setLayoutManager(
                 new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
