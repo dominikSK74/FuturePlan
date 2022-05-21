@@ -1,6 +1,7 @@
 package com.example.futureplan;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -39,6 +40,7 @@ import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -68,6 +70,7 @@ public class Terminarz extends Fragment implements CalendarAdapter.onItemListene
     private  ListView listViewTimetable;
     private  ListView listViewEvents;
 
+    private ArrayList<String> colors;
 
     View dividerCalendar;
     View dividerColor;
@@ -129,7 +132,8 @@ public class Terminarz extends Fragment implements CalendarAdapter.onItemListene
         listViewTimetable = view.findViewById(R.id.listViewTimetable);
         dividerCalendar = view.findViewById(R.id.dividerCalendar);
         listViewEvents = view.findViewById(R.id.listViewEvents);
-        dividerColor = view.findViewById(R.id.dividerColor);
+        //dividerColor = view.findViewById(R.id.dividerColor);
+        colors = new ArrayList<>();
 
         mAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
@@ -296,6 +300,20 @@ public class Terminarz extends Fragment implements CalendarAdapter.onItemListene
                             item.put( "line2", snapshot.getString("subject"));
                             arrayListTimetable.add( item );
                         }
+                        for(int i=0;i<arrayListTimetable.size()-1;i++){
+                            String[] parts = arrayListTimetable.get(i).get("line1").split(":");
+                            String[] parts2 = arrayListTimetable.get(i+1).get("line1").split(":");
+                            if(Integer.parseInt(parts[0]) > Integer.parseInt(parts2[0])){
+                                Collections.swap(arrayListTimetable, i, i+1);
+                            }else if (Integer.parseInt(parts[0]) == Integer.parseInt(parts2[0])){
+                                String[] parts3 = parts[1].split("-");
+                                String[] parts4 = parts2[1].split("-");
+                                if(Integer.parseInt(parts3[0]) > Integer.parseInt(parts4[0])){
+                                    Collections.swap(arrayListTimetable, i, i+1);
+                                }
+                            }
+
+                        }
                         sa = new SimpleAdapter(getContext(), arrayListTimetable,
                                 R.layout.list_terminarz,
                                 new String[] { "line1","line2" },
@@ -315,14 +333,49 @@ public class Terminarz extends Fragment implements CalendarAdapter.onItemListene
                                 HashMap<String, String> item = new HashMap<String, String>();
                                 item.put("line1", snapshot.getString("timeStart") + "-" + snapshot.getString("timeEnd"));
                                 item.put("line2", snapshot.getString("title"));
-                                dividerColor.setBackgroundColor(Integer.parseInt(snapshot.getString("color")));
+                                colors.add(snapshot.getString("color"));
+                                //dividerColor.setBackgroundColor(Integer.parseInt(snapshot.getString("color")));
                                 arrayListEvents.add(item);
                             }
                         }
+                        for(int i=0;i<arrayListEvents.size()-1;i++){
+                            String[] parts = arrayListEvents.get(i).get("line1").split(":");
+                            String[] parts2 = arrayListEvents.get(i+1).get("line1").split(":");
+                            if(Integer.parseInt(parts[0]) > Integer.parseInt(parts2[0])){
+                                Collections.swap(arrayListEvents, i, i+1);
+                            }else if (Integer.parseInt(parts[0]) == Integer.parseInt(parts2[0])){
+                                String[] parts3 = parts[1].split("-");
+                                String[] parts4 = parts2[1].split("-");
+                                if(Integer.parseInt(parts3[0]) > Integer.parseInt(parts4[0])){
+                                    Collections.swap(arrayListEvents, i, i+1);
+                                }
+                            }
+
+                        }
                         sa = new SimpleAdapter(getContext(), arrayListEvents,
-                                R.layout.list_terminarz,
+                                R.layout.list_calendar_color,
                                 new String[] { "line1","line2"},
-                                new int[] {R.id.line_a, R.id.line_b});
+                                new int[] {R.id.line_a, R.id.line_b}){
+                            @Override
+                            public View getView(int position, View convertView, ViewGroup parent) {
+
+                                View v = convertView;
+                                if(v== null){
+
+                                    LayoutInflater vi = (LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                                    v=vi.inflate(R.layout.list_calendar_color, null);
+                                }
+                                TextView line_a = v.findViewById(R.id.line_a);
+                                TextView line_b = v.findViewById(R.id.line_b);
+
+                                line_a.setText(arrayListEvents.get(position).get("line1"));
+                                line_b.setText(arrayListEvents.get(position).get("line2"));
+
+                                v.findViewById(R.id.color).setBackgroundColor(Integer.parseInt(colors.get(position)));
+
+                                return v;
+                            }
+                        };
                         listViewEvents.setAdapter(sa);
                     }
                 });

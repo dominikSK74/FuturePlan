@@ -43,9 +43,9 @@
     <string name="app_description">Android Studio and the Java programming language were used to develop the application</string>
     <string name="choose_language">Choose language</string>
 
-    <string name="polish">Polisch</string>
-    <string name="english">Englisch</string>
-    <string name="german">Deutsch</string>
+    <string name="polish">Polish</string>
+    <string name="english">English</string>
+    <string name="german">German</string>
 
     <string name="polish_lang">Polish</string>
     <string name="infromatics">Infromatics</string>
@@ -79,6 +79,9 @@
     <string name="start">Start</string>
     <string name="end">End</string>
     <string name="choose">Choose</string>
+    <string name="change_motive">Change motive</string>
+    <string name="light">light</string>
+    <string name="dark">dark</string>
 
 
 </resources>

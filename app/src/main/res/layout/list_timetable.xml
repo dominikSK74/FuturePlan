@@ -10,12 +10,13 @@
         android:id="@+id/line_a"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/line_c"
-        android:text="TextView"
         android:layout_marginTop="20px"
+        android:layout_toRightOf="@id/line_c"
+        android:padding="5px"
+        android:text="TextView"
         android:textColor="@color/textColor"
         android:textSize="16sp"
-        android:textStyle="italic" />
+        />
 
     <TextView
         android:id="@+id/line_b"
@@ -24,7 +25,8 @@
         android:layout_below="@id/line_a"
         android:layout_toRightOf="@id/line_c"
         android:text="TextView"
-        android:textColor="@color/textColor"/>
+        android:padding="5px"
+        android:textColor="@color/textColor" />
 
     <TextView
         android:id="@+id/line_c"

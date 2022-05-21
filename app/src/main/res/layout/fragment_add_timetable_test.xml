@@ -5,19 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBackground"
-    tools:context=".EditPlan">
+    tools:context=".AddTimetableTest">
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/txtinput"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:id="@+id/txtinputEditHomework"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="68dp"
         android:layout_marginTop="24dp"
-        android:textColorHint="@color/textColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:textColorHint="@color/textColor"
         app:startIconDrawable="@drawable/przedmioty_ikona">
 
         <AutoCompleteTextView
@@ -28,13 +28,27 @@
             android:inputType="none"
             android:paddingTop="16dp"
             android:paddingBottom="16dp"
-            android:text="@string/choose_subject"
-            android:textColor="@color/textColor" />
-
+            android:text="@string/choose_subject" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <TextView
+        android:id="@+id/dayEdTxtTests"
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/edit_txt_note"
+        android:drawableStart="@drawable/calendar_icon"
+        android:drawablePadding="60px"
+        android:gravity="center_vertical"
+        android:hint="@string/choose_date"
+        android:paddingLeft="40px"
+        android:textColorHint="@color/textColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtinputEditHomework" />
+
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/date_text_input"
+        android:id="@+id/titleEdTxtTests"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -42,53 +56,32 @@
         android:textColorHint="@color/textColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtinput">
+        app:layout_constraintTop_toBottomOf="@+id/dayEdTxtTests">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/date_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableStart="@drawable/time_icon"
-            android:drawablePadding="40px"
-            android:hint="@string/start_and_end_time"
-            android:textColor="@color/textColor"
-            app:layout_constraintTop_toBottomOf="@+id/class_text_input" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/class_text_input"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/titleEdTxt"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_height="68dp"
+        android:drawableStart="@drawable/ic_note"
+        android:drawablePadding="80px"
+        android:drawableTint="@color/blue1"
+        android:textColor="@color/textColor"
         android:textColorHint="@color/textColor"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/date_text_input">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/name_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableStart="@drawable/class_icon"
-            android:drawablePadding="50px"
-            android:hint="@string/classroom"
-            android:textColor="@color/textColor"
-            app:layout_constraintTop_toBottomOf="@+id/classEdText" />
-
+        android:hint="@string/title"
+        app:layout_constraintTop_toBottomOf="@+id/dayEdTxtTests" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <!--BACK BUTTON--> <!-- -->
     <RelativeLayout
-        android:id="@+id/saveButton"
+        android:id="@+id/saveBtnTests"
         android:layout_width="150dp"
         android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="4dp"
         android:background="@drawable/back_button"
         android:clickable="true"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="4dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleEdTxtTests">
 
         <ImageView
             android:layout_width="match_parent"
@@ -126,6 +119,4 @@
 
     </RelativeLayout>
     <!--END BACK BUTTON-->
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

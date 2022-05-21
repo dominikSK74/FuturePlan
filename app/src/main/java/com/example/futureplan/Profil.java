@@ -50,6 +50,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -268,7 +269,14 @@ public class Profil extends Fragment {
                     user.put("birthdate", date);
                     user.put("avatar", avatar);
 
-                    documentReference.set(user);
+                    documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            Snackbar snackbar = Snackbar
+                                    .make(view, "Zapisano dane", Snackbar.LENGTH_LONG);
+                            snackbar.show();
+                        }
+                    });
                     if(avatar.equals("")){
                         uploadPicture();
                     }

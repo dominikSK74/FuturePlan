@@ -8,9 +8,9 @@
 
     <fragment
         android:id="@+id/editHomework"
-        android:name="com.example.futureplan.EditHomework"
+        android:name="com.example.futureplan.AddHomework"
         android:label="fragment_edit_homework"
-        tools:layout="@layout/fragment_edit_homework" >
+        tools:layout="@layout/fragment_add_homework" >
         <action
             android:id="@+id/action_editHomework_to_homework"
             app:destination="@id/homework" />
@@ -29,9 +29,9 @@
     </fragment>
     <fragment
         android:id="@+id/deleteHomework"
-        android:name="com.example.futureplan.DeleteHomework"
+        android:name="com.example.futureplan.EditHomework"
         android:label="fragment_delete_homework"
-        tools:layout="@layout/fragment_delete_homework" >
+        tools:layout="@layout/fragment_edit_homework" >
         <action
             android:id="@+id/action_deleteHomework_to_homework"
             app:destination="@id/homework" />

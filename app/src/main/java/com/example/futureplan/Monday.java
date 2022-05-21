@@ -33,6 +33,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 /**
@@ -122,6 +123,20 @@ public class Monday extends Fragment {
                     item.put( "line3", snapshot.getString("classroom"));
                     list.add( item );
                 }
+                for(int i=0;i<list.size()-1;i++){
+                    String[] parts = list.get(i).get("line2").split(":");
+                    String[] parts2 = list.get(i+1).get("line2").split(":");
+                    if(Integer.parseInt(parts[0]) > Integer.parseInt(parts2[0])){
+                        Collections.swap(list, i, i+1);
+                    }else if (Integer.parseInt(parts[0]) == Integer.parseInt(parts2[0])){
+                        String[] parts3 = parts[1].split("-");
+                        String[] parts4 = parts2[1].split("-");
+                        if(Integer.parseInt(parts3[0]) > Integer.parseInt(parts4[0])){
+                            Collections.swap(list, i, i+1);
+                        }
+                    }
+
+                }
                 sa = new SimpleAdapter(getContext(), list,
                         R.layout.list_timetable,
                         new String[] { "line1","line2","line3" },
@@ -135,7 +150,11 @@ public class Monday extends Fragment {
         listTimetable.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
+                String id = lessonID.get(i);
+                Bundle bundle = new Bundle();
+                bundle.putString("lessonID",id);
+                bundle.putString("day",dayS);
+                Navigation.findNavController(view).navigate(R.id.action_monday_to_editTimetable,bundle);
             }
         });
 

@@ -43,7 +43,6 @@ public class BasicActivity extends AppCompatActivity {
     private ImageView imageProfile;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,7 +57,7 @@ public class BasicActivity extends AppCompatActivity {
 
         final DrawerLayout drawerLayout = findViewById(R.id.drawerLayout);
 
-        findViewById(R.id.imageMenu).setOnClickListener(new View.OnClickListener(){
+        findViewById(R.id.imageMenu).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 drawerLayout.openDrawer(GravityCompat.START);
@@ -82,7 +81,7 @@ public class BasicActivity extends AppCompatActivity {
         documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
-                if(!(mAuth.getCurrentUser() == null)) {
+                if (!(mAuth.getCurrentUser() == null)) {
                     profileEmail.setText(documentSnapshot.getString("email"));
                     profileName.setText(documentSnapshot.getString("fName"));
                     profileSurname.setText(documentSnapshot.getString("sName"));
@@ -98,20 +97,19 @@ public class BasicActivity extends AppCompatActivity {
         });
 
 
-
         //-----------------------------------\\
 
 
     }
 
-    private void downloadFile(){
+    private void downloadFile() {
         StorageReference imageRef = storageReference.child("profileImages").child(userID + ".jpeg");
-        long MAXBYTES = 1024*1024;
+        long MAXBYTES = 1024 * 1024;
         imageRef.getBytes(MAXBYTES).addOnSuccessListener(new OnSuccessListener<byte[]>() {
             @Override
             public void onSuccess(byte[] bytes) {
                 //convert byte[] to bitmap
-                Bitmap bitmap = BitmapFactory.decodeByteArray(bytes,0, bytes.length);
+                Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
                 imageProfile.setImageBitmap(bitmap);
             }
         });

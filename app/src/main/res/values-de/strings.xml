@@ -81,4 +81,8 @@
     <string name="end">Ende</string>
     <string name="choose">Wähle</string>
 
+    <string name="change_motive">Motiv ändern</string>
+    <string name="light">hell</string>
+    <string name="dark">dunkel</string>
+
 </resources>

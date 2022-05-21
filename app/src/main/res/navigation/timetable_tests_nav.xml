@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/editTimetableTest"
-        android:name="com.example.futureplan.EditTimetableTest"
+        android:name="com.example.futureplan.AddTimetableTest"
         android:label="fragment_edit_timetable_test"
-        tools:layout="@layout/fragment_edit_timetable_test" >
+        tools:layout="@layout/fragment_add_timetable_test" >
         <action
             android:id="@+id/action_editTimetableTest_to_timetableTest"
             app:destination="@id/timetableTest" />
@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/deleteTimetableTests"
-        android:name="com.example.futureplan.DeleteTimetableTests"
+        android:name="com.example.futureplan.EditTimetableTests"
         android:label="DeleteTimetableTests" >
         <action
             android:id="@+id/action_deleteTimetableTests_to_timetableTest"

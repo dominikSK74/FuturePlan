@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
@@ -24,10 +23,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -35,15 +31,14 @@ import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link EditHomework#newInstance} factory method to
+ * Use the {@link AddTimetableTest#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class EditHomework extends Fragment {
+public class AddTimetableTest extends Fragment {
     private FirebaseAuth mAuth;
     private FirebaseFirestore fStore;
     private String userID;
 
-    private String title;
     private String subject;
     private  String dayString;
     private  String date;
@@ -59,7 +54,7 @@ public class EditHomework extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public EditHomework() {
+    public AddTimetableTest() {
         // Required empty public constructor
     }
 
@@ -69,11 +64,11 @@ public class EditHomework extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment DeleteHomework.
+     * @return A new instance of fragment EditTimetableTest.
      */
     // TODO: Rename and change types and number of parameters
-    public static EditHomework newInstance(String param1, String param2) {
-        EditHomework fragment = new EditHomework();
+    public static AddTimetableTest newInstance(String param1, String param2) {
+        AddTimetableTest fragment = new AddTimetableTest();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -93,20 +88,19 @@ public class EditHomework extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_edit_homework, container, false);
+        View view = inflater.inflate(R.layout.fragment_add_timetable_test, container, false);
 
         mAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
         userID = mAuth.getCurrentUser().getUid();
 
-        TextInputLayout title_text_input = view.findViewById(R.id.title_text_input);
-        TextView dayEdTxt = view.findViewById(R.id.dayEdTxt);
-
         TextInputLayout txt = view.findViewById(R.id.txtinputEditHomework);
         txt.setStartIconTintList(null);
+
         String[] items = getResources().getStringArray(R.array.subjectsarray);
         AutoCompleteTextView autoCompleteTxt;
         ArrayAdapter<String> adapterItems;
+
         autoCompleteTxt = view.findViewById(R.id.autoCompleteTextView);
         adapterItems = new ArrayAdapter<String>(requireContext(), R.layout.subjects, items);
         autoCompleteTxt.setAdapter(adapterItems);
@@ -117,7 +111,10 @@ public class EditHomework extends Fragment {
             }
         });
 
-        dayEdTxt.setOnClickListener(new View.OnClickListener() {
+        TextView dayEdTxtTests = view.findViewById(R.id.dayEdTxtTests);
+        TextInputLayout titleEdTxtTests = view.findViewById(R.id.titleEdTxtTests);
+
+        dayEdTxtTests.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Calendar cal = Calendar.getInstance();
@@ -150,50 +147,23 @@ public class EditHomework extends Fragment {
                 }
                 date = dayString + "." + monthString;
 
-                dayEdTxt.setText(date);
+                dayEdTxtTests.setText(date);
             }
         };
 
-        DocumentReference documentReference = fStore.collection("users").document(userID).collection("homework").document(Homework.homework);
-        documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                title_text_input.getEditText().setText(value.getString("title"));
-                title = value.getString("title");
-                dayEdTxt.setText(value.getString("date"));
-                date = value.getString("date");
-                autoCompleteTxt.setText(value.getString("subject"),false);
-                subject = value.getString("subject");
-            }
-        });
 
-        RelativeLayout btnDelete = view.findViewById(R.id.btnDelete);
-        btnDelete.setOnClickListener(new View.OnClickListener() {
+        RelativeLayout saveBtnTests = view.findViewById(R.id.saveBtnTests);
+        saveBtnTests.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                documentReference.delete();
-                Navigation.findNavController(view).navigate(R.id.action_deleteHomework_to_homework);
-            }
-        });
-        RelativeLayout btnBack = view.findViewById(R.id.btnBack);
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.action_deleteHomework_to_homework);
-            }
-        });
-
-        RelativeLayout btnSave = view.findViewById(R.id.btnSave);
-        btnSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String title = title_text_input.getEditText().getText().toString();
-                Map<String,String> homework = new HashMap<>();
-                homework.put("date",date);
-                homework.put("title",title);
-                homework.put("subject",subject);
-                documentReference.set(homework);
-                Navigation.findNavController(view).navigate(R.id.action_deleteHomework_to_homework);
+                String title = titleEdTxtTests.getEditText().getText().toString();
+                DocumentReference documentReference = fStore.collection("users").document(userID).collection("tests").document();
+                Map<String,Object> test = new HashMap<>();
+                test.put("subject",subject);
+                test.put("date",date);
+                test.put("title",title);
+                documentReference.set(test);
+                Navigation.findNavController(view).navigate(R.id.action_editTimetableTest_to_timetableTest);
             }
         });
         return view;

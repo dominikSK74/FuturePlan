@@ -157,7 +157,6 @@
 
         </LinearLayout>
         <LinearLayout
-            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -177,7 +176,6 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -197,16 +195,11 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10px"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-            <View
-                android:id="@+id/dividerColor"
-                android:layout_width="3dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="40px"
-                android:background="@color/primary"/>
+
             <ListView
                 android:layout_marginLeft="40px"
                 android:id="@+id/listViewEvents"

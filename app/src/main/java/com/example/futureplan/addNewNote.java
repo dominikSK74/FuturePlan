@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
@@ -113,12 +114,7 @@ public class addNewNote extends Fragment {
                 Map<String,Object> user = new HashMap<>();
                 user.put("title",title);
                 user.put("note",note);
-                documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        Log.d("TAG","onSuccess: note saved for user" + userID);
-                    }
-                });
+                documentReference.set(user);
 
                 Navigation.findNavController(view).navigate(R.id.action_addNewNote_to_notesList);
             }

@@ -97,7 +97,7 @@ public class addNewFlashcards extends Fragment {
 
         addNewFlash.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View  view) {
+            public void onClick(View view) {
                 String nazwa = flashcardsName.getText().toString();
                 String op1 = opis1.getText().toString();
                 String n1 = notatka1.getText().toString();
@@ -105,16 +105,16 @@ public class addNewFlashcards extends Fragment {
                 String n2 = notatka2.getText().toString();
 
                 DocumentReference documentReference2 = fStore.collection("users").document(userID).collection("flashcards").document(nazwa);
-                Map<String,Object> name = new HashMap<>();
-                name.put("name",nazwa);
+                Map<String, Object> name = new HashMap<>();
+                name.put("name", nazwa);
                 documentReference2.set(name);
 
                 DocumentReference documentReference = fStore.collection("users").document(userID).collection("flashcards").document(nazwa).collection("cards").document("" + flashID);
-                Map<String,Object> flashcard = new HashMap<>();
-                flashcard.put("des1",op1);
-                flashcard.put("n1",n1);
-                flashcard.put("des2",op2);
-                flashcard.put("n2",n2);
+                Map<String, Object> flashcard = new HashMap<>();
+                flashcard.put("des1", op1);
+                flashcard.put("n1", n1);
+                flashcard.put("des2", op2);
+                flashcard.put("n2", n2);
                 documentReference.set(flashcard);
                 flashID++;
 

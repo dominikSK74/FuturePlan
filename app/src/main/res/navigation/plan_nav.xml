@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_monday_to_editPlan2"
             app:destination="@id/editPlan2" />
+        <action
+            android:id="@+id/action_monday_to_editTimetable"
+            app:destination="@id/editTimetable" />
     </fragment>
     <fragment
         android:id="@+id/tuesday"
@@ -34,6 +37,9 @@
         <action
             android:id="@+id/action_tuesday_to_editPlan2"
             app:destination="@id/editPlan2" />
+        <action
+            android:id="@+id/action_tuesday_to_editTimetable"
+            app:destination="@id/editTimetable" />
     </fragment>
     <fragment
         android:id="@+id/wednesday"
@@ -49,6 +55,12 @@
         <action
             android:id="@+id/action_wednesday_to_editPlan2"
             app:destination="@id/editPlan2" />
+        <action
+            android:id="@+id/action_wednesday_to_editTimetable"
+            app:destination="@id/editTimetable" />
+        <action
+            android:id="@+id/action_wednesday_to_editTimetable2"
+            app:destination="@id/editTimetable" />
     </fragment>
     <fragment
         android:id="@+id/thursday"
@@ -64,6 +76,15 @@
         <action
             android:id="@+id/action_thursday_to_editPlan2"
             app:destination="@id/editPlan2" />
+        <action
+            android:id="@+id/action_thursday_to_editTimetable"
+            app:destination="@id/editTimetable" />
+        <action
+            android:id="@+id/action_thursday_to_editTimetable2"
+            app:destination="@id/editTimetable" />
+        <action
+            android:id="@+id/action_thursday_to_editTimetable3"
+            app:destination="@id/editTimetable" />
     </fragment>
     <fragment
         android:id="@+id/friday"
@@ -79,6 +100,9 @@
         <action
             android:id="@+id/action_friday_to_editPlan2"
             app:destination="@id/editPlan2" />
+        <action
+            android:id="@+id/action_friday_to_editTimetable"
+            app:destination="@id/editTimetable" />
     </fragment>
     <fragment
         android:id="@+id/saturday"
@@ -94,6 +118,9 @@
         <action
             android:id="@+id/action_saturday_to_editPlan2"
             app:destination="@id/editPlan2" />
+        <action
+            android:id="@+id/action_saturday_to_editTimetable"
+            app:destination="@id/editTimetable" />
     </fragment>
     <fragment
         android:id="@+id/sunday"
@@ -109,12 +136,15 @@
         <action
             android:id="@+id/action_sunday_to_editPlan2"
             app:destination="@id/editPlan2" />
+        <action
+            android:id="@+id/action_sunday_to_editTimetable"
+            app:destination="@id/editTimetable" />
     </fragment>
     <fragment
         android:id="@+id/editPlan2"
-        android:name="com.example.futureplan.EditPlan"
+        android:name="com.example.futureplan.AddPlan"
         android:label="fragment_edit_plan"
-        tools:layout="@layout/fragment_edit_plan" >
+        tools:layout="@layout/fragment_add_plan" >
         <action
             android:id="@+id/action_editPlan2_to_monday"
             app:destination="@id/monday" />
@@ -135,6 +165,36 @@
             app:destination="@id/saturday" />
         <action
             android:id="@+id/action_editPlan2_to_sunday"
+            app:destination="@id/sunday" />
+    </fragment>
+    <fragment
+        android:id="@+id/editTimetable"
+        android:name="com.example.futureplan.EditTimetable"
+        android:label="fragment_edit_timetable"
+        tools:layout="@layout/fragment_edit_timetable" >
+        <action
+            android:id="@+id/action_editTimetable_to_monday"
+            app:destination="@id/monday" />
+        <action
+            android:id="@+id/action_editTimetable_to_tuesday"
+            app:destination="@id/tuesday" />
+        <action
+            android:id="@+id/action_editTimetable_to_wednesday"
+            app:destination="@id/wednesday" />
+        <action
+            android:id="@+id/action_editTimetable_to_thursday"
+            app:destination="@id/thursday" />
+        <action
+            android:id="@+id/action_editTimetable_to_wednesday2"
+            app:destination="@id/wednesday" />
+        <action
+            android:id="@+id/action_editTimetable_to_friday"
+            app:destination="@id/friday" />
+        <action
+            android:id="@+id/action_editTimetable_to_saturday"
+            app:destination="@id/saturday" />
+        <action
+            android:id="@+id/action_editTimetable_to_sunday"
             app:destination="@id/sunday" />
     </fragment>
 

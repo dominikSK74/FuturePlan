@@ -18,8 +18,6 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.opencsv.CSVReader;
-import com.opencsv.exceptions.CsvValidationException;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -94,7 +92,7 @@ public class FileChooserFragment extends Fragment {
         btnBrowse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openFileChooser();
+                //openFileChooser();
             }
         });
 
@@ -103,7 +101,7 @@ public class FileChooserFragment extends Fragment {
         return view;
     }
 
-    int requestcode = 1;
+    /*int requestcode = 1;
     private void proImportCSV(File from) {
         System.out.println(from.getPath());
         //System.out.println(Environment.getExternalStorageDirectory() + "/Download/plan.csv");
@@ -144,5 +142,7 @@ public class FileChooserFragment extends Fragment {
         }
     }
 
+
+     */
 
 }

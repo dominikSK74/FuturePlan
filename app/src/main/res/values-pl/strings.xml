@@ -81,5 +81,7 @@
     <string name="end">Koniec</string>
     <string name="choose">Wybierz</string>
 
-
+    <string name="change_motive">Wybierz motyw</string>
+    <string name="light">jasny</string>
+    <string name="dark">ciemny</string>
 </resources>

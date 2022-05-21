@@ -221,11 +221,10 @@
         android:id="@+id/imageProfile"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:layout_marginStart="8dp"
         android:scaleType="centerCrop"
         android:src="@drawable/awatar1"
         app:layout_constraintBottom_toTopOf="@+id/easyFlipView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toEndOf="@+id/textUser"
         app:layout_constraintTop_toBottomOf="@+id/titleKit"
         app:riv_oval="true" />

@@ -14,6 +14,8 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
@@ -135,7 +137,14 @@ public class ViewNote extends Fragment {
                 Map<String,Object> user = new HashMap<>();
                 user.put("title",titleNote);
                 user.put("note",note);
-                documentReference.set(user);
+                documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Snackbar snackbar = Snackbar
+                                .make(view, "Zapisano dane", Snackbar.LENGTH_LONG);
+                        snackbar.show();
+                    }
+                });
             }
         });
         return view;

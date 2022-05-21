@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
@@ -18,16 +17,14 @@ import android.widget.AutoCompleteTextView;
 import android.widget.DatePicker;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -35,19 +32,18 @@ import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link EditHomework#newInstance} factory method to
+ * Use the {@link AddHomework#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class EditHomework extends Fragment {
+public class AddHomework extends Fragment {
     private FirebaseAuth mAuth;
     private FirebaseFirestore fStore;
     private String userID;
 
-    private String title;
     private String subject;
-    private  String dayString;
-    private  String date;
-    private  String monthString;
+    private String dayString;
+    private String date;
+    private String monthString;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -59,7 +55,8 @@ public class EditHomework extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public EditHomework() {
+
+    public AddHomework() {
         // Required empty public constructor
     }
 
@@ -69,11 +66,11 @@ public class EditHomework extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment DeleteHomework.
+     * @return A new instance of fragment EditHomework.
      */
     // TODO: Rename and change types and number of parameters
-    public static EditHomework newInstance(String param1, String param2) {
-        EditHomework fragment = new EditHomework();
+    public static AddHomework newInstance(String param1, String param2) {
+        AddHomework fragment = new AddHomework();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -93,20 +90,19 @@ public class EditHomework extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_edit_homework, container, false);
+        View view = inflater.inflate(R.layout.fragment_add_homework, container, false);
 
         mAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
         userID = mAuth.getCurrentUser().getUid();
 
-        TextInputLayout title_text_input = view.findViewById(R.id.title_text_input);
-        TextView dayEdTxt = view.findViewById(R.id.dayEdTxt);
-
         TextInputLayout txt = view.findViewById(R.id.txtinputEditHomework);
         txt.setStartIconTintList(null);
+
         String[] items = getResources().getStringArray(R.array.subjectsarray);
         AutoCompleteTextView autoCompleteTxt;
         ArrayAdapter<String> adapterItems;
+
         autoCompleteTxt = view.findViewById(R.id.autoCompleteTextView);
         adapterItems = new ArrayAdapter<String>(requireContext(), R.layout.subjects, items);
         autoCompleteTxt.setAdapter(adapterItems);
@@ -116,6 +112,8 @@ public class EditHomework extends Fragment {
                 subject = autoCompleteTxt.getText().toString();
             }
         });
+
+        TextView dayEdTxt = view.findViewById(R.id.dayEdTxt);
 
         dayEdTxt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,7 +127,7 @@ public class EditHomework extends Fragment {
                         getContext(),
                         android.R.style.Theme_Holo_Light_Dialog_MinWidth,
                         mDateSetListener,
-                        year,month,day);
+                        year, month, day);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
             }
@@ -142,10 +140,10 @@ public class EditHomework extends Fragment {
 
                 dayString = day + "";
                 monthString = month + "";
-                if(day<10){
+                if (day < 10) {
                     dayString = "0" + day;
                 }
-                if(month<10){
+                if (month < 10) {
                     monthString = "0" + month;
                 }
                 date = dayString + "." + monthString;
@@ -154,48 +152,25 @@ public class EditHomework extends Fragment {
             }
         };
 
-        DocumentReference documentReference = fStore.collection("users").document(userID).collection("homework").document(Homework.homework);
-        documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                title_text_input.getEditText().setText(value.getString("title"));
-                title = value.getString("title");
-                dayEdTxt.setText(value.getString("date"));
-                date = value.getString("date");
-                autoCompleteTxt.setText(value.getString("subject"),false);
-                subject = value.getString("subject");
-            }
-        });
 
-        RelativeLayout btnDelete = view.findViewById(R.id.btnDelete);
-        btnDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                documentReference.delete();
-                Navigation.findNavController(view).navigate(R.id.action_deleteHomework_to_homework);
-            }
-        });
-        RelativeLayout btnBack = view.findViewById(R.id.btnBack);
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.action_deleteHomework_to_homework);
-            }
-        });
+        TextInputLayout titleEdTxt = view.findViewById(R.id.title_text_input);
 
-        RelativeLayout btnSave = view.findViewById(R.id.btnSave);
-        btnSave.setOnClickListener(new View.OnClickListener() {
+        RelativeLayout saveBtn = view.findViewById(R.id.saveBtn);
+        saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String title = title_text_input.getEditText().getText().toString();
-                Map<String,String> homework = new HashMap<>();
-                homework.put("date",date);
-                homework.put("title",title);
-                homework.put("subject",subject);
+                String title = titleEdTxt.getEditText().getText().toString();
+                DocumentReference documentReference = fStore.collection("users").document(userID).collection("homework").document();
+                Map<String, Object> homework = new HashMap<>();
+                homework.put("subject", subject);
+                homework.put("date", date);
+                homework.put("title", title);
                 documentReference.set(homework);
-                Navigation.findNavController(view).navigate(R.id.action_deleteHomework_to_homework);
+
+                Navigation.findNavController(view).navigate(R.id.action_editHomework_to_homework);
             }
         });
+
         return view;
     }
 }
